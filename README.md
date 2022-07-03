@@ -125,7 +125,7 @@ This app allows for a user to post and relate to other students within school by
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
-<img src="https://imgur.com/9olLrSD" width=600>
+<img src="https://imgur.com/9olLrSD.png" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
