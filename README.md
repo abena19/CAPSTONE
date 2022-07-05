@@ -41,7 +41,7 @@ This app allows for a user to post and relate to other students within school by
 * User can add and remove features to and from  dorm room wall (which would be initially organised) - customization to follow after MVP
 * User can create and update preferences on different categories
 * User can share walls, and location functionalities
-* User can track location in real time
+* User can track location in real time, if user indicates permission
 * Chat feature, history, compose, create
 * User profiles
 * User can view, follow and like walls

@@ -1,0 +1,6 @@
+framework module Pods_Dorm_Room_Wall_Dorm_Room_WallUITests {
+  umbrella header "Pods-Dorm Room Wall-Dorm Room WallUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
