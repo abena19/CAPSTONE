@@ -124,7 +124,6 @@ This app allows for a user to post and relate to other students within school by
 
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
 <img src="https://imgur.com/9olLrSD.png" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
@@ -132,11 +131,108 @@ This app allows for a user to post and relate to other students within school by
 ### [BONUS] Interactive Prototype
 
 ## Schema 
-[This section will be completed in Unit 9]
+
 ### Models
-[Add table of models]
+* Wall
+* User (from parse)
+* Status
+* Level Count
+
 ### Networking
-- [Add list of network requests by screen ]
+- Parse Network Requests
+* Home feed Screen
+    - (Read/GET)Query all walls that the user follows
+    - (Create/WALL) Create new like on wall 
+    - (Create/WALL) Create new comment on wall 
+    - (Delete) Remove existing like or comment
+
+* My Wall Screen
+    - (Create/WALL) Create new wall 
+    - (Update/WALL) Edit wall
+    - (Delete/WALL) Remove existing wall
+    
+* Profile Screen
+    - (Read/GET)Query logged in user object
+    - (Update/PUT) Update user profile image
+    
+
+
 - [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
- 
+    * Home feed Screen
+    - (Read/GET)Query all walls that the user follows
+        PFQuery *query = [PFQuery queryWithClassName:@"Wall"];
+        [query includeKey:@"user"];
+        [query whereKey:@"school" equalTo:@"Stanford"];
+        [query orderByDescending:@"createdAt"];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *walls, NSError *error) {
+        if (walls != nil) {
+            NSLog(@"Retrieved walls successfully!!");
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+    
+    - (Create/WALL) Create new like on wall 
+    PFQuery *query = [PFQuery queryWithClassName:@"Wall"];
+    [query getObjectInBackgroundWithId:@"WALL_USER_ID" block:^(PFObject *wall, NSError *error) {
+    if (!error) {
+        // Success!
+        // update like count for that user
+    } else {
+        // Failure!
+    }
+    }];
+    - (Create/WALL) Create new comment on wall 
+        - Similar to above
+    
+    - (Delete) Remove existing like or comment
+        - PFQuery *query = [PFQuery queryWithClassName:@"Wall"];
+            [query getObjectInBackgroundWithId:@"WALL_USER_ID" block:^(PFObject *wall, NSError *error) {
+            if (!error) {
+                // Success!
+                // remove like for user (given previous like)
+            } else {
+                // Failure!
+            }
+            }];
+
+* My Wall Screen
+    - (Create/WALL) Create new wall 
+    PFObject *newWall = [PFObject objectWithClassName:@"Wall"];
+    newWall[@"text"] = self.messageField.text;
+    newWall[@"user"] = PFUser.currentUser;
+    [newWall saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+            if (succeeded) {
+                NSLog(@"The wall was saved!");
+            } else {
+                NSLog(@"Problem saving wall: %@", error.localizedDescription);
+            }
+        }];
+        
+    - (Update/WALL) Edit wall
+        - PFQuery *query = [PFQuery queryWithClassName:@"Wall"];
+        [query getObjectInBackgroundWithId:@"WALL_USER_ID"
+                                     block:^(PFObject *wall, NSError *error) {
+            // change wall details
+            [wall saveInBackground];
+        }];
+        
+    - (Delete/WALL) Remove existing wall
+    
+* Profile Screen
+    - (Read/GET)Query logged in user object
+        - PFUser *currentUser = [PFUser currentUser];
+            if (currentUser) {
+                // retrieve information
+            } else {
+                // do something else
+            }
+    - (Update/PUT) Update user profile image
+        - PFUser *user = [PFUser currentUser];
+            user[@"profilePicture"] = [self getPFFileFromImage:self.profilePicture.image];
+            [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded) {
+                    NSLog(@"This worked!");
+                }
+            }];
+    
