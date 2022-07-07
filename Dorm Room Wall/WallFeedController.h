@@ -9,7 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WallFeedController : UIViewController
+@interface WallFeedController : UIViewController <UITableViewDataSource>
+
+@property (nonatomic, strong) NSMutableArray *wallArray;
 
 @end
 
