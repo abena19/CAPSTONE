@@ -6,10 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ComposeViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WallFeedController : UIViewController <UITableViewDataSource>
+@interface WallFeedController : UIViewController <UITableViewDataSource, ComposeViewControllerDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *wallArray;
 

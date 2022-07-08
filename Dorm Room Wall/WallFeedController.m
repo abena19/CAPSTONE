@@ -8,12 +8,13 @@
 #import "WallFeedController.h"
 #import "SceneDelegate.h"
 #import "LoginViewController.h"
+#import "ComposeViewController.h"
 #import <Parse/Parse.h>
 #import "Wall.h"
 #import "WallCell.h"
 
 
-@interface WallFeedController () <UITableViewDataSource, UITableViewDelegate>
+@interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate, UIScrollViewDelegate>
 
 - (IBAction)didTapLogout:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *wallFeedTableView;
@@ -69,6 +70,13 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.wallArray.count;
 }
+
+
+- (void)didPostWall:(nonnull Wall *)wall {
+    [self.wallArray insertObject:wall atIndex:0];
+    [self.wallFeedTableView reloadData];
+}
+
 
 
 @end

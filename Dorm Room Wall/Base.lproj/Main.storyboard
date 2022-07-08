@@ -299,6 +299,17 @@
                     <view key="view" contentMode="scaleToFill" id="YYA-Wk-8Vb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUm-nG-jVg">
+                                <rect key="frame" x="20" y="406" width="374" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Edit Wall"/>
+                                <connections>
+                                    <segue destination="My7-rp-rBM" kind="presentation" identifier="composeSegue" id="b8A-th-UIn"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="7dZ-03-vhk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
@@ -306,7 +317,85 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oxy-fr-SdI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-343" y="-656"/>
+            <point key="canvasLocation" x="-316" y="-656"/>
+        </scene>
+        <!--Compose View Controller-->
+        <scene sceneID="7B6-8O-nxf">
+            <objects>
+                <viewController id="2pf-pU-gEL" customClass="ComposeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NXy-ru-s4u">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-yR-36k">
+                                <rect key="frame" x="20" y="93" width="374" height="238"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="03w-7P-FHU" appends="YES" id="3Aq-YX-C15"/>
+                                </connections>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEW-cp-pmP">
+                                <rect key="frame" x="93" y="640" width="229" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Post Wall"/>
+                                <connections>
+                                    <action selector="didTapPostWall:" destination="2pf-pU-gEL" eventType="touchUpInside" id="rG3-zS-bZd"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WQM-pX-4sF">
+                                <rect key="frame" x="20" y="559" width="374" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T6E-rI-FWD">
+                                <rect key="frame" x="20" y="339" width="121" height="212"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="VKG-Vi-e55" appends="YES" id="CVo-l7-oOI"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5NU-Wq-nfG">
+                                <rect key="frame" x="149" y="339" width="245" height="212"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="SW9-ke-ikK" appends="YES" id="pEz-bA-CMK"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4hO-js-H99"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Eo2-hY-v7b"/>
+                    <connections>
+                        <outlet property="caption" destination="WQM-pX-4sF" id="A7E-if-KgC"/>
+                        <outlet property="lecturePhoto" destination="A8e-yR-36k" id="EpC-L7-AR6"/>
+                        <outlet property="locationPhoto" destination="T6E-rI-FWD" id="Hc6-1L-Tg3"/>
+                        <outlet property="mealPhoto" destination="5NU-Wq-nfG" id="RoW-F5-s3x"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FhF-hU-WVt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="03w-7P-FHU">
+                    <connections>
+                        <action selector="didTapLecturePhoto:" destination="2pf-pU-gEL" id="OG8-aA-eNJ"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="VKG-Vi-e55">
+                    <connections>
+                        <action selector="didTapLocationPhoto:" destination="2pf-pU-gEL" id="uFD-s4-ULV"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="SW9-ke-ikK">
+                    <connections>
+                        <action selector="didTapMealPhoto:" destination="2pf-pU-gEL" id="fNN-1g-Wrs"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="5.7971014492753632" y="89.732142857142847"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="xJf-gN-4Xi">
@@ -384,6 +473,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bWN-tl-I0p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="754" y="-656"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FsD-BP-MNS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="My7-rp-rBM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Egd-hy-F0d">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2pf-pU-gEL" kind="relationship" relationship="rootViewController" id="x5f-Oc-KxP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="721-0k-eT6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-687" y="90"/>
         </scene>
     </scenes>
     <resources>
