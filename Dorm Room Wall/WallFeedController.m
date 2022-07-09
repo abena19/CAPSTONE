@@ -14,10 +14,9 @@
 #import "WallCell.h"
 
 
-@interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate, UIScrollViewDelegate>
+@interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 - (IBAction)didTapLogout:(id)sender;
-@property (weak, nonatomic) IBOutlet UITableView *wallFeedTableView;
 
 @end
 
@@ -43,7 +42,9 @@
             NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);  // handle error
         }
         [self.wallFeedTableView reloadData];
-    }];}
+    }];
+
+}
 
 
 - (IBAction)didTapLogout:(id)sender {
@@ -71,11 +72,6 @@
     return self.wallArray.count;
 }
 
-
-- (void)didPostWall:(nonnull Wall *)wall {
-    [self.wallArray insertObject:wall atIndex:0];
-    [self.wallFeedTableView reloadData];
-}
 
 
 

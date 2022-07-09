@@ -27,6 +27,8 @@
 
 @implementation ComposeViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
@@ -76,6 +78,7 @@
 }
 
 - (IBAction)didTapPostWall:(UIButton *)sender {
+    self.photoArray = [[NSMutableArray alloc]init];
     [self.photoArray addObject:self.locationPhoto.image];
     [self.photoArray addObject:self.lecturePhoto.image];
     [self.photoArray addObject:self.mealPhoto.image];
@@ -86,7 +89,17 @@
             NSLog(@"Successfully posted the following caption: %@", self.caption.text);
         }
     }];
-    [self.composeDelegate didPostWall:wall];
-    [self dismissViewControllerAnimated:true completion:nil];
+    self.wallToPass = wall;
+//    [self dismissViewControllerAnimated:true completion:nil];
 }
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+   if ([[segue identifier] isEqualToString:@"composeToHomeSegue"]) {
+       WallFeedController *wallFeedController = [segue destinationViewController];
+       [wallFeedController.wallArray insertObject:self.wallToPass atIndex:0];
+       [wallFeedController.wallFeedTableView reloadData];
+   }
+}
+
 @end

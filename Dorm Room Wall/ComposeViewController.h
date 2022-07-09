@@ -10,18 +10,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ComposeViewControllerDelegate
-- (void)didPostWall:(Wall *) wall;
-@end
+//@protocol ComposeViewControllerDelegate
+//- (void)didPostWall:(Wall *) wall;
+//@end
 
 
 @interface ComposeViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, weak) id<ComposeViewControllerDelegate> composeDelegate;
 
 - (IBAction)didTapLecturePhoto:(UITapGestureRecognizer *)sender;
 - (IBAction)didTapLocationPhoto:(UITapGestureRecognizer *)sender;
 - (IBAction)didTapMealPhoto:(UITapGestureRecognizer *)sender;
+
+@property (strong, nonatomic) Wall *wallToPass;
 
 
 @end

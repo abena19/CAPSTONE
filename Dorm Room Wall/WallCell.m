@@ -40,7 +40,7 @@
             self.mealImageView.image = [UIImage imageWithData:imageData];
         }
     }];
-    self.captionView.text = self.wall.caption;
+    self.captionView.text = (NSString *)self.wall.caption;
 }
 
 @end

@@ -12,6 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WallCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UIImageView *locationImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *lectureImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *mealImageView;

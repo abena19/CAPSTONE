@@ -10,9 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WallFeedController : UIViewController <UITableViewDataSource, ComposeViewControllerDelegate, UIScrollViewDelegate>
+@interface WallFeedController : UIViewController <UITableViewDataSource, UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *wallArray;
+@property (weak, nonatomic) IBOutlet UITableView *wallFeedTableView;
 
 @end
 
