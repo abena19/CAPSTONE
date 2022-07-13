@@ -20,13 +20,15 @@
 @property (weak, nonatomic) IBOutlet UITextField *caption;
 
 @property (nonatomic, strong) NSMutableArray *photoArray;
+@property (nonatomic, strong) WallFeedController *wallFeedController ;
 
 - (IBAction)didTapPostWall:(UIButton *)sender;
 
 @end
 
-@implementation ComposeViewController
+NSString *const composeSegue = @"composeToHomeSegue";
 
+@implementation ComposeViewController
 
 
 - (void)viewDidLoad {
@@ -36,45 +38,47 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-    if ( self.locationPhoto.tag == 1) {
-        [self.locationPhoto setImage:editedImage];
-        self.locationPhoto.tag = 0;
-    } else if ( self.lecturePhoto.tag == 2) {
-        [self.lecturePhoto setImage:editedImage];
-        self.lecturePhoto.tag = 0;
-    } else if (self.mealPhoto.tag == 3) {
-        [self.mealPhoto setImage:editedImage];
-        self.mealPhoto.tag = 0;
+    if ( self.locationPhoto.tag == LocationPhoto) {
+        [self setImage:self.locationPhoto withImage:editedImage];
+    } else if ( self.lecturePhoto.tag == LecturePhoto) {
+        [self setImage:self.lecturePhoto withImage:editedImage];
+    } else if (self.mealPhoto.tag == MealPhoto) {
+        [self setImage:self.mealPhoto withImage:editedImage];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
-- (IBAction)didTapMealPhoto:(UITapGestureRecognizer *)sender {
+- (void) setImage:(UIImageView *)photo withImage:(UIImage *)editedImage {
+    [photo setImage:editedImage];
+    photo.tag = DefaultState;
+}
+
+
+- (void) tapImageViewHandler {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
     imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    self.mealPhoto.tag = 3;
-    [self presentViewController:imagePickerVC animated:YES completion:nil];}
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
 
+
+- (IBAction)didTapMealPhoto:(UITapGestureRecognizer *)sender {
+    [self tapImageViewHandler];
+    self.mealPhoto.tag =  MealPhoto;
+}
+    
 
 - (IBAction)didTapLocationPhoto:(UITapGestureRecognizer *)sender {
-    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
-    imagePickerVC.delegate = self;
-    imagePickerVC.allowsEditing = YES;
-    imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    self.locationPhoto.tag = 1;
-    [self presentViewController:imagePickerVC animated:YES completion:nil];}
+    [self tapImageViewHandler];
+    self.locationPhoto.tag = LocationPhoto;
+}
 
 
 - (IBAction)didTapLecturePhoto:(UITapGestureRecognizer *)sender {
-    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
-    imagePickerVC.delegate = self;
-    imagePickerVC.allowsEditing = YES;
-    imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    self.lecturePhoto.tag = 2;
-    [self presentViewController:imagePickerVC animated:YES completion:nil];
+    [self tapImageViewHandler];
+    self.lecturePhoto.tag = LecturePhoto;
 }
 
 - (IBAction)didTapPostWall:(UIButton *)sender {
@@ -87,19 +91,13 @@
              NSLog(@"Error posting: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully posted the following caption: %@", self.caption.text);
+            [self.wallFeedController.wallArray insertObject:self.wallToPass atIndex:0];
+            [self performSegueWithIdentifier:composeSegue sender:sender];
+            [self.wallFeedController.wallFeedTableView reloadData];
         }
     }];
     self.wallToPass = wall;
-//    [self dismissViewControllerAnimated:true completion:nil];
 }
 
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-   if ([[segue identifier] isEqualToString:@"composeToHomeSegue"]) {
-       WallFeedController *wallFeedController = [segue destinationViewController];
-       [wallFeedController.wallArray insertObject:self.wallToPass atIndex:0];
-       [wallFeedController.wallFeedTableView reloadData];
-   }
-}
 
 @end

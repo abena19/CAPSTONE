@@ -25,6 +25,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Wall *wallToPass;
 
 
+typedef NS_ENUM(NSInteger , tapWallEditHandlerState) {
+    DefaultState = 0,
+    MealPhoto = 1,
+    LocationPhoto = 2,
+    LecturePhoto =3,
+};
+
+
 @end
 
 NS_ASSUME_NONNULL_END

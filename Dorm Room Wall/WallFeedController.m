@@ -24,10 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.wallFeedTableView.dataSource = self;
     self.wallFeedTableView.delegate = self;
-    
     [self.wallFeedTableView reloadData];
     
     PFQuery *postQuery = [Wall query];
@@ -71,8 +69,6 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.wallArray.count;
 }
-
-
 
 
 @end
