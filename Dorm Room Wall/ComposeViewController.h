@@ -10,10 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-//@protocol ComposeViewControllerDelegate
-//- (void)didPostWall:(Wall *) wall;
-//@end
-
 
 @interface ComposeViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 

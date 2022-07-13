@@ -202,8 +202,40 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="31" id="cV9-Gq-oJN" customClass="HeaderCell">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="31"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cV9-Gq-oJN" id="oAU-jr-cBL">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="31"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebB-1H-mBQ">
+                                                    <rect key="frame" x="8" y="0.0" width="145" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="OVk-YS-5JY"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="145" id="h05-yu-xSM"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ebB-1H-mBQ" firstAttribute="leading" secondItem="oAU-jr-cBL" secondAttribute="leading" constant="8" id="Ave-o7-B7G"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ebB-1H-mBQ" secondAttribute="trailing" constant="20" symbolic="YES" id="BQY-oN-V1Z"/>
+                                                <constraint firstAttribute="bottom" secondItem="ebB-1H-mBQ" secondAttribute="bottom" id="Wdw-Sq-4qs"/>
+                                                <constraint firstItem="ebB-1H-mBQ" firstAttribute="centerY" secondItem="oAU-jr-cBL" secondAttribute="centerY" id="kYM-5y-4Qg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" header="YES"/>
+                                        </accessibility>
+                                        <connections>
+                                            <outlet property="usernameLabel" destination="ebB-1H-mBQ" id="u8W-7C-b9E"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WallCell" rowHeight="488" id="4QT-sz-pcG" customClass="WallCell">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="488"/>
+                                        <rect key="frame" x="0.0" y="75.5" width="414" height="488"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4QT-sz-pcG" id="XpL-as-qog">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="488"/>
@@ -224,7 +256,7 @@
                                                         <constraint firstAttribute="width" constant="263" id="wmT-cm-lyf"/>
                                                     </constraints>
                                                 </imageView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pfK-En-typ">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" editable="NO" text="Lorem ipsum dolor sit er elit " textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pfK-En-typ">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>

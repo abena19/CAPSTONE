@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B4D1EE9287F69D4001D0F3F /* HeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D1EE8287F69D4001D0F3F /* HeaderCell.m */; };
 		0B7194E92874E44200DA7114 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7194E82874E44200DA7114 /* AppDelegate.m */; };
 		0B7194EC2874E44200DA7114 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7194EB2874E44200DA7114 /* SceneDelegate.m */; };
 		0B7194F22874E44300DA7114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B7194F02874E44300DA7114 /* Main.storyboard */; };
@@ -47,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		077EF76A3B8EEBFAC278BCD1 /* Pods-Dorm Room WallTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dorm Room WallTests.debug.xcconfig"; path = "Target Support Files/Pods-Dorm Room WallTests/Pods-Dorm Room WallTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0B4D1EE7287F69D4001D0F3F /* HeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeaderCell.h; sourceTree = "<group>"; };
+		0B4D1EE8287F69D4001D0F3F /* HeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeaderCell.m; sourceTree = "<group>"; };
 		0B7194E42874E44200DA7114 /* Dorm Room Wall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dorm Room Wall.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7194E72874E44200DA7114 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0B7194E82874E44200DA7114 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -139,6 +142,8 @@
 		0B7194E62874E44200DA7114 /* Dorm Room Wall */ = {
 			isa = PBXGroup;
 			children = (
+				0B4D1EE7287F69D4001D0F3F /* HeaderCell.h */,
+				0B4D1EE8287F69D4001D0F3F /* HeaderCell.m */,
 				0B990A452876B83F005B88C1 /* WallCell.h */,
 				0B990A462876B83F005B88C1 /* WallCell.m */,
 				0B7194E72874E44200DA7114 /* AppDelegate.h */,
@@ -151,12 +156,12 @@
 				0B990A482876B8F6005B88C1 /* Wall.h */,
 				0B990A492876B8F6005B88C1 /* Wall.m */,
 				0B71952828764C6800DA7114 /* ChatViewController.h */,
-				0B71952928764C6800DA7114 /* ChatViewController.m */,
 				0B71951C287500BC00DA7114 /* LoginViewController.h */,
 				0B71951D287500BC00DA7114 /* LoginViewController.m */,
 				0B719522287649F900DA7114 /* WallFeedController.h */,
 				0B719523287649F900DA7114 /* WallFeedController.m */,
 				0B71952528764AD100DA7114 /* MyWallViewController.h */,
+				0B71952928764C6800DA7114 /* ChatViewController.m */,
 				0B71952628764AD100DA7114 /* MyWallViewController.m */,
 				0B7194F32874E44300DA7114 /* Assets.xcassets */,
 				0B7194F52874E44300DA7114 /* LaunchScreen.storyboard */,
@@ -449,6 +454,7 @@
 				0B990A4A2876B8F6005B88C1 /* Wall.m in Sources */,
 				0B990A4D2877644A005B88C1 /* ComposeViewController.m in Sources */,
 				0B7194FA2874E44300DA7114 /* main.m in Sources */,
+				0B4D1EE9287F69D4001D0F3F /* HeaderCell.m in Sources */,
 				0B7194EC2874E44200DA7114 /* SceneDelegate.m in Sources */,
 				0B71952728764AD100DA7114 /* MyWallViewController.m in Sources */,
 				0B990A472876B83F005B88C1 /* WallCell.m in Sources */,
