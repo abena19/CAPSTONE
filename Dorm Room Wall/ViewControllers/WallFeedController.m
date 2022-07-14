@@ -45,7 +45,7 @@ NSInteger const rowCount = 1;
             NSLog(@"😎😎😎 Successfully loaded home feed");
             self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)walls];
         } else {
-            NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);  // handle error
+            NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);
         }
         [self.wallFeedTableView reloadData];
     }];
@@ -57,7 +57,7 @@ NSInteger const rowCount = 1;
     SceneDelegate *loginSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:loginControllerId];
-    loginSceneDelegate.window.rootViewController = loginViewController;  // switching content to LoginViewController
+    loginSceneDelegate.window.rootViewController = loginViewController;
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
     }];
 }
@@ -69,7 +69,6 @@ NSInteger const rowCount = 1;
     self.cell.wall = wall;
     [self.cell setWall];
     [self.cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-
     NSLog(@"%@", self.wallArray);
     return self.cell;
 }

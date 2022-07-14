@@ -124,6 +124,7 @@ typedef void(^PFUserLogoutResultBlock)(NSError *_Nullable error);
 
  @return The task, that encapsulates the work being done.
  */
+
 - (BFTask<NSNumber *> *)signUpInBackground;
 
 /**

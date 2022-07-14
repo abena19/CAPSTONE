@@ -7,6 +7,7 @@
 
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
+#import "Wall.h"
 
 @interface LoginViewController ()
 
@@ -23,7 +24,10 @@
     PFUser *newUser = [PFUser user];  // initialize a user object
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
-    // call sign up function on the object
+    NSString *wallID = @"wallID";
+    // wall.objectId
+    [newUser setObject:(NSString *)wallID forKey:@"userWall"];
+    self.userId = newUser.objectId;
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
             NSLog(@"Error: %@", error.localizedDescription);

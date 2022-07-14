@@ -30,7 +30,7 @@
     newWall.mealImage = [self getPFFileFromImage:imageArray[2]];
     newWall.author = [PFUser currentUser];
     newWall.caption = caption;
-    [newWall saveInBackgroundWithBlock: completion];
+    [newWall saveInBackground];
     return newWall;
 }
 
