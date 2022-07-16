@@ -178,7 +178,7 @@
             <objects>
                 <viewController id="zjf-IQ-N0y" customClass="ChatViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bQ5-7n-MVf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="kiP-Db-y8E"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -194,7 +194,7 @@
             <objects>
                 <viewController id="1dC-AB-TSC" customClass="WallFeedController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QWI-7v-nE0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="dQg-Uv-DSt">
@@ -308,7 +308,7 @@
                     <navigationItem key="navigationItem" id="Ha0-Kg-I4Q">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="uqh-fA-dc9">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Hlw-ba-tRN">
-                                <rect key="frame" x="20" y="5" width="92" height="34.5"/>
+                                <rect key="frame" x="20" y="11" width="92" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Logout"/>
@@ -336,7 +336,7 @@
             <objects>
                 <viewController id="oC2-xG-l32" customClass="MyWallViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YYA-Wk-8Vb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUm-nG-jVg">
@@ -415,7 +415,6 @@
                         <outlet property="lecturePhoto" destination="A8e-yR-36k" id="EpC-L7-AR6"/>
                         <outlet property="locationPhoto" destination="T6E-rI-FWD" id="Hc6-1L-Tg3"/>
                         <outlet property="mealPhoto" destination="5NU-Wq-nfG" id="RoW-F5-s3x"/>
-                        <segue destination="yHQ-Uw-kRi" kind="presentation" identifier="composeToHomeSegue" modalPresentationStyle="fullScreen" id="er7-9Z-meH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FhF-hU-WVt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -465,7 +464,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="9qk-B9-NM5"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wqj-aG-2pm">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -484,7 +483,7 @@
                     <tabBarItem key="tabBarItem" title="My Wall" image="list.bullet.rectangle" catalog="system" id="c8G-TB-NPB"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QUr-1q-KYJ">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -503,7 +502,7 @@
                     <tabBarItem key="tabBarItem" title="Chat" image="paperplane.circle" catalog="system" id="J5a-O9-ONQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yMr-NR-L66">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -534,9 +533,6 @@
             <point key="canvasLocation" x="-226" y="80"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="er7-9Z-meH"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="homekit" catalog="system" width="128" height="106"/>
         <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>

@@ -8,6 +8,7 @@
 #import "ComposeViewController.h"
 #import "SceneDelegate.h"
 #import "WallFeedController.h"
+#import "MyWallViewController.h"
 #import "Wall.h"
 #import <Parse/Parse.h>
 
@@ -19,13 +20,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *caption;
 
 @property (nonatomic, strong) NSMutableArray *photoArray;
-@property (nonatomic, strong) WallFeedController *wallFeedController ;
+@property (nonatomic, strong) WallFeedController *wallFeedController;
 
 - (IBAction)didTapPostWall:(UIButton *)sender;
 
 @end
-
-NSString *const composeSegue = @"composeToHomeSegue";
 
 @implementation ComposeViewController
 
@@ -85,19 +84,20 @@ NSString *const composeSegue = @"composeToHomeSegue";
     [self.photoArray addObject:self.locationPhoto.image];
     [self.photoArray addObject:self.lecturePhoto.image];
     [self.photoArray addObject:self.mealPhoto.image];
-    __block Wall *wall = [Wall postWallImage:self.photoArray withCaption:self.caption.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    Wall *wall = [Wall postWallImage:self.photoArray withCaption:self.caption.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
              NSLog(@"Error posting: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully posted the following caption: %@", self.caption.text);
-            self.wallToPass = wall;
-            [self.wallFeedController.wallArray insertObject:self.wallToPass atIndex:0];
-            [self performSegueWithIdentifier:composeSegue sender:sender];
 
+            [self.wallFeedController.wallArray insertObject:self.wallToPass atIndex:0];
             [self.wallFeedController.wallFeedTableView reloadData];
+            
         }
     }];
+    self.wallToPass = wall;
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
 }
-
 
 @end

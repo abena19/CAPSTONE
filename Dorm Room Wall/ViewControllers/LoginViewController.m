@@ -24,9 +24,6 @@
     PFUser *newUser = [PFUser user];  // initialize a user object
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
-    NSString *wallID = @"wallID";
-    // wall.objectId
-    [newUser setObject:(NSString *)wallID forKey:@"userWall"];
     self.userId = newUser.objectId;
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
