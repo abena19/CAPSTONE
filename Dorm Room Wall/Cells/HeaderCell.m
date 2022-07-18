@@ -18,8 +18,8 @@
 }
 
 
-- (void)setHeader:(Wall *)wall {
-    self.usernameLabel.text = wall.author.username;
+- (void)setHeader:(NSString *)username {
+    self.usernameLabel.text = username;
     self.usernameLabel.textColor = [UIColor systemTealColor];
     self.backgroundColor = [UIColor blackColor];
 }

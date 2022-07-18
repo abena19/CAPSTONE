@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HeaderCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-- (void)setHeader:(Wall *)wall;
+- (void)setHeader:(NSString *)wallAuthor;
 
 @end
 
