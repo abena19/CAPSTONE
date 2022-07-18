@@ -7,6 +7,7 @@
 
 #import "MyWallViewController.h"
 #import <Parse/Parse.h>
+#import "WallHeaderView.h"
 
 @interface MyWallViewController ()
 

@@ -12,6 +12,7 @@
 #import <Parse/Parse.h>
 #import "Wall.h"
 #import "WallCell.h"
+#import "WallHeaderView.h"
 
 
 @interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
@@ -24,6 +25,8 @@
 
 NSString *const loginControllerId = @"LoginViewController";
 NSString *const wallCellId = @"WallCell";
+NSString *const wallHeaderViewId = @"WallHeaderView";
+
 NSInteger const rowCount = 1;
 
 
@@ -31,6 +34,11 @@ NSInteger const rowCount = 1;
     [super viewDidLoad];
     self.wallFeedTableView.dataSource = self;
     self.wallFeedTableView.delegate = self;
+    
+    UINib *headerNib = [UINib nibWithNibName:wallHeaderViewId bundle:nil];
+    [self.wallFeedTableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:wallHeaderViewId];
+
+    
     [self.wallFeedTableView reloadData];
    
     PFQuery *postQuery = [Wall query];
@@ -64,8 +72,8 @@ NSInteger const rowCount = 1;
 
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    WallCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WallCell"];
-    Wall *wall = self.wallArray[indexPath.row];
+    WallCell *cell = [tableView dequeueReusableCellWithIdentifier:wallCellId forIndexPath:indexPath];
+    Wall *wall = self.wallArray[indexPath.section];
     cell.wall = wall;
     [cell setWall];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -75,8 +83,27 @@ NSInteger const rowCount = 1;
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return rowCount;
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [self.wallArray count];
 }
 
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    WallHeaderView *wallHeader = (WallHeaderView *) [tableView dequeueReusableHeaderFooterViewWithIdentifier:wallHeaderViewId];
+    Wall *wall = self.wallArray[section];
+    wallHeader.headerUsername.text = (NSString *)wall.author.username;
+    wallHeader.wallAuthor = wall.author;
+    wallHeader.backgroundColor = [UIColor systemGreenColor];
+    return wallHeader;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return UITableViewAutomaticDimension;
+}
 
 @end

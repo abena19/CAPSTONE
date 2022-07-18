@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B4D1EF52885ED52001D0F3F /* WallHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D1EF42885ED52001D0F3F /* WallHeaderView.m */; };
+		0B4D1EF72885EF7C001D0F3F /* WallHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4D1EF62885EF7C001D0F3F /* WallHeaderView.xib */; };
 		0B7194E92874E44200DA7114 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7194E82874E44200DA7114 /* AppDelegate.m */; };
 		0B7194EC2874E44200DA7114 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7194EB2874E44200DA7114 /* SceneDelegate.m */; };
 		0B7194F22874E44300DA7114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B7194F02874E44300DA7114 /* Main.storyboard */; };
@@ -47,6 +49,9 @@
 
 /* Begin PBXFileReference section */
 		077EF76A3B8EEBFAC278BCD1 /* Pods-Dorm Room WallTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dorm Room WallTests.debug.xcconfig"; path = "Target Support Files/Pods-Dorm Room WallTests/Pods-Dorm Room WallTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0B4D1EF32885ED52001D0F3F /* WallHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WallHeaderView.h; sourceTree = "<group>"; };
+		0B4D1EF42885ED52001D0F3F /* WallHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallHeaderView.m; sourceTree = "<group>"; };
+		0B4D1EF62885EF7C001D0F3F /* WallHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WallHeaderView.xib; sourceTree = "<group>"; };
 		0B7194E42874E44200DA7114 /* Dorm Room Wall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dorm Room Wall.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7194E72874E44200DA7114 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0B7194E82874E44200DA7114 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -160,6 +165,16 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
+		0B4D1EF828860DF1001D0F3F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0B4D1EF42885ED52001D0F3F /* WallHeaderView.m */,
+				0B4D1EF62885EF7C001D0F3F /* WallHeaderView.xib */,
+				0B4D1EF32885ED52001D0F3F /* WallHeaderView.h */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		0B7194DB2874E44200DA7114 = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +200,7 @@
 		0B7194E62874E44200DA7114 /* Dorm Room Wall */ = {
 			isa = PBXGroup;
 			children = (
+				0B4D1EF828860DF1001D0F3F /* Views */,
 				0B4D1EED2880DC63001D0F3F /* Delegates */,
 				0B4D1EEC2880DBFC001D0F3F /* ViewControllers */,
 				0B4D1EEB2880DBED001D0F3F /* Models */,
@@ -349,6 +365,7 @@
 				0B7194F72874E44300DA7114 /* LaunchScreen.storyboard in Resources */,
 				0B7194F42874E44300DA7114 /* Assets.xcassets in Resources */,
 				0B7194F22874E44300DA7114 /* Main.storyboard in Resources */,
+				0B4D1EF72885EF7C001D0F3F /* WallHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B4D1EF52885ED52001D0F3F /* WallHeaderView.m in Sources */,
 				0B719524287649F900DA7114 /* WallFeedController.m in Sources */,
 				0B7194E92874E44200DA7114 /* AppDelegate.m in Sources */,
 				0B990A4A2876B8F6005B88C1 /* Wall.m in Sources */,
