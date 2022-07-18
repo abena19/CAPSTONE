@@ -37,17 +37,25 @@ NSInteger const rowCount = 1;
     
     UINib *headerNib = [UINib nibWithNibName:wallHeaderViewId bundle:nil];
     [self.wallFeedTableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:wallHeaderViewId];
-
     
     [self.wallFeedTableView reloadData];
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.wallFeedTableView insertSubview:refreshControl atIndex:0];
+    [self fetchWalls];
    
-    PFQuery *postQuery = [Wall query];
-    [postQuery orderByDescending:@"createdAt"];
-    [postQuery includeKey:@"author"];
-    postQuery.limit = 5;
-    NSLog(@"%d", [postQuery hasCachedResult]);
-    postQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Wall *> * _Nullable walls, NSError * _Nullable error) {
+    
+}
+
+
+- (void)fetchWalls {
+    PFQuery *wallQuery = [Wall query];
+    [wallQuery orderByDescending:@"createdAt"];
+    [wallQuery includeKey:@"author"];
+    wallQuery.limit = 5;
+    NSLog(@"%d", [wallQuery hasCachedResult]);
+    wallQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    [wallQuery findObjectsInBackgroundWithBlock:^(NSArray<Wall *> * _Nullable walls, NSError * _Nullable error) {
        if (walls) {
            NSLog(@"😎😎😎 Successfully loaded home feed");
            self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)walls];
@@ -59,8 +67,6 @@ NSInteger const rowCount = 1;
 }
 
 
-
-
 - (IBAction)didTapLogout:(id)sender {
     SceneDelegate *loginSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -68,6 +74,24 @@ NSInteger const rowCount = 1;
     loginSceneDelegate.window.rootViewController = loginViewController;
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
     }];
+}
+
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    PFQuery *wallQuery = [Wall query];
+    [wallQuery orderByDescending:@"createdAt"];
+    [wallQuery includeKey:@"author"];
+    wallQuery.limit = 5;
+    [wallQuery findObjectsInBackgroundWithBlock:^(NSArray<Wall *> * _Nullable walls, NSError * _Nullable error) {
+       if (walls) {
+           NSLog(@"😎😎😎 Successfully loaded home feed");
+           self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)walls];
+           [refreshControl endRefreshing];
+       } else {
+           NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);  // handle error
+       }
+       [self.wallFeedTableView reloadData];
+   }];
 }
 
 
@@ -97,7 +121,6 @@ NSInteger const rowCount = 1;
     Wall *wall = self.wallArray[section];
     wallHeader.headerUsername.text = (NSString *)wall.author.username;
     wallHeader.wallAuthor = wall.author;
-    wallHeader.backgroundColor = [UIColor systemGreenColor];
     return wallHeader;
 }
 
@@ -105,5 +128,6 @@ NSInteger const rowCount = 1;
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return UITableViewAutomaticDimension;
 }
+
 
 @end
