@@ -12,7 +12,6 @@
 #import <Parse/Parse.h>
 #import "Wall.h"
 #import "WallCell.h"
-#import "HeaderCell.h"
 
 
 @interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
@@ -25,21 +24,22 @@
 
 NSString *const loginControllerId = @"LoginViewController";
 NSString *const wallCellId = @"WallCell";
-NSString *const headerCellId = @"HeaderCell";
 NSInteger const rowCount = 1;
 
 
 - (void)viewDidLoad {
-   [super viewDidLoad];
-   self.wallFeedTableView.dataSource = self;
-   self.wallFeedTableView.delegate = self;
-   [self.wallFeedTableView reloadData];
+    [super viewDidLoad];
+    self.wallFeedTableView.dataSource = self;
+    self.wallFeedTableView.delegate = self;
+    [self.wallFeedTableView reloadData];
    
-   PFQuery *postQuery = [Wall query];
-   [postQuery orderByDescending:@"createdAt"];
-   [postQuery includeKey:@"author"];
-   postQuery.limit = 5;
-   [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Wall *> * _Nullable walls, NSError * _Nullable error) {
+    PFQuery *postQuery = [Wall query];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    postQuery.limit = 5;
+    NSLog(@"%d", [postQuery hasCachedResult]);
+    postQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Wall *> * _Nullable walls, NSError * _Nullable error) {
        if (walls) {
            NSLog(@"😎😎😎 Successfully loaded home feed");
            self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)walls];
@@ -49,6 +49,7 @@ NSInteger const rowCount = 1;
        [self.wallFeedTableView reloadData];
    }];
 }
+
 
 
 
