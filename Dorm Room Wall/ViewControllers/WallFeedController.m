@@ -26,7 +26,6 @@
 NSString *const loginControllerId = @"LoginViewController";
 NSString *const wallCellId = @"WallCell";
 NSString *const wallHeaderViewId = @"WallHeaderView";
-
 NSInteger const rowCount = 1;
 
 
@@ -34,6 +33,8 @@ NSInteger const rowCount = 1;
     [super viewDidLoad];
     self.wallFeedTableView.dataSource = self;
     self.wallFeedTableView.delegate = self;
+    
+    self.didPost = NO;
     
     UINib *headerNib = [UINib nibWithNibName:wallHeaderViewId bundle:nil];
     [self.wallFeedTableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:wallHeaderViewId];
@@ -43,18 +44,37 @@ NSInteger const rowCount = 1;
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.wallFeedTableView insertSubview:refreshControl atIndex:0];
     [self fetchWalls];
-   
-    
 }
 
 
-- (void)fetchWalls {
+- (void) viewWillAppear:(BOOL)animated {
+        self.timeSinceLoginUser = [NSTimer scheduledTimerWithTimeInterval:60.0  target:self selector:@selector(actionOnTimer) userInfo:nil repeats:YES];
+}
+
+
+- (void) actionOnTimer {
+    if (self.didPost) {
+        [[self queryWalls] clearCachedResult];
+        [self.wallFeedTableView reloadData];
+        self.didPost = NO;
+    }
+}
+
+
+- (PFQuery *)queryWalls {
     PFQuery *wallQuery = [Wall query];
     [wallQuery orderByDescending:@"createdAt"];
     [wallQuery includeKey:@"author"];
     wallQuery.limit = 5;
+    return wallQuery;
+}
+
+
+
+- (void)fetchWalls {
+    PFQuery *wallQuery = [self queryWalls];
     NSLog(@"%d", [wallQuery hasCachedResult]);
-    wallQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
+    wallQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;  //check cache for query else network
     [wallQuery findObjectsInBackgroundWithBlock:^(NSArray<Wall *> * _Nullable walls, NSError * _Nullable error) {
        if (walls) {
            NSLog(@"😎😎😎 Successfully loaded home feed");
@@ -67,28 +87,16 @@ NSInteger const rowCount = 1;
 }
 
 
-- (IBAction)didTapLogout:(id)sender {
-    SceneDelegate *loginSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:loginControllerId];
-    loginSceneDelegate.window.rootViewController = loginViewController;
-    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-    }];
-}
-
-
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
-    PFQuery *wallQuery = [Wall query];
-    [wallQuery orderByDescending:@"createdAt"];
-    [wallQuery includeKey:@"author"];
-    wallQuery.limit = 5;
+    PFQuery *wallQuery = [self queryWalls];
+    wallQuery.cachePolicy = kPFCachePolicyNetworkOnly;  //saves new data from network to cache
     [wallQuery findObjectsInBackgroundWithBlock:^(NSArray<Wall *> * _Nullable walls, NSError * _Nullable error) {
        if (walls) {
-           NSLog(@"😎😎😎 Successfully loaded home feed");
+           NSLog(@"😎😎😎 Successfully refreshed home feed");
            self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)walls];
            [refreshControl endRefreshing];
        } else {
-           NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);  // handle error
+           NSLog(@"😫😫😫 Error refreshing home feed: %@", error.localizedDescription);  // handle error
        }
        [self.wallFeedTableView reloadData];
    }];
@@ -127,6 +135,17 @@ NSInteger const rowCount = 1;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return UITableViewAutomaticDimension;
+}
+
+
+
+- (IBAction)didTapLogout:(id)sender {
+    SceneDelegate *loginSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:loginControllerId];
+    loginSceneDelegate.window.rootViewController = loginViewController;
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+    }];
 }
 
 

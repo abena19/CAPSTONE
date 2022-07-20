@@ -89,15 +89,16 @@
              NSLog(@"Error posting: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully posted the following caption: %@", self.caption.text);
-
             [self.wallFeedController.wallArray insertObject:self.wallToPass atIndex:0];
+            self.wallFeedController.didPost = YES;
             [self.wallFeedController.wallFeedTableView reloadData];
-            
         }
     }];
     self.wallToPass = wall;
-    [self dismissViewControllerAnimated:YES completion:^{
-    }];
+    SceneDelegate *homeSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"HomeTabController"];
+    homeSceneDelegate.window.rootViewController = tabController;
 }
 
 @end

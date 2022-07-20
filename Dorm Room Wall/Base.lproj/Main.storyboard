@@ -192,7 +192,7 @@
         <!--Wall Feed Controller-->
         <scene sceneID="Lij-91-qex">
             <objects>
-                <viewController id="1dC-AB-TSC" customClass="WallFeedController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WallFeedController" id="1dC-AB-TSC" customClass="WallFeedController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QWI-7v-nE0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
