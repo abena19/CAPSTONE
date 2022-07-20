@@ -13,6 +13,7 @@
 #import "Wall.h"
 #import "WallCell.h"
 #import "WallHeaderView.h"
+#import "ParseQueryManager.h"
 
 
 @interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
@@ -40,66 +41,40 @@ NSInteger const rowCount = 1;
     [self.wallFeedTableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:wallHeaderViewId];
     
     [self.wallFeedTableView reloadData];
+    
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.wallFeedTableView insertSubview:refreshControl atIndex:0];
-    [self fetchWalls];
+    [self fetchFeedWalls];
 }
 
 
-- (void) viewWillAppear:(BOOL)animated {
-        self.timeSinceLoginUser = [NSTimer scheduledTimerWithTimeInterval:60.0  target:self selector:@selector(actionOnTimer) userInfo:nil repeats:YES];
-}
-
-
-- (void) actionOnTimer {
-    if (self.didPost) {
-        [[self queryWalls] clearCachedResult];
+- (void)fetchFeedWalls {
+    [[ParseQueryManager shared] fetchWallsFromCache:^(NSArray *feedWalls, NSError *error) {
+        if (feedWalls) {
+            NSLog(@"😎😎😎 Successfully loaded home feed");
+            self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
+        } else {
+            NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);
+        }
         [self.wallFeedTableView reloadData];
-        self.didPost = NO;
-    }
-}
-
-
-- (PFQuery *)queryWalls {
-    PFQuery *wallQuery = [Wall query];
-    [wallQuery orderByDescending:@"createdAt"];
-    [wallQuery includeKey:@"author"];
-    wallQuery.limit = 5;
-    return wallQuery;
-}
-
-
-
-- (void)fetchWalls {
-    PFQuery *wallQuery = [self queryWalls];
-    NSLog(@"%d", [wallQuery hasCachedResult]);
-    wallQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;  //check cache for query else network
-    [wallQuery findObjectsInBackgroundWithBlock:^(NSArray<Wall *> * _Nullable walls, NSError * _Nullable error) {
-       if (walls) {
-           NSLog(@"😎😎😎 Successfully loaded home feed");
-           self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)walls];
-       } else {
-           NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);  // handle error
-       }
-       [self.wallFeedTableView reloadData];
-   }];
+        }
+    ];
 }
 
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
-    PFQuery *wallQuery = [self queryWalls];
-    wallQuery.cachePolicy = kPFCachePolicyNetworkOnly;  //saves new data from network to cache
-    [wallQuery findObjectsInBackgroundWithBlock:^(NSArray<Wall *> * _Nullable walls, NSError * _Nullable error) {
-       if (walls) {
-           NSLog(@"😎😎😎 Successfully refreshed home feed");
-           self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)walls];
-           [refreshControl endRefreshing];
-       } else {
-           NSLog(@"😫😫😫 Error refreshing home feed: %@", error.localizedDescription);  // handle error
-       }
-       [self.wallFeedTableView reloadData];
-   }];
+    [[ParseQueryManager shared] fetchWallsFromNetworkOnly:^(NSArray *feedWalls, NSError *error) {
+        if (feedWalls) {
+            NSLog(@"😎😎😎 Successfully refreshed home feed");
+            self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
+            [refreshControl endRefreshing];
+        } else {
+            NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);
+        }
+        [self.wallFeedTableView reloadData];
+        }
+    ];
 }
 
 

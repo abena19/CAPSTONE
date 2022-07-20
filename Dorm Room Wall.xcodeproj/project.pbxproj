@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0B4D1EF52885ED52001D0F3F /* WallHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D1EF42885ED52001D0F3F /* WallHeaderView.m */; };
 		0B4D1EF72885EF7C001D0F3F /* WallHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4D1EF62885EF7C001D0F3F /* WallHeaderView.xib */; };
+		0B4D1EFB2888728C001D0F3F /* ParseQueryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D1EFA2888728C001D0F3F /* ParseQueryManager.m */; };
 		0B7194E92874E44200DA7114 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7194E82874E44200DA7114 /* AppDelegate.m */; };
 		0B7194EC2874E44200DA7114 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7194EB2874E44200DA7114 /* SceneDelegate.m */; };
 		0B7194F22874E44300DA7114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B7194F02874E44300DA7114 /* Main.storyboard */; };
@@ -52,6 +53,8 @@
 		0B4D1EF32885ED52001D0F3F /* WallHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WallHeaderView.h; sourceTree = "<group>"; };
 		0B4D1EF42885ED52001D0F3F /* WallHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallHeaderView.m; sourceTree = "<group>"; };
 		0B4D1EF62885EF7C001D0F3F /* WallHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WallHeaderView.xib; sourceTree = "<group>"; };
+		0B4D1EF92888728C001D0F3F /* ParseQueryManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParseQueryManager.h; sourceTree = "<group>"; };
+		0B4D1EFA2888728C001D0F3F /* ParseQueryManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParseQueryManager.m; sourceTree = "<group>"; };
 		0B7194E42874E44200DA7114 /* Dorm Room Wall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dorm Room Wall.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7194E72874E44200DA7114 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0B7194E82874E44200DA7114 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 		0B4D1EEB2880DBED001D0F3F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0B4D1EF92888728C001D0F3F /* ParseQueryManager.h */,
+				0B4D1EFA2888728C001D0F3F /* ParseQueryManager.m */,
 				0B990A492876B8F6005B88C1 /* Wall.m */,
 				0B990A482876B8F6005B88C1 /* Wall.h */,
 			);
@@ -503,6 +508,7 @@
 				0B71952728764AD100DA7114 /* MyWallViewController.m in Sources */,
 				0B990A472876B83F005B88C1 /* WallCell.m in Sources */,
 				0B71952A28764C6800DA7114 /* ChatViewController.m in Sources */,
+				0B4D1EFB2888728C001D0F3F /* ParseQueryManager.m in Sources */,
 				0B71951E287500BC00DA7114 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

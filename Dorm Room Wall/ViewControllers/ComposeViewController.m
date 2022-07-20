@@ -92,13 +92,16 @@
             [self.wallFeedController.wallArray insertObject:self.wallToPass atIndex:0];
             self.wallFeedController.didPost = YES;
             [self.wallFeedController.wallFeedTableView reloadData];
+            // move to wall feed if successful
+            SceneDelegate *homeSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"HomeTabController"];
+            homeSceneDelegate.window.rootViewController = tabController;
         }
     }];
     self.wallToPass = wall;
-    SceneDelegate *homeSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"HomeTabController"];
-    homeSceneDelegate.window.rootViewController = tabController;
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
 }
 
 @end
