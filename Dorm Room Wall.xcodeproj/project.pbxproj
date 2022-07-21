@@ -10,6 +10,7 @@
 		0B4D1EF52885ED52001D0F3F /* WallHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D1EF42885ED52001D0F3F /* WallHeaderView.m */; };
 		0B4D1EF72885EF7C001D0F3F /* WallHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4D1EF62885EF7C001D0F3F /* WallHeaderView.xib */; };
 		0B4D1EFB2888728C001D0F3F /* ParseQueryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D1EFA2888728C001D0F3F /* ParseQueryManager.m */; };
+		0B4D1EFC2889D2AC001D0F3F /* Pods_Dorm_Room_Wall.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BF4AAF191067986D5DF5D60 /* Pods_Dorm_Room_Wall.framework */; };
 		0B7194E92874E44200DA7114 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7194E82874E44200DA7114 /* AppDelegate.m */; };
 		0B7194EC2874E44200DA7114 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7194EB2874E44200DA7114 /* SceneDelegate.m */; };
 		0B7194F22874E44300DA7114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B7194F02874E44300DA7114 /* Main.storyboard */; };
@@ -28,7 +29,6 @@
 		0B990A4D2877644A005B88C1 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B990A4C2877644A005B88C1 /* ComposeViewController.m */; };
 		134C9C4568381B36EDA0EA58 /* Pods_Dorm_Room_WallTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79A86AFA772E657A3502DE0 /* Pods_Dorm_Room_WallTests.framework */; };
 		BD9DDEA1F7FE470A46E13FCF /* Pods_Dorm_Room_Wall_Dorm_Room_WallUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2AC8745A9547ACB1C97D51C /* Pods_Dorm_Room_Wall_Dorm_Room_WallUITests.framework */; };
-		D1750779BF68D5840A600DAD /* Pods_Dorm_Room_Wall.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BF4AAF191067986D5DF5D60 /* Pods_Dorm_Room_Wall.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1750779BF68D5840A600DAD /* Pods_Dorm_Room_Wall.framework in Frameworks */,
+				0B4D1EFC2889D2AC001D0F3F /* Pods_Dorm_Room_Wall.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +271,7 @@
 				0B7194E12874E44200DA7114 /* Frameworks */,
 				0B7194E22874E44200DA7114 /* Resources */,
 				3D3D7C43DF03FB32AEE6199B /* [CP] Embed Pods Frameworks */,
+				62C23CE8E5DB50B877657D7E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -309,6 +310,7 @@
 				0B7195062874E44400DA7114 /* Frameworks */,
 				0B7195072874E44400DA7114 /* Resources */,
 				9FA25AC02728BD336F834B63 /* [CP] Embed Pods Frameworks */,
+				C9B5BD6D26D682C11B00B468 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -452,6 +454,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dorm Room Wall/Pods-Dorm Room Wall-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		62C23CE8E5DB50B877657D7E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dorm Room Wall/Pods-Dorm Room Wall-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dorm Room Wall/Pods-Dorm Room Wall-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dorm Room Wall/Pods-Dorm Room Wall-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9FA25AC02728BD336F834B63 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -489,6 +508,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C9B5BD6D26D682C11B00B468 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dorm Room Wall-Dorm Room WallUITests/Pods-Dorm Room Wall-Dorm Room WallUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dorm Room Wall-Dorm Room WallUITests/Pods-Dorm Room Wall-Dorm Room WallUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dorm Room Wall-Dorm Room WallUITests/Pods-Dorm Room Wall-Dorm Room WallUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -698,6 +734,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abena.Dorm-Room-Wall";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -726,6 +763,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abena.Dorm-Room-Wall";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

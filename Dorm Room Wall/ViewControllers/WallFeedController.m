@@ -14,6 +14,7 @@
 #import "WallCell.h"
 #import "WallHeaderView.h"
 #import "ParseQueryManager.h"
+@import GoogleMaps;
 
 
 @interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
