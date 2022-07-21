@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B4D1EE9287F69D4001D0F3F /* HeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D1EE8287F69D4001D0F3F /* HeaderCell.m */; };
+		0B4D1EF52885ED52001D0F3F /* WallHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D1EF42885ED52001D0F3F /* WallHeaderView.m */; };
+		0B4D1EF72885EF7C001D0F3F /* WallHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4D1EF62885EF7C001D0F3F /* WallHeaderView.xib */; };
+		0B4D1EFB2888728C001D0F3F /* ParseQueryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D1EFA2888728C001D0F3F /* ParseQueryManager.m */; };
+		0B4D1EFC2889D2AC001D0F3F /* Pods_Dorm_Room_Wall.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BF4AAF191067986D5DF5D60 /* Pods_Dorm_Room_Wall.framework */; };
 		0B7194E92874E44200DA7114 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7194E82874E44200DA7114 /* AppDelegate.m */; };
 		0B7194EC2874E44200DA7114 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7194EB2874E44200DA7114 /* SceneDelegate.m */; };
 		0B7194F22874E44300DA7114 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B7194F02874E44300DA7114 /* Main.storyboard */; };
@@ -26,7 +29,6 @@
 		0B990A4D2877644A005B88C1 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B990A4C2877644A005B88C1 /* ComposeViewController.m */; };
 		134C9C4568381B36EDA0EA58 /* Pods_Dorm_Room_WallTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79A86AFA772E657A3502DE0 /* Pods_Dorm_Room_WallTests.framework */; };
 		BD9DDEA1F7FE470A46E13FCF /* Pods_Dorm_Room_Wall_Dorm_Room_WallUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2AC8745A9547ACB1C97D51C /* Pods_Dorm_Room_Wall_Dorm_Room_WallUITests.framework */; };
-		D1750779BF68D5840A600DAD /* Pods_Dorm_Room_Wall.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BF4AAF191067986D5DF5D60 /* Pods_Dorm_Room_Wall.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,8 +50,11 @@
 
 /* Begin PBXFileReference section */
 		077EF76A3B8EEBFAC278BCD1 /* Pods-Dorm Room WallTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dorm Room WallTests.debug.xcconfig"; path = "Target Support Files/Pods-Dorm Room WallTests/Pods-Dorm Room WallTests.debug.xcconfig"; sourceTree = "<group>"; };
-		0B4D1EE7287F69D4001D0F3F /* HeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeaderCell.h; sourceTree = "<group>"; };
-		0B4D1EE8287F69D4001D0F3F /* HeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeaderCell.m; sourceTree = "<group>"; };
+		0B4D1EF32885ED52001D0F3F /* WallHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WallHeaderView.h; sourceTree = "<group>"; };
+		0B4D1EF42885ED52001D0F3F /* WallHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallHeaderView.m; sourceTree = "<group>"; };
+		0B4D1EF62885EF7C001D0F3F /* WallHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WallHeaderView.xib; sourceTree = "<group>"; };
+		0B4D1EF92888728C001D0F3F /* ParseQueryManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParseQueryManager.h; sourceTree = "<group>"; };
+		0B4D1EFA2888728C001D0F3F /* ParseQueryManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParseQueryManager.m; sourceTree = "<group>"; };
 		0B7194E42874E44200DA7114 /* Dorm Room Wall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dorm Room Wall.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7194E72874E44200DA7114 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0B7194E82874E44200DA7114 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -94,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1750779BF68D5840A600DAD /* Pods_Dorm_Room_Wall.framework in Frameworks */,
+				0B4D1EFC2889D2AC001D0F3F /* Pods_Dorm_Room_Wall.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,8 +125,6 @@
 		0B4D1EEA2880DBC4001D0F3F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				0B4D1EE7287F69D4001D0F3F /* HeaderCell.h */,
-				0B4D1EE8287F69D4001D0F3F /* HeaderCell.m */,
 				0B990A452876B83F005B88C1 /* WallCell.h */,
 				0B990A462876B83F005B88C1 /* WallCell.m */,
 			);
@@ -131,6 +134,8 @@
 		0B4D1EEB2880DBED001D0F3F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0B4D1EF92888728C001D0F3F /* ParseQueryManager.h */,
+				0B4D1EFA2888728C001D0F3F /* ParseQueryManager.m */,
 				0B990A492876B8F6005B88C1 /* Wall.m */,
 				0B990A482876B8F6005B88C1 /* Wall.h */,
 			);
@@ -165,6 +170,16 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
+		0B4D1EF828860DF1001D0F3F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0B4D1EF42885ED52001D0F3F /* WallHeaderView.m */,
+				0B4D1EF62885EF7C001D0F3F /* WallHeaderView.xib */,
+				0B4D1EF32885ED52001D0F3F /* WallHeaderView.h */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		0B7194DB2874E44200DA7114 = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +205,7 @@
 		0B7194E62874E44200DA7114 /* Dorm Room Wall */ = {
 			isa = PBXGroup;
 			children = (
+				0B4D1EF828860DF1001D0F3F /* Views */,
 				0B4D1EED2880DC63001D0F3F /* Delegates */,
 				0B4D1EEC2880DBFC001D0F3F /* ViewControllers */,
 				0B4D1EEB2880DBED001D0F3F /* Models */,
@@ -255,6 +271,7 @@
 				0B7194E12874E44200DA7114 /* Frameworks */,
 				0B7194E22874E44200DA7114 /* Resources */,
 				3D3D7C43DF03FB32AEE6199B /* [CP] Embed Pods Frameworks */,
+				62C23CE8E5DB50B877657D7E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -293,6 +310,7 @@
 				0B7195062874E44400DA7114 /* Frameworks */,
 				0B7195072874E44400DA7114 /* Resources */,
 				9FA25AC02728BD336F834B63 /* [CP] Embed Pods Frameworks */,
+				C9B5BD6D26D682C11B00B468 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -354,6 +372,7 @@
 				0B7194F72874E44300DA7114 /* LaunchScreen.storyboard in Resources */,
 				0B7194F42874E44300DA7114 /* Assets.xcassets in Resources */,
 				0B7194F22874E44300DA7114 /* Main.storyboard in Resources */,
+				0B4D1EF72885EF7C001D0F3F /* WallHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +454,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dorm Room Wall/Pods-Dorm Room Wall-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		62C23CE8E5DB50B877657D7E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dorm Room Wall/Pods-Dorm Room Wall-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dorm Room Wall/Pods-Dorm Room Wall-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dorm Room Wall/Pods-Dorm Room Wall-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9FA25AC02728BD336F834B63 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -474,6 +510,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C9B5BD6D26D682C11B00B468 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dorm Room Wall-Dorm Room WallUITests/Pods-Dorm Room Wall-Dorm Room WallUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dorm Room Wall-Dorm Room WallUITests/Pods-Dorm Room Wall-Dorm Room WallUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dorm Room Wall-Dorm Room WallUITests/Pods-Dorm Room Wall-Dorm Room WallUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -481,16 +534,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B4D1EF52885ED52001D0F3F /* WallHeaderView.m in Sources */,
 				0B719524287649F900DA7114 /* WallFeedController.m in Sources */,
 				0B7194E92874E44200DA7114 /* AppDelegate.m in Sources */,
 				0B990A4A2876B8F6005B88C1 /* Wall.m in Sources */,
 				0B990A4D2877644A005B88C1 /* ComposeViewController.m in Sources */,
 				0B7194FA2874E44300DA7114 /* main.m in Sources */,
-				0B4D1EE9287F69D4001D0F3F /* HeaderCell.m in Sources */,
 				0B7194EC2874E44200DA7114 /* SceneDelegate.m in Sources */,
 				0B71952728764AD100DA7114 /* MyWallViewController.m in Sources */,
 				0B990A472876B83F005B88C1 /* WallCell.m in Sources */,
 				0B71952A28764C6800DA7114 /* ChatViewController.m in Sources */,
+				0B4D1EFB2888728C001D0F3F /* ParseQueryManager.m in Sources */,
 				0B71951E287500BC00DA7114 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -680,6 +734,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abena.Dorm-Room-Wall";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -708,6 +763,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abena.Dorm-Room-Wall";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

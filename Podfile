@@ -7,6 +7,8 @@ target 'Dorm Room Wall' do
 
   # Pods for Dorm Room Wall
   pod 'Parse'
+  pod 'GoogleMaps'
+  pod 'Google-Maps-iOS-Utils'
 
   target 'Dorm Room WallTests' do
     inherit! :search_paths

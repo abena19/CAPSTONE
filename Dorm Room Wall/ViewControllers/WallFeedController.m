@@ -12,13 +12,14 @@
 #import <Parse/Parse.h>
 #import "Wall.h"
 #import "WallCell.h"
-#import "HeaderCell.h"
+#import "WallHeaderView.h"
+#import "ParseQueryManager.h"
+@import GoogleMaps;
 
 
 @interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 - (IBAction)didTapLogout:(id)sender;
-@property (weak, nonatomic) WallCell *cell;
 
 @end
 
@@ -26,31 +27,134 @@
 
 NSString *const loginControllerId = @"LoginViewController";
 NSString *const wallCellId = @"WallCell";
-NSString *const headerCellId = @"HeaderCell";
+NSString *const wallHeaderViewId = @"WallHeaderView";
 NSInteger const rowCount = 1;
+
+
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+- (id) init {
+    self = [super init];
+    if (!self) return nil;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(receiveTestNotification:)
+        name:@"TestNotification"
+        object:nil];
+    return self;
+}
+
+
+- (void) receiveTestNotification:(NSNotification *) notification {
+    if ([[notification name] isEqualToString:@"TestNotification"]) {
+        NSLog (@"Successfully received the test notification!");
+    }
+}
+
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.wallFeedTableView.dataSource = self;
     self.wallFeedTableView.delegate = self;
+    
+    UINib *headerNib = [UINib nibWithNibName:wallHeaderViewId bundle:nil];
+    [self.wallFeedTableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:wallHeaderViewId];
+    
     [self.wallFeedTableView reloadData];
     
-    PFQuery *postQuery = [Wall query];
-    [postQuery orderByDescending:@"createdAt"];
-    [postQuery includeKey:@"author"];
-    postQuery.limit = 5;
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Wall *> * _Nullable walls, NSError * _Nullable error) {
-        if (walls) {
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.wallFeedTableView insertSubview:refreshControl atIndex:0];
+    [self fetchFeedWalls];
+}
+
+
+- (void) viewWillAppear:(BOOL)animated {
+        self.timeSinceLoginUser = [NSTimer scheduledTimerWithTimeInterval:60.0  target:self selector:@selector(actionOnTimer) userInfo:nil repeats:YES];
+}
+
+
+- (void) actionOnTimer {
+        [[ParseQueryManager shared] fetchWallsFromNetworkOnly:^(NSArray *feedWalls, NSError *error) {
+            if (feedWalls) {
+                NSLog(@"😎😎😎 Successfully refreshed home feed");
+                self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
+            } else {
+                NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);
+            }
+            [self.wallFeedTableView reloadData];
+            }
+        ];
+}
+
+
+- (void)fetchFeedWalls {
+    [[ParseQueryManager shared] fetchWallsFromCache:^(NSArray *feedWalls, NSError *error) {
+        if (feedWalls) {
             NSLog(@"😎😎😎 Successfully loaded home feed");
-            self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)walls];
+            self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
         } else {
             NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);
         }
         [self.wallFeedTableView reloadData];
-    }];
-
+        }
+    ];
 }
+
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [[ParseQueryManager shared] fetchWallsFromNetworkOnly:^(NSArray *feedWalls, NSError *error) {
+        if (feedWalls) {
+            NSLog(@"😎😎😎 Successfully refreshed home feed");
+            self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
+            [refreshControl endRefreshing];
+        } else {
+            NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);
+        }
+        [self.wallFeedTableView reloadData];
+        }
+    ];
+}
+
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    WallCell *cell = [tableView dequeueReusableCellWithIdentifier:wallCellId forIndexPath:indexPath];
+    Wall *wall = self.wallArray[indexPath.section];
+    cell.wall = wall;
+    [cell setWall];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    NSLog(@"%@", self.wallArray);
+    return cell;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return rowCount;
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [self.wallArray count];
+}
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    WallHeaderView *wallHeader = (WallHeaderView *) [tableView dequeueReusableHeaderFooterViewWithIdentifier:wallHeaderViewId];
+    Wall *wall = self.wallArray[section];
+    wallHeader.headerUsername.text = (NSString *)wall.author.username;
+    wallHeader.wallAuthor = wall.author;
+    return wallHeader;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return UITableViewAutomaticDimension;
+}
+
 
 
 - (IBAction)didTapLogout:(id)sender {
@@ -60,33 +164,6 @@ NSInteger const rowCount = 1;
     loginSceneDelegate.window.rootViewController = loginViewController;
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
     }];
-}
-
-
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    self.cell = [tableView dequeueReusableCellWithIdentifier:wallCellId];
-    Wall *wall = self.wallArray[indexPath.row];
-    self.cell.wall = wall;
-    [self.cell setWall];
-    [self.cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    NSLog(@"%@", self.wallArray);
-    return self.cell;
-}
-
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return rowCount;
-}
-
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    HeaderCell *headerCell = [tableView dequeueReusableCellWithIdentifier:headerCellId];
-    [headerCell setHeader:self.cell.wall];
-    return headerCell;
-}
-
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.wallArray.count;
 }
 
 

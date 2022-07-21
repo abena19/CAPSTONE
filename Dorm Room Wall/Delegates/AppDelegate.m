@@ -7,6 +7,9 @@
 
 #import "AppDelegate.h"
 #import "Parse/Parse.h"
+@import GoogleMaps;
+
+static NSString *const GoogleMapsAPIKey = @"AIzaSyA388K_O7Tq-mYBzCPEnZcq45dpa1jdXDo";
 
 @interface AppDelegate ()
 
@@ -22,6 +25,7 @@
             configuration.server = @"https://parseapi.back4app.com";
         }];
     [Parse initializeWithConfiguration:config];
+    [GMSServices provideAPIKey:GoogleMapsAPIKey];
     return YES;
 }
 
