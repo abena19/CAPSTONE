@@ -25,9 +25,9 @@
     return sharedManager;
 }
 
+
 - (instancetype)init {
-    if (self) {
-        
+    if (self) {      
     }
     return self;
 }

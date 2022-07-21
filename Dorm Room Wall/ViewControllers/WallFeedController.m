@@ -30,12 +30,35 @@ NSString *const wallHeaderViewId = @"WallHeaderView";
 NSInteger const rowCount = 1;
 
 
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+- (id) init {
+    self = [super init];
+    if (!self) return nil;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(receiveTestNotification:)
+        name:@"TestNotification"
+        object:nil];
+    return self;
+}
+
+
+- (void) receiveTestNotification:(NSNotification *) notification {
+    if ([[notification name] isEqualToString:@"TestNotification"]) {
+        NSLog (@"Successfully received the test notification!");
+    }
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.wallFeedTableView.dataSource = self;
     self.wallFeedTableView.delegate = self;
-    
-    self.didPost = NO;
     
     UINib *headerNib = [UINib nibWithNibName:wallHeaderViewId bundle:nil];
     [self.wallFeedTableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:wallHeaderViewId];
@@ -46,6 +69,25 @@ NSInteger const rowCount = 1;
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.wallFeedTableView insertSubview:refreshControl atIndex:0];
     [self fetchFeedWalls];
+}
+
+
+- (void) viewWillAppear:(BOOL)animated {
+        self.timeSinceLoginUser = [NSTimer scheduledTimerWithTimeInterval:60.0  target:self selector:@selector(actionOnTimer) userInfo:nil repeats:YES];
+}
+
+
+- (void) actionOnTimer {
+        [[ParseQueryManager shared] fetchWallsFromNetworkOnly:^(NSArray *feedWalls, NSError *error) {
+            if (feedWalls) {
+                NSLog(@"😎😎😎 Successfully refreshed home feed");
+                self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
+            } else {
+                NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);
+            }
+            [self.wallFeedTableView reloadData];
+            }
+        ];
 }
 
 

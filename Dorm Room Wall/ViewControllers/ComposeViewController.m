@@ -89,9 +89,6 @@
              NSLog(@"Error posting: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully posted the following caption: %@", self.caption.text);
-            [self.wallFeedController.wallArray insertObject:self.wallToPass atIndex:0];
-            self.wallFeedController.didPost = YES;
-            [self.wallFeedController.wallFeedTableView reloadData];
             // move to wall feed if successful
             SceneDelegate *homeSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -100,6 +97,10 @@
         }
     }];
     self.wallToPass = wall;
+    [[NSNotificationCenter defaultCenter]
+            postNotificationName:@"TestNotification"
+            object:self];
+    NSLog(@"Successfully notified");
     [self dismissViewControllerAnimated:YES completion:^{
     }];
 }
