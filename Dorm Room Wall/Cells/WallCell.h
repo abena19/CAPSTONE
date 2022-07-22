@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIImageView *lectureImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *mealImageView;
 @property (weak, nonatomic) IBOutlet UITextView *captionView;
+- (IBAction)dormLocation:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *dormLocationButton;
 
 @property (strong, nonatomic) Wall *wall;
 

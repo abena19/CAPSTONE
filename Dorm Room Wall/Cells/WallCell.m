@@ -41,6 +41,10 @@
         }
     }];
     self.captionView.text = (NSString *)self.wall.caption;
+    [self.dormLocationButton setTitle:self.wall.dormAddress forState:UIControlStateNormal];
+}
+
+- (IBAction)dormLocation:(id)sender {
 }
 
 @end
