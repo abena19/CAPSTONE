@@ -7,6 +7,7 @@
 
 #import "GMapViewController.h"
 @import GoogleMaps;
+@import GoogleMapsUtils;
 
 
 @interface GMapViewController () <GMSMapViewDelegate>
@@ -15,27 +16,25 @@
 
 @implementation GMapViewController{
     GMSMapView *_mapView;
-  }
+    GMUClusterManager *_clusterManager;
+}
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
+
+- (void)loadView {
+    [super loadView];
     _mapView.delegate = self;
-    
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:12];
     _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     self.view = _mapView;
-
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    CLLocationCoordinate2D mapCenter = CLLocationCoordinate2DMake(_mapView.camera.target.latitude, _mapView.camera.target.longitude);
+    GMSMarker *marker = [GMSMarker markerWithPosition:mapCenter];
+    marker.icon = [UIImage imageNamed:@"custom_pin.png"];
+    marker.map = _mapView;
 }
-*/
 
 @end
