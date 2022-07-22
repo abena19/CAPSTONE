@@ -9,6 +9,7 @@
 #import "SceneDelegate.h"
 #import "LoginViewController.h"
 #import "ComposeViewController.h"
+#import "GMapViewController.h"
 #import <Parse/Parse.h>
 #import "Wall.h"
 #import "WallCell.h"
@@ -28,6 +29,7 @@
 NSString *const loginControllerId = @"LoginViewController";
 NSString *const wallCellId = @"WallCell";
 NSString *const wallHeaderViewId = @"WallHeaderView";
+NSString *const locationSegueId = @"locationSegue";
 NSInteger const rowCount = 1;
 
 
@@ -50,7 +52,6 @@ NSInteger const rowCount = 1;
 
 - (void) receiveTestNotification:(NSNotification *) notification {
     if ([[notification name] isEqualToString:@"TestNotification"]) {
-        NSLog (@"Successfully received the test notification!");
     }
 }
 
@@ -127,7 +128,6 @@ NSInteger const rowCount = 1;
     cell.wall = wall;
     [cell setWall];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    NSLog(@"%@", self.wallArray);
     return cell;
 }
 
@@ -156,6 +156,14 @@ NSInteger const rowCount = 1;
 }
 
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:locationSegueId]) {
+        NSIndexPath *myIndexPath = [self.wallFeedTableView indexPathForCell:sender];
+        Wall *wallToPass = self.wallArray[myIndexPath.row];
+        GMapViewController *mapController = [segue destinationViewController];
+        [mapController.dormAddress isEqualToString:wallToPass.dormAddress];
+    }
+}
 
 - (IBAction)didTapLogout:(id)sender {
     SceneDelegate *loginSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;

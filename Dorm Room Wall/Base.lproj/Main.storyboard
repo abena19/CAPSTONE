@@ -250,7 +250,7 @@
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                                     <connections>
-                                                        <action selector="dormLocation:" destination="4QT-sz-pcG" eventType="touchUpInside" id="9tc-fT-QBP"/>
+                                                        <segue destination="nvP-II-pOS" kind="presentation" identifier="locationSegue" id="aaS-bG-Rwi"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -333,7 +333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOK-5l-ti3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2116" y="26"/>
+            <point key="canvasLocation" x="-2097" y="212"/>
         </scene>
         <!--My Wall View Controller-->
         <scene sceneID="ZHB-W8-QbK">
@@ -391,24 +391,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="square.and.arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-yR-36k">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-yR-36k">
                                 <rect key="frame" x="20" y="93" width="374" height="238"/>
                                 <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="237" id="aUF-Jp-9mP"/>
+                                </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="03w-7P-FHU" appends="YES" id="3Aq-YX-C15"/>
                                 </connections>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEW-cp-pmP">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEW-cp-pmP">
                                 <rect key="frame" x="93" y="737" width="229" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Post Wall"/>
                                 <connections>
                                     <action selector="didTapPostWall:" destination="2pf-pU-gEL" eventType="touchUpInside" id="rG3-zS-bZd"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WQM-pX-4sF">
-                                <rect key="frame" x="20" y="559" width="326" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WQM-pX-4sF">
+                                <rect key="frame" x="20" y="559" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             </textField>
@@ -431,7 +433,7 @@
                                 </connections>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R2d-c9-tCj">
-                                <rect key="frame" x="20" y="655" width="236" height="34"/>
+                                <rect key="frame" x="20" y="612" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -439,20 +441,23 @@
                         <viewLayoutGuide key="safeArea" id="4hO-js-H99"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="R2d-c9-tCj" firstAttribute="top" secondItem="WQM-pX-4sF" secondAttribute="bottom" constant="62" id="0pP-cd-Wfz"/>
                             <constraint firstItem="WQM-pX-4sF" firstAttribute="top" secondItem="T6E-rI-FWD" secondAttribute="bottom" constant="8" symbolic="YES" id="3TK-PT-drv"/>
-                            <constraint firstItem="WQM-pX-4sF" firstAttribute="leading" secondItem="A8e-yR-36k" secondAttribute="leading" id="4Hv-k1-qLS"/>
+                            <constraint firstItem="A8e-yR-36k" firstAttribute="trailing" secondItem="5NU-Wq-nfG" secondAttribute="trailing" id="58o-TT-sVL"/>
                             <constraint firstItem="WQM-pX-4sF" firstAttribute="leading" secondItem="R2d-c9-tCj" secondAttribute="leading" id="Dvq-i3-Upu"/>
                             <constraint firstItem="5NU-Wq-nfG" firstAttribute="leading" secondItem="T6E-rI-FWD" secondAttribute="trailing" constant="8" symbolic="YES" id="Ezz-xB-Abm"/>
-                            <constraint firstItem="5NU-Wq-nfG" firstAttribute="top" secondItem="A8e-yR-36k" secondAttribute="bottom" constant="8" symbolic="YES" id="Kvo-Sf-URY"/>
+                            <constraint firstItem="T6E-rI-FWD" firstAttribute="top" secondItem="A8e-yR-36k" secondAttribute="bottom" constant="8" symbolic="YES" id="GAq-q3-2z9"/>
                             <constraint firstAttribute="bottom" secondItem="WQM-pX-4sF" secondAttribute="bottom" constant="249" id="NA8-It-Qie"/>
                             <constraint firstItem="WQM-pX-4sF" firstAttribute="leading" secondItem="4hO-js-H99" secondAttribute="leading" constant="20" id="ZHw-tj-FsG"/>
                             <constraint firstItem="5NU-Wq-nfG" firstAttribute="trailing" secondItem="NXy-ru-s4u" secondAttribute="trailingMargin" id="eH2-qf-qsi"/>
-                            <constraint firstItem="4hO-js-H99" firstAttribute="trailing" secondItem="WQM-pX-4sF" secondAttribute="trailing" constant="68" id="gBf-jZ-grt"/>
+                            <constraint firstItem="R2d-c9-tCj" firstAttribute="top" secondItem="WQM-pX-4sF" secondAttribute="bottom" constant="19" id="fQh-4w-yLC"/>
+                            <constraint firstItem="R2d-c9-tCj" firstAttribute="trailing" secondItem="WQM-pX-4sF" secondAttribute="trailing" id="fmL-Sg-xhp"/>
+                            <constraint firstItem="4hO-js-H99" firstAttribute="trailing" secondItem="WQM-pX-4sF" secondAttribute="trailing" constant="8" id="gBf-jZ-grt"/>
                             <constraint firstItem="WQM-pX-4sF" firstAttribute="top" secondItem="5NU-Wq-nfG" secondAttribute="bottom" constant="8" symbolic="YES" id="iSQ-CK-VMj"/>
-                            <constraint firstItem="5NU-Wq-nfG" firstAttribute="trailing" secondItem="A8e-yR-36k" secondAttribute="trailing" id="njd-gp-fd3"/>
+                            <constraint firstItem="A8e-yR-36k" firstAttribute="leading" secondItem="T6E-rI-FWD" secondAttribute="leading" id="jSi-bu-mRh"/>
+                            <constraint firstItem="vEW-cp-pmP" firstAttribute="top" secondItem="R2d-c9-tCj" secondAttribute="bottom" constant="91" id="jXX-YA-Her"/>
                             <constraint firstItem="5NU-Wq-nfG" firstAttribute="top" secondItem="T6E-rI-FWD" secondAttribute="top" id="qqs-Vp-MXM"/>
                             <constraint firstItem="WQM-pX-4sF" firstAttribute="leading" secondItem="T6E-rI-FWD" secondAttribute="leading" id="xVT-he-H5n"/>
+                            <constraint firstItem="A8e-yR-36k" firstAttribute="centerX" secondItem="vEW-cp-pmP" secondAttribute="centerX" id="znd-t1-B9Y"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Eo2-hY-v7b"/>
@@ -584,6 +589,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cw1-57-O8y" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="KtE-Fu-PCM"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MOX-Pz-Hga">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -598,6 +604,9 @@
             <point key="canvasLocation" x="-2813" y="26"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="aaS-bG-Rwi"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="homekit" catalog="system" width="128" height="106"/>
         <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>
