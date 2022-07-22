@@ -10,20 +10,30 @@
 @import GoogleMapsUtils;
 
 
-@interface GMapViewController () <GMSMapViewDelegate>
+@interface GMapViewController () <GMSMapViewDelegate, CLLocationManagerDelegate>
 
 @end
 
 @implementation GMapViewController{
     GMSMapView *_mapView;
     GMUClusterManager *_clusterManager;
+    CLLocationManager *locationManager;
 }
 
 
 - (void)loadView {
     [super loadView];
     _mapView.delegate = self;
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86 longitude:151.20 zoom:12];
+    locationManager.delegate = self;
+    
+    if (CLLocationManager.locationServicesEnabled) {
+         [locationManager requestLocation];
+    } else {
+        [locationManager requestWhenInUseAuthorization];
+    }
+
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:locationManager.location.coordinate.latitude longitude:locationManager.location.coordinate.longitude zoom:15];
+    NSLog(@"%@", camera);
     _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     self.view = _mapView;
 }
@@ -45,8 +55,33 @@
     [_mapView animateToZoom:_mapView.camera.zoom +1];
     return YES;
   }
-
   return NO;
+}
+
+
+- (void) didChangeAuthorizationStatus:(CLAuthorizationStatus)status :(CLLocationManager *)manager {
+      // Check accuracy authorization
+      CLAccuracyAuthorization accuracy = manager.accuracyAuthorization;
+      switch (accuracy) {
+        case CLAccuracyAuthorizationFullAccuracy:
+          NSLog(@"Location accuracy is precise.");
+          break;
+        case CLAccuracyAuthorizationReducedAccuracy:
+          NSLog(@"Location accuracy is not precise.");
+          break;
+      }
+
+      // Handle authorization status
+      switch (status) {
+        case kCLAuthorizationStatusRestricted:
+          break;
+        case kCLAuthorizationStatusDenied:
+        _mapView.hidden = NO;
+        case kCLAuthorizationStatusNotDetermined:
+        case kCLAuthorizationStatusAuthorizedAlways:
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+          NSLog(@"Location status is OK.");
+      }
 }
 
 
