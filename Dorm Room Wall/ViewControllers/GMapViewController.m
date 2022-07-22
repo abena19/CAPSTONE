@@ -9,22 +9,27 @@
 @import GoogleMaps;
 @import GoogleMapsUtils;
 
-
 @interface GMapViewController () <GMSMapViewDelegate, CLLocationManagerDelegate>
 
 @end
 
 @implementation GMapViewController{
     GMSMapView *_mapView;
-    GMUClusterManager *_clusterManager;
     CLLocationManager *locationManager;
 }
 
 
 - (void)loadView {
     [super loadView];
+    
+    locationManager = [[CLLocationManager alloc] init];
     _mapView.delegate = self;
     locationManager.delegate = self;
+    [locationManager startUpdatingLocation];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self->_mapView.myLocationEnabled = YES;
+    });
     
     if (CLLocationManager.locationServicesEnabled) {
          [locationManager requestLocation];
@@ -33,10 +38,11 @@
     }
 
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:locationManager.location.coordinate.latitude longitude:locationManager.location.coordinate.longitude zoom:15];
-    NSLog(@"%@", camera);
     _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     self.view = _mapView;
 }
+
+
 
 
 - (void)viewDidLoad {
@@ -45,6 +51,7 @@
     GMSMarker *marker = [GMSMarker markerWithPosition:mapCenter];
     marker.icon = [UIImage imageNamed:@"custom_pin.png"];
     marker.map = _mapView;
+    [locationManager stopUpdatingLocation];
 }
 
 
@@ -59,18 +66,25 @@
 }
 
 
-- (void) didChangeAuthorizationStatus:(CLAuthorizationStatus)status :(CLLocationManager *)manager {
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    [locations lastObject];
+}
+
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"%@", error.localizedDescription);
+}
+
+
+- (void) didChangeAuthorizationStatus:(CLAuthorizationStatus)status locationManager:(CLLocationManager *)manager {
       // Check accuracy authorization
       CLAccuracyAuthorization accuracy = manager.accuracyAuthorization;
       switch (accuracy) {
         case CLAccuracyAuthorizationFullAccuracy:
-          NSLog(@"Location accuracy is precise.");
           break;
         case CLAccuracyAuthorizationReducedAccuracy:
-          NSLog(@"Location accuracy is not precise.");
           break;
       }
-
       // Handle authorization status
       switch (status) {
         case kCLAuthorizationStatusRestricted:
@@ -83,6 +97,7 @@
           NSLog(@"Location status is OK.");
       }
 }
+
 
 
 @end

@@ -323,18 +323,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUm-nG-jVg">
-                                <rect key="frame" x="20" y="406" width="374" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUm-nG-jVg">
+                                <rect key="frame" x="20" y="405" width="374" height="32"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Edit Wall"/>
                                 <connections>
                                     <segue destination="My7-rp-rBM" kind="presentation" identifier="viewComposeSegue" id="b8A-th-UIn"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3v-g6-qUX">
-                                <rect key="frame" x="106" y="728" width="202" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3v-g6-qUX">
+                                <rect key="frame" x="106" y="610" width="202" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="4MJ-aU-us3"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="202" id="Kox-lR-Eum"/>
+                                </constraints>
                                 <color key="tintColor" systemColor="systemTealColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="My Location"/>
@@ -347,6 +349,15 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7dZ-03-vhk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="B3v-g6-qUX" firstAttribute="leading" secondItem="7dZ-03-vhk" secondAttribute="leading" constant="106" id="0o2-Ng-C9E"/>
+                            <constraint firstItem="7dZ-03-vhk" firstAttribute="trailing" secondItem="B3v-g6-qUX" secondAttribute="trailing" constant="106" id="CKB-AM-Mcc"/>
+                            <constraint firstItem="RUm-nG-jVg" firstAttribute="centerY" secondItem="YYA-Wk-8Vb" secondAttribute="centerY" id="HCb-0M-9ZV"/>
+                            <constraint firstItem="B3v-g6-qUX" firstAttribute="top" secondItem="RUm-nG-jVg" secondAttribute="bottom" constant="173" id="OZe-RR-G91"/>
+                            <constraint firstItem="RUm-nG-jVg" firstAttribute="leading" secondItem="YYA-Wk-8Vb" secondAttribute="leadingMargin" id="bSc-04-gFD"/>
+                            <constraint firstItem="RUm-nG-jVg" firstAttribute="centerX" secondItem="B3v-g6-qUX" secondAttribute="centerX" id="onO-53-1CJ"/>
+                            <constraint firstItem="7dZ-03-vhk" firstAttribute="bottom" secondItem="B3v-g6-qUX" secondAttribute="bottom" constant="172" id="vdd-ZC-arc"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aym-3U-bZh"/>
                 </viewController>
