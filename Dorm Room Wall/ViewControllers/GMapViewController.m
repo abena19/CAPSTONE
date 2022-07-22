@@ -37,4 +37,17 @@
     marker.map = _mapView;
 }
 
+
+- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker {
+  [_mapView animateToLocation:marker.position];
+
+  if ([marker.userData conformsToProtocol:@protocol(GMUCluster)]) {
+    [_mapView animateToZoom:_mapView.camera.zoom +1];
+    return YES;
+  }
+
+  return NO;
+}
+
+
 @end
