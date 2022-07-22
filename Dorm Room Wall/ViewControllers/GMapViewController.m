@@ -39,6 +39,7 @@
 
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:locationManager.location.coordinate.latitude longitude:locationManager.location.coordinate.longitude zoom:15];
     _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    _mapView.settings.myLocationButton = YES;
     self.view = _mapView;
 }
 
@@ -51,6 +52,7 @@
     GMSMarker *marker = [GMSMarker markerWithPosition:mapCenter];
     marker.icon = [UIImage imageNamed:@"custom_pin.png"];
     marker.map = _mapView;
+    marker.title = @"Me!";
     [locationManager stopUpdatingLocation];
 }
 
