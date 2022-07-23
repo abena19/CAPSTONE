@@ -19,9 +19,8 @@
 }
 
 
-- (void)loadView {
-    [super loadView];
-    
+- (void)viewDidLoad {
+    [super viewDidLoad];
     locationManager = [[CLLocationManager alloc] init];
     _mapView.delegate = self;
     locationManager.delegate = self;
@@ -36,24 +35,25 @@
     } else {
         [locationManager requestWhenInUseAuthorization];
     }
-
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:locationManager.location.coordinate.latitude longitude:locationManager.location.coordinate.longitude zoom:15];
-    _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    
     _mapView.settings.myLocationButton = YES;
     self.view = _mapView;
+
+    [self setMarker:locationManager.location];
+    [locationManager stopUpdatingLocation];
 }
 
 
-
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    CLLocationCoordinate2D mapCenter = CLLocationCoordinate2DMake(_mapView.camera.target.latitude, _mapView.camera.target.longitude);
+- (void) setMarker:(CLLocation *)coordinates {
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:coordinates.coordinate.latitude longitude:coordinates.coordinate.longitude zoom:15];
+    _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    _mapView.settings.myLocationButton = YES;
+    self.view = _mapView;
+    CLLocationCoordinate2D mapCenter = CLLocationCoordinate2DMake(coordinates.coordinate.latitude, coordinates.coordinate.longitude);
     GMSMarker *marker = [GMSMarker markerWithPosition:mapCenter];
     marker.icon = [UIImage imageNamed:@"custom_pin.png"];
     marker.map = _mapView;
     marker.title = @"Me!";
-    [locationManager stopUpdatingLocation];
 }
 
 
@@ -99,7 +99,6 @@
           NSLog(@"Location status is OK.");
       }
 }
-
 
 
 @end

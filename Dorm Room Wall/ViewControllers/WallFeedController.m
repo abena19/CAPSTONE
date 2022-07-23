@@ -21,6 +21,7 @@
 @interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 - (IBAction)didTapLogout:(id)sender;
+- (IBAction)didTapLocation:(id)sender;
 
 @end
 
@@ -29,7 +30,7 @@
 NSString *const loginControllerId = @"LoginViewController";
 NSString *const wallCellId = @"WallCell";
 NSString *const wallHeaderViewId = @"WallHeaderView";
-NSString *const locationSegueId = @"locationSegue";
+NSString *const mapControllerId = @"GMapViewController";
 NSInteger const rowCount = 1;
 
 
@@ -156,13 +157,18 @@ NSInteger const rowCount = 1;
 }
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:locationSegueId]) {
-        NSIndexPath *myIndexPath = [self.wallFeedTableView indexPathForCell:sender];
-        Wall *wallToPass = self.wallArray[myIndexPath.row];
-        GMapViewController *mapController = [segue destinationViewController];
-        [mapController.dormAddress isEqualToString:wallToPass.dormAddress];
-    }
+
+- (IBAction)didTapLocation:(id)sender {
+    SceneDelegate *mapSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:mapControllerId];
+    GMapViewController *mapViewController = navController.childViewControllers[0];
+    NSIndexPath *myIndexPath = [self.wallFeedTableView indexPathForCell:sender];
+    Wall *wallToPass = self.wallArray[myIndexPath.row];
+    NSLog(@"😎😎😎😎😎%@", wallToPass.dormAddress);
+    mapViewController.dormAddress = wallToPass.dormAddress;
+    NSLog(@"%@",mapViewController.dormAddress);
+    mapSceneDelegate.window.rootViewController = navController;
 }
 
 - (IBAction)didTapLogout:(id)sender {

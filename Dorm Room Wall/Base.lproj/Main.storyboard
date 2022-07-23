@@ -250,6 +250,7 @@
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                                     <connections>
+                                                        <action selector="didTapLocation:" destination="1dC-AB-TSC" eventType="touchUpInside" id="WQ4-nJ-hiO"/>
                                                         <segue destination="nvP-II-pOS" kind="presentation" identifier="locationSegue" id="aaS-bG-Rwi"/>
                                                     </connections>
                                                 </button>
@@ -322,7 +323,7 @@
         <!--Map View Controller-->
         <scene sceneID="8GK-20-Mir">
             <objects>
-                <viewController id="nvP-II-pOS" customClass="GMapViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier=" GMapViewController" id="nvP-II-pOS" customClass="GMapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F3b-T8-cii">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -587,7 +588,7 @@
         <!--Navigation Controller-->
         <scene sceneID="CAd-SI-eW2">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cw1-57-O8y" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="GMapViewController" automaticallyAdjustsScrollViewInsets="NO" id="cw1-57-O8y" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="KtE-Fu-PCM"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MOX-Pz-Hga">
@@ -605,7 +606,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="aaS-bG-Rwi"/>
+        <segue reference="DEo-dr-GuJ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="homekit" catalog="system" width="128" height="106"/>
