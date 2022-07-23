@@ -16,6 +16,7 @@
 @implementation GMapViewController{
     GMSMapView *_mapView;
     CLLocationManager *locationManager;
+    CLLocation *dormLocation;
 }
 
 
@@ -41,6 +42,7 @@
 
     [self setMarker:locationManager.location];
     [locationManager stopUpdatingLocation];
+    [self getLocationFromString];
 }
 
 
@@ -53,7 +55,7 @@
     GMSMarker *marker = [GMSMarker markerWithPosition:mapCenter];
     marker.icon = [UIImage imageNamed:@"custom_pin.png"];
     marker.map = _mapView;
-    marker.title = @"Me!";
+    marker.title = @"Here!";
 }
 
 
@@ -98,6 +100,18 @@
         case kCLAuthorizationStatusAuthorizedWhenInUse:
           NSLog(@"Location status is OK.");
       }
+}
+
+
+- (void) getLocationFromString {
+    CLGeocoder *locationGeocoder = [[CLGeocoder alloc] init];
+    [locationGeocoder geocodeAddressString:self.dormAddress completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (placemarks) {
+            self->dormLocation = placemarks.firstObject.location;
+            [self setMarker:placemarks.firstObject.location];
+        } else {
+        }
+    }];
 }
 
 

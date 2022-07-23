@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface GMapViewController : UIViewController
 
 @property (nonatomic, strong) NSString* _Nullable dormAddress;
-@property (nonatomic, strong) CLLocation *dormLocation;
 
 @end
 
