@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *locationPhoto;
 @property (weak, nonatomic) IBOutlet UIImageView *mealPhoto;
 @property (weak, nonatomic) IBOutlet UITextField *caption;
+@property (weak, nonatomic) IBOutlet UITextField *dormLocation;
 
 @property (nonatomic, strong) NSMutableArray *photoArray;
 @property (nonatomic, strong) WallFeedController *wallFeedController;
@@ -31,6 +32,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //dismiss keyboard with tap
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+    
+}
+
+
+-(void)dismissKeyboard {
+    [self.view endEditing:YES];
 }
 
 
@@ -84,11 +94,9 @@
     [self.photoArray addObject:self.locationPhoto.image];
     [self.photoArray addObject:self.lecturePhoto.image];
     [self.photoArray addObject:self.mealPhoto.image];
-    Wall *wall = [Wall postWallImage:self.photoArray withCaption:self.caption.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    Wall *wall = [Wall postWallImage:self.photoArray withAddress:self.dormLocation.text withCaption:self.caption.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
-             NSLog(@"Error posting: %@", error.localizedDescription);
         } else {
-            NSLog(@"Successfully posted the following caption: %@", self.caption.text);
             // move to wall feed if successful
             SceneDelegate *homeSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -100,9 +108,9 @@
     [[NSNotificationCenter defaultCenter]
             postNotificationName:@"TestNotification"
             object:self];
-    NSLog(@"Successfully notified");
     [self dismissViewControllerAnimated:YES completion:^{
     }];
 }
+
 
 @end

@@ -9,8 +9,6 @@
 #import "Parse/Parse.h"
 @import GoogleMaps;
 
-static NSString *const GoogleMapsAPIKey = @"AIzaSyA388K_O7Tq-mYBzCPEnZcq45dpa1jdXDo";
-
 @interface AppDelegate ()
 
 @end
@@ -25,6 +23,9 @@ static NSString *const GoogleMapsAPIKey = @"AIzaSyA388K_O7Tq-mYBzCPEnZcq45dpa1jd
             configuration.server = @"https://parseapi.back4app.com";
         }];
     [Parse initializeWithConfiguration:config];
+    NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];;
+    NSString *GoogleMapsAPIKey = [dict objectForKey: @"GMapsAPIKey"];
     [GMSServices provideAPIKey:GoogleMapsAPIKey];
     return YES;
 }
@@ -40,6 +41,13 @@ static NSString *const GoogleMapsAPIKey = @"AIzaSyA388K_O7Tq-mYBzCPEnZcq45dpa1jd
 
 - (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions {
 }
+
+
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
+    if ([shortcutItem.type  isEqual: @"com.abena.Dorm-Room-Wall.viewImage"]) {
+    }
+}
+
 
 
 @end

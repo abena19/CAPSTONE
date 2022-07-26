@@ -14,6 +14,7 @@
 @dynamic userID;
 @dynamic author;
 @dynamic caption;
+@dynamic dormAddress;
 @dynamic locationImage;
 @dynamic lectureImage;
 @dynamic mealImage;
@@ -23,13 +24,14 @@
 }
 
 
-+ (Wall *)  postWallImage: (NSMutableArray *)imageArray withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (Wall *)  postWallImage: (NSMutableArray *)imageArray withAddress:( NSString * _Nullable )dormLocation withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     Wall *newWall = [Wall new];
     newWall.locationImage = [self getPFFileFromImage:imageArray[0]];
     newWall.lectureImage = [self getPFFileFromImage:imageArray[1]];
     newWall.mealImage = [self getPFFileFromImage:imageArray[2]];
     newWall.author = [PFUser currentUser];
     newWall.caption = caption;
+    newWall.dormAddress = dormLocation;
     [newWall saveInBackgroundWithBlock: completion];
     return newWall;
 }

@@ -2,12 +2,31 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortIconType</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.abena.Dorm-Room-Wall.viewImage</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>View Image</string>
+		</dict>
+	</array>
+	<key>CFBundleIdentifier</key>
+	<string>com.abena.Dorm-Room-Wall</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Google Maps Needs Permission To Access your Location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Google Maps Needs Permission To Access your Location</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Google Maps Needs Permission To Access your Location</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
-        <key>NSPhotoLibraryUsageDescription</key>
-        <string>Need library access to upload images</string>
-        <key>NSCameraUsageDescription</key>
-        <string>Need camera access to take pictures</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Need library access to upload images</string>
+		<key>NSCameraUsageDescription</key>
+		<string>Need camera access to take pictures</string>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
 		<key>UISceneConfigurations</key>
