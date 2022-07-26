@@ -166,17 +166,17 @@ NSInteger const rowCount = 1;
 
 
 - (void)didDoubleTap:(UITapGestureRecognizer *)recognizer {
-    UIView *gestureView = recognizer.view.superview;
-        UIImageView *heart =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, gestureView.frame.size.width/4, gestureView.frame.size.width/4)];
+    UIView *gestureView = recognizer.view;
+        UIImageView *heart =[[UIImageView alloc] initWithFrame:CGRectMake(gestureView.center.x, gestureView.center.y, gestureView.frame.size.width/4, gestureView.frame.size.width/4)];
         heart.tintColor = [UIColor redColor];
         heart.alpha = 0;
-        [heart setImage:[UIImage imageNamed:@"heart.fill"]];
+        [heart setImage:[UIImage systemImageNamed:@"heart.fill"]];
         [gestureView addSubview:heart];
         [gestureView layoutIfNeeded];
         
-        dispatch_after(DISPATCH_TIME_NOW + 5, dispatch_get_main_queue(), ^{
-            [UIView transitionWithView:gestureView duration:0.5 options:UIViewAnimationOptionTransitionCurlUp animations:^{heart.alpha = 1;} completion:^(BOOL finished) {
-                [UIView transitionWithView:gestureView duration:0.5 options:UIViewAnimationOptionTransitionCurlDown animations:^{heart.alpha = 0;} completion:^(BOOL finished) {
+        dispatch_after(DISPATCH_TIME_NOW, dispatch_get_main_queue(), ^{
+            [UIView transitionWithView:gestureView duration:1 options:UIViewAnimationOptionTransitionNone animations:^{heart.alpha = 1;} completion:^(BOOL finished) {
+                [UIView transitionWithView:gestureView duration:0.5 options:UIViewAnimationOptionTransitionCurlUp animations:^{heart.alpha = 0;} completion:^(BOOL finished) {
                     [heart removeFromSuperview];
                 }];
             }];

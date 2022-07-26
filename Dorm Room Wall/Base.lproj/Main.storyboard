@@ -259,10 +259,12 @@
                                                 <constraint firstItem="Y97-rZ-PUc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pfK-En-typ" secondAttribute="bottom" constant="8" id="0Hf-Je-oGf"/>
                                                 <constraint firstItem="oQW-P5-wRu" firstAttribute="leading" secondItem="XpL-as-qog" secondAttribute="leading" constant="8" id="8oB-H5-CL4"/>
                                                 <constraint firstItem="oye-Is-nvB" firstAttribute="leading" secondItem="XpL-as-qog" secondAttribute="leading" constant="8" id="AJ4-HE-vwi"/>
+                                                <constraint firstAttribute="trailing" secondItem="oQW-P5-wRu" secondAttribute="trailing" constant="8" id="Asm-3Z-xGk"/>
                                                 <constraint firstAttribute="trailing" secondItem="oQW-P5-wRu" secondAttribute="trailing" constant="8" id="EnI-7A-MlU"/>
                                                 <constraint firstAttribute="trailing" secondItem="Y97-rZ-PUc" secondAttribute="trailing" constant="8" id="JKz-Ja-DqR"/>
                                                 <constraint firstAttribute="trailing" secondItem="pfK-En-typ" secondAttribute="trailing" id="KLW-tY-NJ1"/>
                                                 <constraint firstAttribute="trailing" secondItem="EJc-By-AB9" secondAttribute="trailing" constant="8" id="MwE-4n-5P3"/>
+                                                <constraint firstAttribute="trailing" secondItem="EJc-By-AB9" secondAttribute="trailing" constant="8" id="Osj-62-NXZ"/>
                                                 <constraint firstItem="Y97-rZ-PUc" firstAttribute="trailing" secondItem="oQW-P5-wRu" secondAttribute="trailing" id="PBS-zd-C4P"/>
                                                 <constraint firstItem="pfK-En-typ" firstAttribute="leading" secondItem="XpL-as-qog" secondAttribute="leading" id="PUz-jR-SXF"/>
                                                 <constraint firstItem="EJc-By-AB9" firstAttribute="bottom" secondItem="oye-Is-nvB" secondAttribute="bottom" id="QLi-3U-RRg"/>
@@ -278,6 +280,7 @@
                                                 <constraint firstItem="oQW-P5-wRu" firstAttribute="top" secondItem="EJc-By-AB9" secondAttribute="bottom" constant="8" id="l1n-ge-A9M"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="EJc-By-AB9" secondAttribute="bottom" constant="8" id="qfp-na-d1S"/>
                                                 <constraint firstItem="pfK-En-typ" firstAttribute="top" secondItem="XpL-as-qog" secondAttribute="top" id="uTY-MM-jYK"/>
+                                                <constraint firstAttribute="trailing" secondItem="Y97-rZ-PUc" secondAttribute="trailing" constant="8" id="xkQ-3Q-nNC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

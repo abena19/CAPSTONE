@@ -38,7 +38,6 @@
     [wallQuery orderByDescending:@"createdAt"];
     [wallQuery includeKey:@"author"];
     wallQuery.limit = 5;
-    NSLog(@"%d", [wallQuery hasCachedResult]);
     wallQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;  //check cache for query else network
     [wallQuery findObjectsInBackgroundWithBlock:^(NSArray<Wall *> * _Nullable walls, NSError * _Nullable error) {
         if (walls) {
