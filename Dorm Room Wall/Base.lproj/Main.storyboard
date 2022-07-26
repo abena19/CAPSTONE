@@ -209,14 +209,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="526"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y97-rZ-PUc">
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y97-rZ-PUc">
                                                     <rect key="frame" x="8" y="42" width="398" height="135"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="135" id="CBO-Gk-K33"/>
                                                         <constraint firstAttribute="width" constant="374" id="ySx-He-u0J"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EJc-By-AB9">
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EJc-By-AB9">
                                                     <rect key="frame" x="143" y="185" width="263" height="294"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="298" id="2w5-PG-COh"/>
@@ -235,7 +235,7 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                 </textView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oye-Is-nvB">
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oye-Is-nvB">
                                                     <rect key="frame" x="8" y="185" width="127" height="294"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="127" id="Oqr-Ue-hcT"/>
@@ -602,11 +602,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5gU-BU-HjS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2813" y="26"/>
+            <point key="canvasLocation" x="-2813" y="212"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="DEo-dr-GuJ"/>
+        <segue reference="aaS-bG-Rwi"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="homekit" catalog="system" width="128" height="106"/>

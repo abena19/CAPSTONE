@@ -2,6 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortIconType</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.abena.Dorm-Room-Wall.viewImage</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>View Image</string>
+		</dict>
+	</array>
+	<key>CFBundleIdentifier</key>
+	<string>com.abena.Dorm-Room-Wall</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Google Maps Needs Permission To Access your Location</string>
 	<key>NSLocationAlwaysUsageDescription</key>

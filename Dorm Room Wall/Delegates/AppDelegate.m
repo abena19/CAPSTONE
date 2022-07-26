@@ -43,4 +43,11 @@
 }
 
 
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
+    if ([shortcutItem.type  isEqual: @"com.abena.Dorm-Room-Wall.viewImage"]) {
+    }
+}
+
+
+
 @end

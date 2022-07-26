@@ -38,13 +38,14 @@ This app allows for a user to post and relate to other students within school by
 **Required Must-have Stories**
 
 * User can login, register and sign out
-* User can add and remove features to and from  dorm room wall (which would be initially organised) - customization to follow after MVP
-* User can create and update preferences on different categories
-* User can share walls, and location functionalities
-* User can track location in real time, if user indicates permission
-* Chat feature, history, compose, create
+* User can add images to dorm room wall
+* User can create preferences on different categories
+* User can view location functionalities(current location, other location displayed on wall)
+* User can track location in real time
 * User profiles
-* User can view, follow and like walls
+* User can view and like walls
+* User can view walls in airplane mode, or without connection
+
 
 **Optional Nice-to-have Stories**
 
@@ -52,22 +53,21 @@ This app allows for a user to post and relate to other students within school by
 * Trending locations/ dorm room walls
 * User can customise dorm room wall based on predetermined templates/ or toggle picture arrangements
 * User can view a history of their walls
-* Create statuses to disappear within 24 hours (initially a small button on profile on MVP)
-* Archive chat, and walls
+* Create statuses to disappear within 24 hours
 * User can tap on wall components for details
 
 ### 2. Screen Archetypes
 
 * Login Screen
    * User can login
-       * Google, FB, email
+       * FB, email
 * Registration Screen
    * User can create a new account
    * Create preferences, interests
 
 * Home page
     * User can view home feed, other walls
-    * User can share with friends, like and follow other wall accounts
+    * User can view, like or follow other wall accounts
 
 * Profile page
     * User can view profile page with username, followers (not based on counts), wall interaction level from other people
@@ -84,9 +84,6 @@ This app allows for a user to post and relate to other students within school by
     * User can update preferences, add categories, etc
     * User can view and change current status
     * User can notify group of change 
-
-* Search page
-    * User can search for other walls using filters
     
 * Settings page
     * Change profile details
@@ -160,6 +157,7 @@ This app allows for a user to post and relate to other students within school by
 - [Create basic snippets for each Parse network request]
     * Home feed Screen
     - (Read/GET)Query all walls that the user follows
+    ```
         PFQuery *query = [PFQuery queryWithClassName:@"Wall"];
         [query includeKey:@"user"];
         [query whereKey:@"school" equalTo:@"Stanford"];
@@ -171,8 +169,10 @@ This app allows for a user to post and relate to other students within school by
             NSLog(@"%@", error.localizedDescription);
         }
     }];
+    ```
     
     - (Create/WALL) Create new like on wall 
+    ```
     PFQuery *query = [PFQuery queryWithClassName:@"Wall"];
     [query getObjectInBackgroundWithId:@"WALL_USER_ID" block:^(PFObject *wall, NSError *error) {
     if (!error) {
@@ -195,9 +195,11 @@ This app allows for a user to post and relate to other students within school by
                 // Failure!
             }
             }];
+     ```       
 
 * My Wall Screen
     - (Create/WALL) Create new wall 
+    ```
     PFObject *newWall = [PFObject objectWithClassName:@"Wall"];
     newWall[@"text"] = self.messageField.text;
     newWall[@"user"] = PFUser.currentUser;
@@ -208,31 +210,38 @@ This app allows for a user to post and relate to other students within school by
                 NSLog(@"Problem saving wall: %@", error.localizedDescription);
             }
         }];
+    ```
         
     - (Update/WALL) Edit wall
-        - PFQuery *query = [PFQuery queryWithClassName:@"Wall"];
+    ```
+        PFQuery *query = [PFQuery queryWithClassName:@"Wall"];
         [query getObjectInBackgroundWithId:@"WALL_USER_ID"
                                      block:^(PFObject *wall, NSError *error) {
             // change wall details
             [wall saveInBackground];
         }];
+    ```
         
     - (Delete/WALL) Remove existing wall
     
 * Profile Screen
     - (Read/GET)Query logged in user object
-        - PFUser *currentUser = [PFUser currentUser];
+    ```
+        PFUser *currentUser = [PFUser currentUser];
             if (currentUser) {
                 // retrieve information
             } else {
                 // do something else
             }
+    ```
     - (Update/PUT) Update user profile image
-        - PFUser *user = [PFUser currentUser];
+    ```
+        PFUser *user = [PFUser currentUser];
             user[@"profilePicture"] = [self getPFFileFromImage:self.profilePicture.image];
             [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
                     NSLog(@"This worked!");
                 }
             }];
+    ```
     

@@ -31,12 +31,13 @@ NSString *const loginControllerId = @"LoginViewController";
 NSString *const wallCellId = @"WallCell";
 NSString *const wallHeaderViewId = @"WallHeaderView";
 NSString *const mapControllerId = @"GMapViewController";
+NSString *const postNotification = @"TestNotification";
 NSInteger const rowCount = 1;
 
 
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:postNotification object:nil];
 }
 
 
@@ -45,17 +46,41 @@ NSInteger const rowCount = 1;
     if (!self) return nil;
     [[NSNotificationCenter defaultCenter] addObserver:self
         selector:@selector(receiveTestNotification:)
-        name:@"TestNotification"
+        name:postNotification
         object:nil];
     return self;
 }
 
 
 - (void) receiveTestNotification:(NSNotification *) notification {
-    if ([[notification name] isEqualToString:@"TestNotification"]) {
+    if ([[notification name] isEqualToString:postNotification]) {
+        [[ParseQueryManager shared] fetchWallsFromNetworkOnly:^(NSArray *feedWalls, NSError *error) {
+            if (feedWalls) {
+                self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
+            } else {
+            }
+            [self.wallFeedTableView reloadData];
+            }
+        ];
     }
 }
 
+
+- (void) viewWillAppear:(BOOL)animated {
+        self.timeSinceLoginUser = [NSTimer scheduledTimerWithTimeInterval:180.0  target:self selector:@selector(actionOnTimer) userInfo:nil repeats:YES];
+}
+
+
+- (void) actionOnTimer {
+        [[ParseQueryManager shared] fetchWallsFromNetworkOnly:^(NSArray *feedWalls, NSError *error) {
+            if (feedWalls) {
+                self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
+            } else {
+            }
+            [self.wallFeedTableView reloadData];
+            }
+        ];
+}
 
 
 - (void)viewDidLoad {
@@ -71,36 +96,16 @@ NSInteger const rowCount = 1;
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.wallFeedTableView insertSubview:refreshControl atIndex:0];
+    
     [self fetchFeedWalls];
-}
-
-
-- (void) viewWillAppear:(BOOL)animated {
-        self.timeSinceLoginUser = [NSTimer scheduledTimerWithTimeInterval:60.0  target:self selector:@selector(actionOnTimer) userInfo:nil repeats:YES];
-}
-
-
-- (void) actionOnTimer {
-        [[ParseQueryManager shared] fetchWallsFromNetworkOnly:^(NSArray *feedWalls, NSError *error) {
-            if (feedWalls) {
-                NSLog(@"😎😎😎 Successfully refreshed home feed");
-                self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
-            } else {
-                NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);
-            }
-            [self.wallFeedTableView reloadData];
-            }
-        ];
 }
 
 
 - (void)fetchFeedWalls {
     [[ParseQueryManager shared] fetchWallsFromCache:^(NSArray *feedWalls, NSError *error) {
         if (feedWalls) {
-            NSLog(@"😎😎😎 Successfully loaded home feed");
             self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
         } else {
-            NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);
         }
         [self.wallFeedTableView reloadData];
         }
@@ -111,11 +116,9 @@ NSInteger const rowCount = 1;
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
     [[ParseQueryManager shared] fetchWallsFromNetworkOnly:^(NSArray *feedWalls, NSError *error) {
         if (feedWalls) {
-            NSLog(@"😎😎😎 Successfully refreshed home feed");
             self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
             [refreshControl endRefreshing];
         } else {
-            NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);
         }
         [self.wallFeedTableView reloadData];
         }
@@ -157,7 +160,6 @@ NSInteger const rowCount = 1;
 }
 
 
-
 - (IBAction)didTapLocation:(id)sender {
     SceneDelegate *mapSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -165,9 +167,7 @@ NSInteger const rowCount = 1;
     GMapViewController *mapViewController = navController.childViewControllers[0];
     NSIndexPath *myIndexPath = [self.wallFeedTableView indexPathForCell:sender];
     Wall *wallToPass = self.wallArray[myIndexPath.row];
-    NSLog(@"😎😎😎😎😎%@", wallToPass.dormAddress);
     mapViewController.dormAddress = wallToPass.dormAddress;
-    NSLog(@"%@",mapViewController.dormAddress);
     mapSceneDelegate.window.rootViewController = navController;
 }
 
