@@ -72,14 +72,14 @@ NSInteger const rowCount = 1;
 
 
 - (void) actionOnTimer {
-        [[ParseQueryManager shared] fetchWallsFromNetworkOnly:^(NSArray *feedWalls, NSError *error) {
-            if (feedWalls) {
-                self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
-            } else {
-            }
-            [self.wallFeedTableView reloadData];
-            }
-        ];
+    [[ParseQueryManager shared] fetchWallsFromNetworkOnly:^(NSArray *feedWalls, NSError *error) {
+        if (feedWalls) {
+            self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
+        } else {
+        }
+        [self.wallFeedTableView reloadData];
+        }
+    ];
 }
 
 
@@ -131,6 +131,11 @@ NSInteger const rowCount = 1;
     Wall *wall = self.wallArray[indexPath.section];
     cell.wall = wall;
     [cell setWall];
+    UITapGestureRecognizer *doubleTap =
+          [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                  action:@selector(didDoubleTap:)];
+        doubleTap.numberOfTapsRequired = 2;
+        [cell.contentView addGestureRecognizer:doubleTap];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
@@ -157,6 +162,25 @@ NSInteger const rowCount = 1;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return UITableViewAutomaticDimension;
+}
+
+
+- (void)didDoubleTap:(UITapGestureRecognizer *)recognizer {
+    UIView *gestureView = recognizer.view;
+        UIImageView *heart =[[UIImageView alloc] initWithFrame:CGRectMake(gestureView.center.x, gestureView.center.y, gestureView.frame.size.width/4, gestureView.frame.size.width/4)];
+        heart.tintColor = [UIColor redColor];
+        heart.alpha = 0;
+        [heart setImage:[UIImage systemImageNamed:@"heart.fill"]];
+        [gestureView addSubview:heart];
+        [gestureView layoutIfNeeded];
+        
+        dispatch_after(DISPATCH_TIME_NOW, dispatch_get_main_queue(), ^{
+            [UIView transitionWithView:gestureView duration:1 options:UIViewAnimationOptionTransitionNone animations:^{heart.alpha = 1;} completion:^(BOOL finished) {
+                [UIView transitionWithView:gestureView duration:0.5 options:UIViewAnimationOptionTransitionCurlUp animations:^{heart.alpha = 0;} completion:^(BOOL finished) {
+                    [heart removeFromSuperview];
+                }];
+            }];
+        });
 }
 
 
