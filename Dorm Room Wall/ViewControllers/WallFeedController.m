@@ -75,9 +75,10 @@ NSInteger const rowCount = 1;
 
 
 - (void)fetchFeedWalls {
+    // check memory cache else upload from parse cache
     self.wallArray = [self.wallCache objectForKey:@"wallArrayCached"];
     if (!self.wallArray) {
-        [[ParseQueryManager shared] fetchWallsFromCache:^(NSArray *feedWalls, NSError *error) {
+        [[ParseQueryManager shared] fetchWalls:QueryDefaultState withCompletion:^(NSArray *feedWalls, NSError *error) {
             if (feedWalls) {
                 self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
                 [self.wallCache setObject:self.wallArray forKey:@"wallArrayCached"];
@@ -90,15 +91,14 @@ NSInteger const rowCount = 1;
 
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
-    [[ParseQueryManager shared] fetchWallsFromNetworkOnly:^(NSArray *feedWalls, NSError *error) {
+    [[ParseQueryManager shared] fetchWalls:QueryNetworkState withCompletion:^(NSArray *feedWalls, NSError *error) {
         if (feedWalls) {
             self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
             [refreshControl endRefreshing];
         } else {
         }
         [self.wallFeedTableView reloadData];
-        }
-    ];
+        }];
 }
 
 

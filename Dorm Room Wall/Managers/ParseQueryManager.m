@@ -33,38 +33,32 @@
 }
 
 
-- (void)fetchWallsFromCache:(void(^)(NSArray *feedWalls, NSError *error))completion {    
+
+- (void) fetchWalls:(NSInteger)fetchMethod withCompletion:(void(^)(NSArray *feedWalls, NSError *error))completion {
     PFQuery *wallQuery = [Wall query];
     [wallQuery orderByDescending:@"createdAt"];
     [wallQuery includeKey:@"author"];
     wallQuery.limit = 5;
-    wallQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;  //check cache for query else network
+    switch (fetchMethod) {
+        case QueryDefaultState:
+            wallQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
+            break;
+            
+        case QueryNetworkState:
+            wallQuery.cachePolicy = kPFCachePolicyNetworkOnly;
+            break;
+    }
     [wallQuery findObjectsInBackgroundWithBlock:^(NSArray<Wall *> * _Nullable walls, NSError * _Nullable error) {
         if (walls) {
             NSArray *feedWalls = walls;
             completion(feedWalls, nil);
         } else {
-            NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription); // handle error
         }
     }];
 }
+   
 
 
-- (void)fetchWallsFromNetworkOnly:(void(^)(NSArray *feedWalls, NSError *error))completion {
-    PFQuery *wallQuery = [Wall query];
-    [wallQuery orderByDescending:@"createdAt"];
-    [wallQuery includeKey:@"author"];
-    wallQuery.limit = 5;
-    wallQuery.cachePolicy = kPFCachePolicyNetworkOnly;  //check cache for query else network
-    [wallQuery findObjectsInBackgroundWithBlock:^(NSArray<Wall *> * _Nullable walls, NSError * _Nullable error) {
-        if (walls) {
-            NSArray *feedWalls = walls;
-            completion(feedWalls, nil);
-        } else {
-            NSLog(@"😫😫😫 Error getting home feed: %@", error.localizedDescription);  // handle error
-        }
-    }];
-}
 
 
 @end
