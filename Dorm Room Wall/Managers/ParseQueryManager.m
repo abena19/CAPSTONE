@@ -33,7 +33,7 @@
 }
 
 
-- (void)fetchWallsFromCache:(void(^)(NSArray *feedWalls, NSError *error))completion {
+- (void)fetchWallsFromCache:(void(^)(NSArray *feedWalls, NSError *error))completion {    
     PFQuery *wallQuery = [Wall query];
     [wallQuery orderByDescending:@"createdAt"];
     [wallQuery includeKey:@"author"];
