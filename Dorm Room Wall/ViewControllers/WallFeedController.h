@@ -14,8 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *wallArray;
 @property (weak, nonatomic) IBOutlet UITableView *wallFeedTableView;
-@property (nonatomic, weak) NSTimer *timeSinceLoginUser;
 @property (nonatomic) NSInteger *didPost;
+@property (nonatomic, strong) NSCache *wallCache;
+
 
 @end
 

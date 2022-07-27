@@ -14,9 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)shared;
 
-- (void)fetchWallsFromCache:(void(^)(NSArray *feedWalls, NSError *error))completion;
+- (void) fetchWalls:(NSInteger)fetchMethod withCompletion:(void(^)(NSArray *feedWalls, NSError *error))completion;
 
-- (void)fetchWallsFromNetworkOnly:(void(^)(NSArray *feedWalls, NSError *error))completion;
+typedef NS_ENUM(NSInteger , cacheState) {
+    QueryDefaultState = 1,
+    QueryNetworkState = 2,
+};
 
 @end
 

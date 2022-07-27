@@ -102,12 +102,12 @@
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"HomeTabController"];
             homeSceneDelegate.window.rootViewController = tabController;
+            [[NSNotificationCenter defaultCenter]
+                    postNotificationName:@"TestNotification"
+                    object:self];
         }
     }];
-    self.wallToPass = wall;
-    [[NSNotificationCenter defaultCenter]
-            postNotificationName:@"TestNotification"
-            object:self];
+    self.wallToPass = wall;   
     [self dismissViewControllerAnimated:YES completion:^{
     }];
 }

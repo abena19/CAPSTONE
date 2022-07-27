@@ -32,6 +32,7 @@ NSString *const wallCellId = @"WallCell";
 NSString *const wallHeaderViewId = @"WallHeaderView";
 NSString *const mapControllerId = @"GMapViewController";
 NSString *const postNotification = @"TestNotification";
+NSString *const wallArrayCached = @"wallArrayCached";
 NSInteger const rowCount = 1;
 
 
@@ -41,45 +42,11 @@ NSInteger const rowCount = 1;
 }
 
 
-- (id) init {
-    self = [super init];
-    if (!self) return nil;
-    [[NSNotificationCenter defaultCenter] addObserver:self
-        selector:@selector(receiveTestNotification:)
-        name:postNotification
-        object:nil];
-    return self;
-}
-
-
-- (void) receiveTestNotification:(NSNotification *) notification {
+- (void) postNotification:(NSNotification *) notification {
     if ([[notification name] isEqualToString:postNotification]) {
-        [[ParseQueryManager shared] fetchWallsFromNetworkOnly:^(NSArray *feedWalls, NSError *error) {
-            if (feedWalls) {
-                self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
-            } else {
-            }
-            [self.wallFeedTableView reloadData];
-            }
-        ];
-    }
-}
-
-
-- (void) viewWillAppear:(BOOL)animated {
-        self.timeSinceLoginUser = [NSTimer scheduledTimerWithTimeInterval:180.0  target:self selector:@selector(actionOnTimer) userInfo:nil repeats:YES];
-}
-
-
-- (void) actionOnTimer {
-    [[ParseQueryManager shared] fetchWallsFromNetworkOnly:^(NSArray *feedWalls, NSError *error) {
-        if (feedWalls) {
-            self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
-        } else {
-        }
+        self.wallArray = [self.wallCache objectForKey:wallArrayCached];
         [self.wallFeedTableView reloadData];
-        }
-    ];
+    }
 }
 
 
@@ -91,38 +58,48 @@ NSInteger const rowCount = 1;
     UINib *headerNib = [UINib nibWithNibName:wallHeaderViewId bundle:nil];
     [self.wallFeedTableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:wallHeaderViewId];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(postNotification:)
+        name:postNotification
+        object:nil];
+    
     [self.wallFeedTableView reloadData];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.wallFeedTableView insertSubview:refreshControl atIndex:0];
-    
+    [self.wallFeedTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.wallFeedTableView setShowsVerticalScrollIndicator:FALSE];
+    self.wallCache = [[NSCache alloc] init];
     [self fetchFeedWalls];
 }
 
 
 - (void)fetchFeedWalls {
-    [[ParseQueryManager shared] fetchWallsFromCache:^(NSArray *feedWalls, NSError *error) {
-        if (feedWalls) {
-            self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
-        } else {
-        }
-        [self.wallFeedTableView reloadData];
-        }
-    ];
+    // check memory cache else upload from parse cache
+    self.wallArray = [self.wallCache objectForKey:wallArrayCached];
+    if (!self.wallArray) {
+        [[ParseQueryManager shared] fetchWalls:QueryDefaultState withCompletion:^(NSArray *feedWalls, NSError *error) {
+            if (feedWalls) {
+                self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
+                [self.wallCache setObject:self.wallArray forKey:wallArrayCached];
+            } else {
+            }
+            [self.wallFeedTableView reloadData];
+        }];
+    }
 }
 
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
-    [[ParseQueryManager shared] fetchWallsFromNetworkOnly:^(NSArray *feedWalls, NSError *error) {
+    [[ParseQueryManager shared] fetchWalls:QueryNetworkState withCompletion:^(NSArray *feedWalls, NSError *error) {
         if (feedWalls) {
             self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
             [refreshControl endRefreshing];
         } else {
         }
         [self.wallFeedTableView reloadData];
-        }
-    ];
+        }];
 }
 
 
@@ -130,6 +107,7 @@ NSInteger const rowCount = 1;
     WallCell *cell = [tableView dequeueReusableCellWithIdentifier:wallCellId forIndexPath:indexPath];
     Wall *wall = self.wallArray[indexPath.section];
     cell.wall = wall;
+    cell.contentView.layer.shadowRadius = 2;
     [cell setWall];
     UITapGestureRecognizer *doubleTap =
           [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -167,15 +145,14 @@ NSInteger const rowCount = 1;
 
 - (void)didDoubleTap:(UITapGestureRecognizer *)recognizer {
     UIView *gestureView = recognizer.view;
-        UIImageView *heart =[[UIImageView alloc] initWithFrame:CGRectMake(gestureView.center.x, gestureView.center.y, gestureView.frame.size.width/4, gestureView.frame.size.width/4)];
-        heart.tintColor = [UIColor redColor];
-        heart.alpha = 0;
-        [heart setImage:[UIImage systemImageNamed:@"heart.fill"]];
-        [gestureView addSubview:heart];
-        [gestureView layoutIfNeeded];
-        
-        dispatch_after(DISPATCH_TIME_NOW, dispatch_get_main_queue(), ^{
-            [UIView transitionWithView:gestureView duration:1 options:UIViewAnimationOptionTransitionNone animations:^{heart.alpha = 1;} completion:^(BOOL finished) {
+    UIImageView *heart =[[UIImageView alloc] initWithFrame:CGRectMake(gestureView.center.x, gestureView.center.y, gestureView.frame.size.width/4, gestureView.frame.size.width/4)];
+    heart.tintColor = [UIColor redColor];
+    heart.alpha = 0;
+    [heart setImage:[UIImage systemImageNamed:@"heart.fill"]];
+    [gestureView addSubview:heart];
+    [gestureView layoutIfNeeded];
+    dispatch_after(DISPATCH_TIME_NOW, dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:gestureView duration:1 options:UIViewAnimationOptionTransitionNone animations:^{heart.alpha = 1;} completion:^(BOOL finished) {
                 [UIView transitionWithView:gestureView duration:0.5 options:UIViewAnimationOptionTransitionCurlUp animations:^{heart.alpha = 0;} completion:^(BOOL finished) {
                     [heart removeFromSuperview];
                 }];
@@ -194,6 +171,7 @@ NSInteger const rowCount = 1;
     mapViewController.dormAddress = wallToPass.dormAddress;
     mapSceneDelegate.window.rootViewController = navController;
 }
+
 
 - (IBAction)didTapLogout:(id)sender {
     SceneDelegate *loginSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
