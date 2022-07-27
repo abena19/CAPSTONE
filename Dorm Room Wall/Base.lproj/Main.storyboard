@@ -209,25 +209,23 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="526"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y97-rZ-PUc">
-                                                    <rect key="frame" x="20" y="42" width="374" height="135"/>
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Y97-rZ-PUc">
+                                                    <rect key="frame" x="8" y="44" width="398" height="252"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="374" id="05J-Yp-PKt"/>
-                                                        <constraint firstAttribute="height" constant="135" id="QXx-Bn-P7F"/>
+                                                        <constraint firstAttribute="width" secondItem="Y97-rZ-PUc" secondAttribute="height" multiplier="374:135" constant="-300.13333333333333" id="OFt-Na-Cs4"/>
                                                     </constraints>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EJc-By-AB9">
-                                                    <rect key="frame" x="143" y="185" width="251" height="294"/>
+                                                    <rect key="frame" x="144.5" y="304" width="261.5" height="175"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="294" id="GOu-BV-8po"/>
-                                                        <constraint firstAttribute="width" constant="251" id="HTH-mM-dKj"/>
+                                                        <constraint firstAttribute="width" secondItem="EJc-By-AB9" secondAttribute="height" multiplier="263:176" id="Bmb-B8-gPn"/>
                                                     </constraints>
                                                 </imageView>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" editable="NO" text="Lorem ipsum dolor sit er elit " textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pfK-En-typ">
-                                                    <rect key="frame" x="20" y="0.0" width="374" height="34"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="36"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="34" id="abb-v0-2Vm"/>
+                                                        <constraint firstAttribute="width" secondItem="pfK-En-typ" secondAttribute="height" multiplier="11:1" id="Bck-Wj-i7q"/>
                                                     </constraints>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -235,17 +233,15 @@
                                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                 </textView>
                                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oye-Is-nvB">
-                                                    <rect key="frame" x="20" y="185" width="115" height="294"/>
+                                                    <rect key="frame" x="8" y="304" width="128.5" height="175"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="294" id="dyI-Ul-CfH"/>
-                                                        <constraint firstAttribute="width" constant="115" id="kA8-xD-HZv"/>
+                                                        <constraint firstAttribute="width" secondItem="oye-Is-nvB" secondAttribute="height" multiplier="127:173" id="C9P-lm-RR1"/>
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQW-P5-wRu">
-                                                    <rect key="frame" x="20" y="487" width="374" height="31"/>
+                                                    <rect key="frame" x="56" y="487" width="350" height="31"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="374" id="Gxj-NM-JhA"/>
-                                                        <constraint firstAttribute="height" constant="31" id="cEa-yb-dXw"/>
+                                                        <constraint firstAttribute="width" secondItem="oQW-P5-wRu" secondAttribute="height" multiplier="398:31" id="hmb-3p-9ZO"/>
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
@@ -256,28 +252,24 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="EJc-By-AB9" firstAttribute="leading" secondItem="oye-Is-nvB" secondAttribute="trailing" constant="8" id="0bP-9L-dm6"/>
-                                                <constraint firstItem="pfK-En-typ" firstAttribute="centerX" secondItem="Y97-rZ-PUc" secondAttribute="centerX" id="1JN-Sa-d6p"/>
-                                                <constraint firstItem="oQW-P5-wRu" firstAttribute="top" secondItem="oye-Is-nvB" secondAttribute="bottom" constant="8" id="8Ig-TI-upg"/>
-                                                <constraint firstItem="oQW-P5-wRu" firstAttribute="leading" secondItem="XpL-as-qog" secondAttribute="leading" constant="20" id="8n6-2B-0e4"/>
-                                                <constraint firstItem="EJc-By-AB9" firstAttribute="top" secondItem="Y97-rZ-PUc" secondAttribute="bottom" constant="8" id="9VL-I3-df9"/>
-                                                <constraint firstAttribute="trailing" secondItem="oQW-P5-wRu" secondAttribute="trailing" constant="20" id="AIl-dL-V5U"/>
-                                                <constraint firstItem="pfK-En-typ" firstAttribute="leading" secondItem="XpL-as-qog" secondAttribute="leading" constant="20" id="GhG-cA-EQd"/>
-                                                <constraint firstAttribute="trailing" secondItem="pfK-En-typ" secondAttribute="trailing" constant="20" id="IJX-jg-yts"/>
-                                                <constraint firstAttribute="bottom" secondItem="oQW-P5-wRu" secondAttribute="bottom" constant="8" id="LL3-dk-stC"/>
-                                                <constraint firstItem="EJc-By-AB9" firstAttribute="leading" secondItem="oye-Is-nvB" secondAttribute="trailing" constant="8" symbolic="YES" id="P27-0E-92x"/>
-                                                <constraint firstItem="Y97-rZ-PUc" firstAttribute="top" secondItem="pfK-En-typ" secondAttribute="bottom" constant="8" symbolic="YES" id="UMi-zM-iOP"/>
-                                                <constraint firstItem="pfK-En-typ" firstAttribute="top" secondItem="XpL-as-qog" secondAttribute="top" id="XbX-qa-pZ6"/>
-                                                <constraint firstItem="EJc-By-AB9" firstAttribute="top" secondItem="Y97-rZ-PUc" secondAttribute="bottom" constant="8" id="ZM9-N9-DbJ"/>
-                                                <constraint firstItem="Y97-rZ-PUc" firstAttribute="leading" secondItem="XpL-as-qog" secondAttribute="leading" constant="20" id="b8I-qc-oJ8"/>
-                                                <constraint firstItem="pfK-En-typ" firstAttribute="centerX" secondItem="oQW-P5-wRu" secondAttribute="centerX" id="bFC-y4-zpU"/>
-                                                <constraint firstAttribute="trailing" secondItem="EJc-By-AB9" secondAttribute="trailing" constant="20" id="cxt-v4-Vgs"/>
-                                                <constraint firstItem="oye-Is-nvB" firstAttribute="leading" secondItem="XpL-as-qog" secondAttribute="leading" constant="20" id="drs-B8-pT5"/>
-                                                <constraint firstItem="oQW-P5-wRu" firstAttribute="top" secondItem="EJc-By-AB9" secondAttribute="bottom" constant="8" id="iM3-cJ-0zs"/>
-                                                <constraint firstAttribute="trailing" secondItem="Y97-rZ-PUc" secondAttribute="trailing" constant="20" id="uNm-Wd-09E"/>
-                                                <constraint firstItem="oQW-P5-wRu" firstAttribute="top" secondItem="EJc-By-AB9" secondAttribute="bottom" constant="8" id="x7E-Ak-C09"/>
-                                                <constraint firstItem="Y97-rZ-PUc" firstAttribute="top" secondItem="pfK-En-typ" secondAttribute="bottom" constant="8" id="xIp-yK-ccL"/>
-                                                <constraint firstItem="oye-Is-nvB" firstAttribute="top" secondItem="Y97-rZ-PUc" secondAttribute="bottom" constant="8" symbolic="YES" id="zUD-zl-Z65"/>
+                                                <constraint firstItem="pfK-En-typ" firstAttribute="top" secondItem="XpL-as-qog" secondAttribute="top" id="5Zm-Rw-1EA"/>
+                                                <constraint firstItem="oQW-P5-wRu" firstAttribute="top" secondItem="EJc-By-AB9" secondAttribute="bottom" constant="8" id="5u5-4e-kNc"/>
+                                                <constraint firstAttribute="trailing" secondItem="oQW-P5-wRu" secondAttribute="trailing" constant="8" id="ILC-k8-KNk"/>
+                                                <constraint firstAttribute="trailing" secondItem="Y97-rZ-PUc" secondAttribute="trailing" constant="8" id="LOk-pf-6Zq"/>
+                                                <constraint firstItem="EJc-By-AB9" firstAttribute="leading" secondItem="oye-Is-nvB" secondAttribute="trailing" constant="8" id="Nfu-UN-hjE"/>
+                                                <constraint firstAttribute="trailing" secondItem="pfK-En-typ" secondAttribute="trailing" constant="8" id="Qf6-Pa-r3w"/>
+                                                <constraint firstItem="oQW-P5-wRu" firstAttribute="leading" secondItem="XpL-as-qog" secondAttribute="leading" constant="56" id="WjS-Rp-lQA"/>
+                                                <constraint firstItem="Y97-rZ-PUc" firstAttribute="top" secondItem="pfK-En-typ" secondAttribute="bottom" constant="8" id="YGo-yC-qzF"/>
+                                                <constraint firstItem="oQW-P5-wRu" firstAttribute="top" secondItem="EJc-By-AB9" secondAttribute="bottom" constant="8" id="bda-LH-myd"/>
+                                                <constraint firstItem="oQW-P5-wRu" firstAttribute="top" secondItem="oye-Is-nvB" secondAttribute="bottom" constant="8" id="eqY-80-BnM"/>
+                                                <constraint firstItem="oye-Is-nvB" firstAttribute="top" secondItem="Y97-rZ-PUc" secondAttribute="bottom" constant="8" id="g4I-kv-74x"/>
+                                                <constraint firstAttribute="bottom" secondItem="oQW-P5-wRu" secondAttribute="bottom" constant="8" id="gMz-ue-S9r"/>
+                                                <constraint firstItem="oye-Is-nvB" firstAttribute="leading" secondItem="XpL-as-qog" secondAttribute="leading" constant="8" id="gbl-Z9-nRe"/>
+                                                <constraint firstItem="Y97-rZ-PUc" firstAttribute="top" secondItem="pfK-En-typ" secondAttribute="bottom" constant="8" id="owO-yQ-HyI"/>
+                                                <constraint firstItem="EJc-By-AB9" firstAttribute="top" secondItem="Y97-rZ-PUc" secondAttribute="bottom" constant="8" id="rAi-uU-Mef"/>
+                                                <constraint firstItem="pfK-En-typ" firstAttribute="leading" secondItem="XpL-as-qog" secondAttribute="leading" constant="8" id="syN-6E-qZ7"/>
+                                                <constraint firstAttribute="trailing" secondItem="EJc-By-AB9" secondAttribute="trailing" constant="8" id="uli-wp-bOf"/>
+                                                <constraint firstItem="Y97-rZ-PUc" firstAttribute="leading" secondItem="XpL-as-qog" secondAttribute="leading" constant="8" id="wYL-o0-8Ei"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

@@ -32,6 +32,7 @@ NSString *const wallCellId = @"WallCell";
 NSString *const wallHeaderViewId = @"WallHeaderView";
 NSString *const mapControllerId = @"GMapViewController";
 NSString *const postNotification = @"TestNotification";
+NSString *const wallArrayCached = @"wallArrayCached";
 NSInteger const rowCount = 1;
 
 
@@ -41,9 +42,9 @@ NSInteger const rowCount = 1;
 }
 
 
-- (void) receiveTestNotification:(NSNotification *) notification {
+- (void) postNotification:(NSNotification *) notification {
     if ([[notification name] isEqualToString:postNotification]) {
-        self.wallArray = [self.wallCache objectForKey:@"wallArrayCached"];
+        self.wallArray = [self.wallCache objectForKey:wallArrayCached];
         [self.wallFeedTableView reloadData];
     }
 }
@@ -58,7 +59,7 @@ NSInteger const rowCount = 1;
     [self.wallFeedTableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:wallHeaderViewId];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-        selector:@selector(receiveTestNotification:)
+        selector:@selector(postNotification:)
         name:postNotification
         object:nil];
     
@@ -76,12 +77,12 @@ NSInteger const rowCount = 1;
 
 - (void)fetchFeedWalls {
     // check memory cache else upload from parse cache
-    self.wallArray = [self.wallCache objectForKey:@"wallArrayCached"];
+    self.wallArray = [self.wallCache objectForKey:wallArrayCached];
     if (!self.wallArray) {
         [[ParseQueryManager shared] fetchWalls:QueryDefaultState withCompletion:^(NSArray *feedWalls, NSError *error) {
             if (feedWalls) {
                 self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
-                [self.wallCache setObject:self.wallArray forKey:@"wallArrayCached"];
+                [self.wallCache setObject:self.wallArray forKey:wallArrayCached];
             } else {
             }
             [self.wallFeedTableView reloadData];
