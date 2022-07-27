@@ -41,13 +41,6 @@ NSInteger const rowCount = 1;
 }
 
 
-- (id) init {
-    self = [super init];
-    if (!self) return nil;
-    return self;
-}
-
-
 - (void) receiveTestNotification:(NSNotification *) notification {
     if ([[notification name] isEqualToString:postNotification]) {
         self.wallArray = [self.wallCache objectForKey:@"wallArrayCached"];
@@ -61,13 +54,13 @@ NSInteger const rowCount = 1;
     self.wallFeedTableView.dataSource = self;
     self.wallFeedTableView.delegate = self;
     
+    UINib *headerNib = [UINib nibWithNibName:wallHeaderViewId bundle:nil];
+    [self.wallFeedTableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:wallHeaderViewId];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
         selector:@selector(receiveTestNotification:)
         name:postNotification
         object:nil];
-    
-    UINib *headerNib = [UINib nibWithNibName:wallHeaderViewId bundle:nil];
-    [self.wallFeedTableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:wallHeaderViewId];
     
     [self.wallFeedTableView reloadData];
     
