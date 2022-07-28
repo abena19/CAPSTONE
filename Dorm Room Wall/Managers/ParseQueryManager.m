@@ -58,7 +58,19 @@
 }
    
 
-
+- (void)updateLike:(Wall *)wall likeState:(BOOL)value withCompletion:(void (^)(Wall * wall, NSError *error))completion {
+    PFQuery *query = [PFQuery queryWithClassName:@"Wall"];
+    // Retrieve the object by id
+    [query getObjectInBackgroundWithId:wall.objectId
+                                 block:^(PFObject *currentWall, NSError *error) {
+        if (value) {
+            currentWall[@"likedByCurrentUser"] = @NO;
+        } else {
+            currentWall[@"likedByCurrentUser"] = @YES;
+        }
+        [currentWall saveInBackground];
+    }];
+}
 
 
 @end

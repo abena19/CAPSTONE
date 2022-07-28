@@ -15,6 +15,7 @@
 @dynamic author;
 @dynamic caption;
 @dynamic dormAddress;
+@dynamic likedByCurrentUser;
 @dynamic locationImage;
 @dynamic lectureImage;
 @dynamic mealImage;
@@ -32,6 +33,7 @@
     newWall.author = [PFUser currentUser];
     newWall.caption = caption;
     newWall.dormAddress = dormLocation;
+    newWall.likedByCurrentUser = NO;
     [newWall saveInBackgroundWithBlock: completion];
     return newWall;
 }

@@ -9,6 +9,7 @@
 #import <Parse/Parse.h>
 #import "Wall.h"
 #import "WallCell.h"
+#import "ParseQueryManager.h"
 
 @implementation WallCell
 
@@ -48,6 +49,7 @@
     }];
     self.captionView.text = (NSString *)self.wall.caption;
     [self.dormLocationButton setTitle:self.wall.dormAddress forState:UIControlStateNormal];
+    [self likeCheck];
     
     UITapGestureRecognizer *doubleTap =
           [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -72,16 +74,38 @@
                 }];
             }];
         });
-    [self likeCheck];    
+    [self likeCheck];
 }
 - (IBAction)didTapLike:(id)sender {
-    [self likeCheck];
+//    [self likeCheck];
+    if (self.wall.likedByCurrentUser == NO) {
+        [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart.fill"]
+          forState:UIControlStateNormal];
+        [[ParseQueryManager shared] updateLike:self.wall likeState:self.wall.likedByCurrentUser withCompletion:^(Wall * _Nonnull wall, NSError * _Nonnull error) {
+        }];
+    } else {
+        [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart"]
+          forState:UIControlStateNormal];
+        [[ParseQueryManager shared] updateLike:self.wall likeState:self.wall.likedByCurrentUser withCompletion:^(Wall * _Nonnull wall, NSError * _Nonnull error) {
+        }];
+    }
+    self.wall.likedByCurrentUser = !self.wall.likedByCurrentUser;
 }
 
 
 - (void) likeCheck {
-    [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart.fill"]
-      forState:UIControlStateNormal];
+    if (self.wall.likedByCurrentUser == NO) {
+        [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart.fill"]
+          forState:UIControlStateNormal];
+        [[ParseQueryManager shared] updateLike:self.wall likeState:self.wall.likedByCurrentUser withCompletion:^(Wall * _Nonnull wall, NSError * _Nonnull error) {
+        }];
+    } else {
+        [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart"]
+          forState:UIControlStateNormal];
+        [[ParseQueryManager shared] updateLike:self.wall likeState:self.wall.likedByCurrentUser withCompletion:^(Wall * _Nonnull wall, NSError * _Nonnull error) {
+        }];
+    }
+    self.wall.likedByCurrentUser = !self.wall.likedByCurrentUser;
 }
 
 

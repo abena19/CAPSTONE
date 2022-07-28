@@ -46,6 +46,7 @@ NSInteger const rowCount = 1;
     if ([[notification name] isEqualToString:postNotification]) {
         self.wallArray = [self.wallCache objectForKey:wallArrayCached];
         [self.wallFeedTableView reloadData];
+        
     }
 }
 
