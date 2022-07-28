@@ -56,6 +56,7 @@ NSInteger const rowCount = 1;
     self.wallFeedTableView.delegate = self;
     
     UINib *headerNib = [UINib nibWithNibName:wallHeaderViewId bundle:nil];
+    
     [self.wallFeedTableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:wallHeaderViewId];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -107,7 +108,6 @@ NSInteger const rowCount = 1;
     WallCell *cell = [tableView dequeueReusableCellWithIdentifier:wallCellId forIndexPath:indexPath];
     Wall *wall = self.wallArray[indexPath.section];
     cell.wall = wall;
-    cell.contentView.layer.shadowRadius = 2;
     [cell setWall];
     UITapGestureRecognizer *doubleTap =
           [[UITapGestureRecognizer alloc] initWithTarget:self
