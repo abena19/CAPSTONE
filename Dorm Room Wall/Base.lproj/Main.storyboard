@@ -53,31 +53,29 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mzd-ZD-ToD">
-                                        <rect key="frame" x="96" y="110" width="68" height="35.5"/>
+                                        <rect key="frame" x="60" y="110" width="140" height="35.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="68" id="RGe-PG-bDl"/>
-                                            <constraint firstAttribute="height" constant="35.5" id="hPe-19-Aep"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35.5" id="x4d-Xi-FB6"/>
+                                            <constraint firstAttribute="height" constant="35.5" id="c75-aK-iSn"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Login">
-                                            <fontDescription key="titleFontDescription" type="italicSystem" pointSize="18"/>
+                                            <fontDescription key="titleFontDescription" type="italicSystem" pointSize="16"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="loginUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WJC-8C-lqc"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GUK-O4-L7K">
-                                        <rect key="frame" x="28" y="152.5" width="204" height="34.5"/>
+                                        <rect key="frame" x="28" y="152.5" width="204" height="85.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New member? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWI-PP-qRq" userLabel="newUserLabel">
-                                                <rect key="frame" x="0.0" y="0.0" width="115" height="34.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="115" height="85.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TsW-2x-dFc">
-                                                <rect key="frame" x="115" y="0.0" width="89" height="34.5"/>
+                                                <rect key="frame" x="115" y="0.0" width="89" height="85.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Sign Up!">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
@@ -89,7 +87,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="VFR-jd-T5h">
-                                        <rect key="frame" x="0.0" y="194" width="260" height="133"/>
+                                        <rect key="frame" x="0.0" y="245" width="260" height="82"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btR-kI-A1L" userLabel="fbButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="260" height="31"/>
@@ -113,19 +111,6 @@
                                                     <action selector="registerUserGoogle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YUF-hV-Q3T"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIh-3g-3Jy">
-                                                <rect key="frame" x="0.0" y="102" width="260" height="31"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="31" id="RzN-nd-7eQ"/>
-                                                </constraints>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Sign up with email">
-                                                    <color key="baseBackgroundColor" systemColor="systemGray3Color"/>
-                                                </buttonConfiguration>
-                                                <connections>
-                                                    <action selector="registerUserEmail:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Exp-Bx-h6X"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="260" id="9Mg-lg-GM0"/>
@@ -134,21 +119,15 @@
                                             <constraint firstItem="Pq7-Cc-bS9" firstAttribute="top" secondItem="btR-kI-A1L" secondAttribute="bottom" constant="20" id="INQ-a8-oun"/>
                                             <constraint firstItem="btR-kI-A1L" firstAttribute="top" secondItem="VFR-jd-T5h" secondAttribute="top" id="Pgd-Nb-tW4"/>
                                             <constraint firstAttribute="trailing" secondItem="btR-kI-A1L" secondAttribute="trailing" id="Re6-nU-WLc"/>
-                                            <constraint firstItem="PIh-3g-3Jy" firstAttribute="top" secondItem="Pq7-Cc-bS9" secondAttribute="bottom" constant="20" id="Ugq-tv-7W7"/>
                                             <constraint firstAttribute="trailing" secondItem="Pq7-Cc-bS9" secondAttribute="trailing" id="aPx-Bd-urc"/>
-                                            <constraint firstAttribute="height" constant="133" id="gJh-oa-UoA"/>
                                             <constraint firstItem="Pq7-Cc-bS9" firstAttribute="leading" secondItem="VFR-jd-T5h" secondAttribute="leading" id="p5G-Ua-cl4"/>
-                                            <constraint firstItem="PIh-3g-3Jy" firstAttribute="top" secondItem="Pq7-Cc-bS9" secondAttribute="bottom" constant="20" id="v9f-oI-HDD"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Mzd-ZD-ToD" secondAttribute="trailing" constant="96" id="2QH-2S-85O"/>
-                                    <constraint firstItem="Mzd-ZD-ToD" firstAttribute="top" secondItem="ovz-Ie-0Ml" secondAttribute="bottom" constant="7" id="TwZ-R4-2m3"/>
-                                    <constraint firstItem="GUK-O4-L7K" firstAttribute="top" secondItem="Mzd-ZD-ToD" secondAttribute="bottom" constant="7" id="Y2c-oV-fRU"/>
                                     <constraint firstAttribute="width" constant="260" id="cXP-9O-rI6"/>
+                                    <constraint firstItem="Mzd-ZD-ToD" firstAttribute="leading" secondItem="eeR-mE-qOg" secondAttribute="leading" constant="60" id="m7U-6l-Kn1"/>
                                     <constraint firstAttribute="height" constant="327" id="pM0-aX-ArM"/>
-                                    <constraint firstItem="Mzd-ZD-ToD" firstAttribute="leading" secondItem="eeR-mE-qOg" secondAttribute="leading" constant="96" id="vaQ-Gj-ku3"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -422,7 +401,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-yR-36k">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-yR-36k">
                                 <rect key="frame" x="20" y="93" width="374" height="238"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -445,14 +424,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             </textField>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.down.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="T6E-rI-FWD">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.down.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="T6E-rI-FWD">
                                 <rect key="frame" x="20" y="339" width="121" height="212"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="VKG-Vi-e55" appends="YES" id="CVo-l7-oOI"/>
                                 </connections>
                             </imageView>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rectangle.portrait.and.arrow.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="5NU-Wq-nfG">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rectangle.portrait.and.arrow.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="5NU-Wq-nfG">
                                 <rect key="frame" x="149" y="339" width="245" height="212"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -636,7 +615,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Xlb-2h-TyP"/>
+        <segue reference="6wI-lw-sE5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="heart" catalog="system" width="128" height="109"/>
@@ -651,9 +630,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

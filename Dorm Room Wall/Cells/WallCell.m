@@ -49,7 +49,14 @@
     }];
     self.captionView.text = (NSString *)self.wall.caption;
     [self.dormLocationButton setTitle:self.wall.dormAddress forState:UIControlStateNormal];
-    [self likeCheck];
+//    TODO: FUNC OUT (WITH IMAGE PARAM)
+    if ([self isInLikeDictionary]) {
+        [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart"]
+                  forState:UIControlStateNormal];
+    } else {
+        [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart.fill"]
+                  forState:UIControlStateNormal];
+    }
     
     UITapGestureRecognizer *doubleTap =
           [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -75,38 +82,33 @@
             }];
         });
     [self likeCheck];
+//    TO DO: check pseudoset
 }
 - (IBAction)didTapLike:(id)sender {
-//    [self likeCheck];
-    if (self.wall.likedByCurrentUser == NO) {
-        [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart.fill"]
-          forState:UIControlStateNormal];
-        [[ParseQueryManager shared] updateLike:self.wall likeState:self.wall.likedByCurrentUser withCompletion:^(Wall * _Nonnull wall, NSError * _Nonnull error) {
-        }];
-    } else {
-        [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart"]
-          forState:UIControlStateNormal];
-        [[ParseQueryManager shared] updateLike:self.wall likeState:self.wall.likedByCurrentUser withCompletion:^(Wall * _Nonnull wall, NSError * _Nonnull error) {
-        }];
-    }
-    self.wall.likedByCurrentUser = !self.wall.likedByCurrentUser;
+    [self likeCheck];
 }
 
 
 - (void) likeCheck {
-    if (self.wall.likedByCurrentUser == NO) {
+//    TODO:FIX AND REPLACE WITH COMPLETION HANDLER!!
+    if (self.wall.author == [PFUser currentUser]) {
+        //cannot like their own wall
+    } else {
+        NSLog(@"%@", self.wall.author);
+        if ([self isInLikeDictionary]) {
+            [[ParseQueryManager shared] updateLike:self.wall likeState:self.wall.likedByCurrentUser withCompletion:^(Wall * _Nonnull wall, NSError * _Nonnull error) {
+            NSLog(@"did tap like completion!!!");
+        }];
         [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart.fill"]
           forState:UIControlStateNormal];
-        [[ParseQueryManager shared] updateLike:self.wall likeState:self.wall.likedByCurrentUser withCompletion:^(Wall * _Nonnull wall, NSError * _Nonnull error) {
-        }];
-    } else {
-        [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart"]
-          forState:UIControlStateNormal];
-        [[ParseQueryManager shared] updateLike:self.wall likeState:self.wall.likedByCurrentUser withCompletion:^(Wall * _Nonnull wall, NSError * _Nonnull error) {
-        }];
+        }
+        
     }
-    self.wall.likedByCurrentUser = !self.wall.likedByCurrentUser;
 }
 
+
+- (BOOL) isInLikeDictionary {
+    return [self.wall[@"usersLikeDictionary"] valueForKey:[PFUser currentUser].objectId] == nil;
+}
 
 @end

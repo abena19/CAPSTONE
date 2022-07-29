@@ -19,6 +19,8 @@
 @dynamic locationImage;
 @dynamic lectureImage;
 @dynamic mealImage;
+@dynamic usersLikeDictionary;
+
 
 + (nonnull NSString *)parseClassName {
     return @"Wall";
@@ -34,6 +36,8 @@
     newWall.caption = caption;
     newWall.dormAddress = dormLocation;
     newWall.likedByCurrentUser = NO;
+    // TODO: Update parameter to set (replace pfuser), pseudoset?
+    newWall.usersLikeDictionary = [[NSMutableDictionary<NSString*, PFUser*> alloc] init];
     [newWall saveInBackgroundWithBlock: completion];
     return newWall;
 }

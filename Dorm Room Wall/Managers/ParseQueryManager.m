@@ -33,7 +33,6 @@
 }
 
 
-
 - (void) fetchWalls:(NSInteger)fetchMethod withCompletion:(void(^)(NSArray *feedWalls, NSError *error))completion {
     PFQuery *wallQuery = [Wall query];
     [wallQuery orderByDescending:@"createdAt"];
@@ -59,17 +58,14 @@
    
 
 - (void)updateLike:(Wall *)wall likeState:(BOOL)value withCompletion:(void (^)(Wall * wall, NSError *error))completion {
-    PFQuery *query = [PFQuery queryWithClassName:@"Wall"];
-    // Retrieve the object by id
-    [query getObjectInBackgroundWithId:wall.objectId
-                                 block:^(PFObject *currentWall, NSError *error) {
-        if (value) {
-            currentWall[@"likedByCurrentUser"] = @NO;
-        } else {
-            currentWall[@"likedByCurrentUser"] = @YES;
-        }
-        [currentWall saveInBackground];
-    }];
+    if (false) {
+        // cannot unlike
+    } else {
+        NSMutableDictionary<NSString*, PFUser*> *dict = wall[@"usersLikeDictionary"];
+        [dict setValue:[PFUser currentUser] forKey:[PFUser currentUser].objectId];
+        wall[@"usersLikeDictionary"] = dict;
+        [wall saveInBackground];
+    }
 }
 
 

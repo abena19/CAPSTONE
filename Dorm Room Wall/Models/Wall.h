@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PFFileObject *locationImage;
 @property (nonatomic, strong) PFFileObject *lectureImage;
 @property (nonatomic, strong) PFFileObject *mealImage;
+@property (nonatomic, strong) NSMutableDictionary<NSString*, PFUser*>* _Nullable usersLikeDictionary;
 @property (nonatomic) BOOL likedByCurrentUser;
 + (Wall *) postWallImage: (NSMutableArray *) imageArray withAddress:( NSString * _Nullable )dormLocation withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
