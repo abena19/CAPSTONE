@@ -49,8 +49,7 @@
     }];
     self.captionView.text = (NSString *)self.wall.caption;
     [self.dormLocationButton setTitle:self.wall.dormAddress forState:UIControlStateNormal];
-//    TODO: FUNC OUT (WITH IMAGE PARAM)
-    if ([self isInLikeDictionary]) {
+    if (![self isInLikeDictionary]) {
         [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart"]
                   forState:UIControlStateNormal];
     } else {
@@ -64,6 +63,7 @@
     doubleTap.numberOfTapsRequired = 2;
     [self.contentView addGestureRecognizer:doubleTap];
 }
+
 
 
 - (void)didDoubleTap:(UITapGestureRecognizer *)recognizer {
@@ -82,33 +82,32 @@
             }];
         });
     [self likeCheck];
-//    TO DO: check pseudoset
 }
+
+
+
 - (IBAction)didTapLike:(id)sender {
     [self likeCheck];
 }
 
 
+
 - (void) likeCheck {
-//    TODO:FIX AND REPLACE WITH COMPLETION HANDLER!!
-    if (self.wall.author == [PFUser currentUser]) {
-        //cannot like their own wall
-    } else {
+    if (self.wall.author != [PFUser currentUser]) {
         NSLog(@"%@", self.wall.author);
-        if ([self isInLikeDictionary]) {
-            [[ParseQueryManager shared] updateLike:self.wall likeState:self.wall.likedByCurrentUser withCompletion:^(Wall * _Nonnull wall, NSError * _Nonnull error) {
+        if (![self isInLikeDictionary]) {
+            [[ParseQueryManager shared] updateLike:self.wall withCompletion:^(Wall * _Nonnull wall, NSError * _Nonnull error) {
             NSLog(@"did tap like completion!!!");
         }];
         [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart.fill"]
           forState:UIControlStateNormal];
         }
-        
     }
 }
 
 
 - (BOOL) isInLikeDictionary {
-    return [self.wall[@"usersLikeDictionary"] valueForKey:[PFUser currentUser].objectId] == nil;
+    return [self.wall[@"usersLikeDictionary"] objectForKey:[PFUser currentUser].objectId] != nil;
 }
 
 @end

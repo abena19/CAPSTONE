@@ -57,12 +57,10 @@
 }
    
 
-- (void)updateLike:(Wall *)wall likeState:(BOOL)value withCompletion:(void (^)(Wall * wall, NSError *error))completion {
-    if (false) {
-        // cannot unlike
-    } else {
-        NSMutableDictionary<NSString*, PFUser*> *dict = wall[@"usersLikeDictionary"];
-        [dict setValue:[PFUser currentUser] forKey:[PFUser currentUser].objectId];
+- (void)updateLike:(Wall *)wall withCompletion:(void (^)(Wall * wall, NSError *error))completion {
+    if (wall.author != [PFUser currentUser]) {
+        NSMutableDictionary<NSString*, NSString*> *dict = wall[@"usersLikeDictionary"];
+        [dict setValue:@"" forKey:[PFUser currentUser].objectId];
         wall[@"usersLikeDictionary"] = dict;
         [wall saveInBackground];
     }
