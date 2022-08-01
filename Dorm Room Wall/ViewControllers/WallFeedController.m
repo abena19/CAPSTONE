@@ -18,7 +18,7 @@
 @import GoogleMaps;
 
 
-@interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, WallCellDelegate>
+@interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, WallCellDelegate, ParseQueryManagerDelegate>
 
 - (IBAction)didTapLogout:(id)sender;
 - (IBAction)didTapLocation:(id)sender;
@@ -174,8 +174,19 @@ NSInteger const rowCount = 1;
     return container.preferredContentSize;
 }
 
+ 
 - (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
     return YES;
+}
+
+
+- (void)outOfLikes {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sorry..." message:@"You are out of likes for now!" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Wait" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:^{
+    }];
 }
 
 
