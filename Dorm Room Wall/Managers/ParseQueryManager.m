@@ -37,7 +37,7 @@
     PFQuery *wallQuery = [Wall query];
     [wallQuery orderByDescending:@"createdAt"];
     [wallQuery includeKey:@"author"];
-    wallQuery.limit = 5;
+    wallQuery.limit = 8;
     switch (fetchMethod) {
         case QueryDefaultState:
             wallQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
@@ -64,17 +64,17 @@
         wall[@"usersLikeDictionary"] = dict;
         NSNumber *likesLeft = [PFUser currentUser][@"userLikesLeft"];
 //        start of like count
-        if (likesLeft == [PFUser currentUser][@"likeCountLimit"]) {
+        if ([likesLeft isEqualToNumber:[PFUser currentUser][@"likeCountLimit"]]) {
             [PFUser currentUser][@"userLikesLeft"] = @([likesLeft intValue] - 1);
             [PFUser currentUser][@"timeSinceFirstLike"] = [self dateNow];
             [[PFUser currentUser] saveInBackground];
-        } else if (likesLeft > 0) {
+        } else if ([likesLeft isEqualToNumber:@0]) {
+            [PFUser currentUser][@"userLikesLeft"] = @5;
+            [[PFUser currentUser] saveInBackground];
+        } else {
             [PFUser currentUser][@"userLikesLeft"] = @([likesLeft intValue] - 1);
             [[PFUser currentUser] saveInBackground];
-        } else if (likesLeft <= 0) {
-            [PFUser currentUser][@"userLikesLeft"] = [PFUser currentUser][@"likeCountLimit"];
-            [[PFUser currentUser] saveInBackground];
-        } 
+        }
         [[PFUser currentUser] saveInBackground];
         [wall saveInBackground];
     }
