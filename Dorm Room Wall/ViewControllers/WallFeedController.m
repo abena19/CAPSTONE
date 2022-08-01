@@ -161,5 +161,22 @@ NSInteger const rowCount = 1;
 }
 
 
+- (void)didLikeOwnPost {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Restricted!" message:@"You cannot like your own post!" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:^{
+    }];
+}
+
+- (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
+    return container.preferredContentSize;
+}
+
+- (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
+    return YES;
+}
+
 
 @end
