@@ -18,7 +18,7 @@
 @import GoogleMaps;
 
 
-@interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, WallCellDelegate, ParseQueryManagerDelegate>
+@interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, WallCellDelegate>
 
 - (IBAction)didTapLogout:(id)sender;
 - (IBAction)didTapLocation:(id)sender;
@@ -32,12 +32,14 @@ NSString *const wallCellId = @"WallCell";
 NSString *const wallHeaderViewId = @"WallHeaderView";
 NSString *const mapControllerId = @"GMapViewController";
 NSString *const postNotification = @"TestNotification";
+NSString *const finishedLikeNotification = @"OutOfLikes";
 NSString *const wallArrayCached = @"wallArrayCached";
 NSInteger const rowCount = 1;
 
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:postNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:finishedLikeNotification object:nil];
 }
 
 
@@ -45,7 +47,13 @@ NSInteger const rowCount = 1;
     if ([[notification name] isEqualToString:postNotification]) {
         self.wallArray = [self.wallCache objectForKey:wallArrayCached];
         [self.wallFeedTableView reloadData];
-        
+    }
+}
+
+
+- (void) finishedLikeNotification:(NSNotification *) notification {
+    if ([[notification name] isEqualToString:finishedLikeNotification]) {
+        [self outOfLikes];
     }
 }
 
@@ -62,6 +70,10 @@ NSInteger const rowCount = 1;
     [[NSNotificationCenter defaultCenter] addObserver:self
         selector:@selector(postNotification:)
         name:postNotification
+        object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(finishedLikeNotification:)
+        name:finishedLikeNotification
         object:nil];
     
     [self.wallFeedTableView reloadData];

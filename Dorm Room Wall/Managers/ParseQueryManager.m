@@ -62,27 +62,37 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
 
 - (void)updateLike:(Wall *)wall withCompletion:(void (^)(Wall * wall, NSError *error))completion {
     if (wall.author != [PFUser currentUser]) {
-        NSMutableDictionary<NSString*, NSString*> *dict = wall[usersLikeDictionary];
-        [dict setValue:@"" forKey:[PFUser currentUser].objectId];
-        wall[usersLikeDictionary] = dict;
         NSNumber *likesLeft = [PFUser currentUser][userLikesLeft];
-//        start of like count
+        //        start of like count
         if ([likesLeft isEqualToNumber:[PFUser currentUser][@"likeCountLimit"]]) {
             [PFUser currentUser][userLikesLeft] = @([likesLeft intValue] - 1);
             [PFUser currentUser][timeSinceFirstLike] = [self dateNow];
-            [[PFUser currentUser] saveInBackground];
+            [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded) {
+                    completion(wall, nil);
+                }
+            }];
         } else if ([likesLeft isEqualToNumber:@0]) {
             if ([self hoursSinceFirstLike:[PFUser currentUser][timeSinceFirstLike]]) {
-                [PFUser currentUser][userLikesLeft] = @5;
-                [[PFUser currentUser] saveInBackground];
+                [PFUser currentUser][userLikesLeft] = @20;  //adjust to var
+                [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (succeeded) {
+                        completion(wall, nil);
+                    }
+                }];
             } else {
-                [self.delegate outOfLikes];
+                [[NSNotificationCenter defaultCenter]
+                        postNotificationName:@"OutOfLikes"
+                        object:self];
             }
         } else {
             [PFUser currentUser][userLikesLeft] = @([likesLeft intValue] - 1);
-            [[PFUser currentUser] saveInBackground];
+            [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded) {
+                    completion(wall, nil);
+                }
+            }];
         }
-        [[PFUser currentUser] saveInBackground];
         [wall saveInBackground];
     }
 }
@@ -101,6 +111,7 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
     NSInteger numberOfHours = secondsBetween / 3600;
     return numberOfHours >= 6;
 }
+
 
 
 @end

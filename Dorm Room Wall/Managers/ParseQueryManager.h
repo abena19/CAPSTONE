@@ -10,15 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ParseQueryManagerDelegate
-
-- (void) outOfLikes;
-
-@end
-
 @interface ParseQueryManager : NSObject
-
-@property (nonatomic, weak) id<ParseQueryManagerDelegate> delegate;
 
 + (instancetype)shared;
 
