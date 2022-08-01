@@ -18,7 +18,7 @@
 @import GoogleMaps;
 
 
-@interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
+@interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, WallCellDelegate>
 
 - (IBAction)didTapLogout:(id)sender;
 - (IBAction)didTapLocation:(id)sender;
@@ -34,7 +34,6 @@ NSString *const mapControllerId = @"GMapViewController";
 NSString *const postNotification = @"TestNotification";
 NSString *const wallArrayCached = @"wallArrayCached";
 NSInteger const rowCount = 1;
-
 
 
 - (void)dealloc {
@@ -110,7 +109,7 @@ NSInteger const rowCount = 1;
     Wall *wall = self.wallArray[indexPath.section];
     cell.wall = wall;
     [cell setWall];
-    
+    cell.delegate = self;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
@@ -160,6 +159,7 @@ NSInteger const rowCount = 1;
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
     }];
 }
+
 
 
 @end

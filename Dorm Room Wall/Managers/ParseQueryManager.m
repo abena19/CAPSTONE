@@ -62,8 +62,30 @@
         NSMutableDictionary<NSString*, NSString*> *dict = wall[@"usersLikeDictionary"];
         [dict setValue:@"" forKey:[PFUser currentUser].objectId];
         wall[@"usersLikeDictionary"] = dict;
+        NSNumber *likesLeft = [PFUser currentUser][@"userLikesLeft"];
+//        start of like count
+        if (likesLeft == [PFUser currentUser][@"likeCountLimit"]) {
+            [PFUser currentUser][@"userLikesLeft"] = @([likesLeft intValue] - 1);
+            [PFUser currentUser][@"timeSinceFirstLike"] = [self dateNow];
+            [[PFUser currentUser] saveInBackground];
+        } else if (likesLeft > 0) {
+            [PFUser currentUser][@"userLikesLeft"] = @([likesLeft intValue] - 1);
+            [[PFUser currentUser] saveInBackground];
+        } else if (likesLeft <= 0) {
+            [PFUser currentUser][@"userLikesLeft"] = [PFUser currentUser][@"likeCountLimit"];
+            [[PFUser currentUser] saveInBackground];
+        } 
+        [[PFUser currentUser] saveInBackground];
         [wall saveInBackground];
     }
+}
+
+
+- (NSDate*) dateNow {
+    NSDate * now = [NSDate date];
+    NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
+    [outputFormatter setDateFormat:@"HH:mm:ss"];
+    return now;
 }
 
 

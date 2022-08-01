@@ -49,14 +49,7 @@
     }];
     self.captionView.text = (NSString *)self.wall.caption;
     [self.dormLocationButton setTitle:self.wall.dormAddress forState:UIControlStateNormal];
-    if (![self isInLikeDictionary]) {
-        [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart"]
-                  forState:UIControlStateNormal];
-    } else {
-        [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart.fill"]
-                  forState:UIControlStateNormal];
-    }
-    
+    [self setWallLikeStateWithHeart];
     UITapGestureRecognizer *doubleTap =
           [[UITapGestureRecognizer alloc] initWithTarget:self
                                                   action:@selector(didDoubleTap:)];
@@ -93,15 +86,16 @@
 
 
 - (void) likeCheck {
-    if (self.wall.author != [PFUser currentUser]) {
-        NSLog(@"%@", self.wall.author);
+    BOOL isUserAuthor = [self.wall.author.username isEqual:[PFUser currentUser].username];
+    if (!isUserAuthor) {
         if (![self isInLikeDictionary]) {
             [[ParseQueryManager shared] updateLike:self.wall withCompletion:^(Wall * _Nonnull wall, NSError * _Nonnull error) {
-            NSLog(@"did tap like completion!!!");
         }];
         [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart.fill"]
           forState:UIControlStateNormal];
         }
+    } else {
+        [self.delegate didLikeOwnPost];
     }
 }
 
@@ -109,5 +103,17 @@
 - (BOOL) isInLikeDictionary {
     return [self.wall[@"usersLikeDictionary"] objectForKey:[PFUser currentUser].objectId] != nil;
 }
+
+
+- (void) setWallLikeStateWithHeart {
+    if (![self isInLikeDictionary]) {
+        [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart"]
+                  forState:UIControlStateNormal];
+    } else {
+        [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart.fill"]
+                  forState:UIControlStateNormal];
+    }
+}
+
 
 @end
