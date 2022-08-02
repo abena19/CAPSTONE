@@ -11,6 +11,7 @@
 #import "MyWallViewController.h"
 #import "Wall.h"
 #import <Parse/Parse.h>
+#import "ParseQueryManager.h"
 
 @interface ComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -107,10 +108,13 @@
                     object:self];
         }
     }];
-    self.wallToPass = wall;   
+    self.wallToPass = wall;
+    
     [self dismissViewControllerAnimated:YES completion:^{
     }];
 }
+
+
 
 
 @end

@@ -47,6 +47,7 @@
 
 
 - (void)sidebar:(RNFrostedSidebar *)sidebar didTapItemAtIndex:(NSUInteger)index {
+
 }
 
 
