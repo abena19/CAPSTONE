@@ -9,6 +9,7 @@ target 'Dorm Room Wall' do
   pod 'Parse'
   pod 'GoogleMaps'
   pod 'Google-Maps-iOS-Utils'
+  pod 'RNFrostedSidebar', '~> 0.2.0'
 
   target 'Dorm Room WallTests' do
     inherit! :search_paths
