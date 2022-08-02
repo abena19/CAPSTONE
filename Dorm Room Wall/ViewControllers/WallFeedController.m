@@ -53,7 +53,9 @@ NSInteger const rowCount = 1;
 
 - (void) finishedLikeNotification:(NSNotification *) notification {
     if ([[notification name] isEqualToString:finishedLikeNotification]) {
-        [self outOfLikes];
+        NSDictionary *hoursToRefillDict = notification.userInfo;
+        NSNumber *hoursToRefill = [hoursToRefillDict allKeys].firstObject;
+        [self outOfLikes:hoursToRefill];
     }
 }
 
@@ -182,6 +184,7 @@ NSInteger const rowCount = 1;
     }];
 }
 
+
 - (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
     return container.preferredContentSize;
 }
@@ -192,8 +195,10 @@ NSInteger const rowCount = 1;
 }
 
 
-- (void)outOfLikes {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sorry..." message:@"You are out of likes for now!" preferredStyle:(UIAlertControllerStyleAlert)];
+- (void)outOfLikes: (NSNumber*) timeLeftToRefill {
+    NSString *timeLeft = [NSString stringWithFormat: @"%@", timeLeftToRefill];
+    NSString *timeStatement = @"Hours spent:";
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[timeStatement stringByAppendingString:timeLeft] message:@"You are out of likes for now!" preferredStyle:(UIAlertControllerStyleAlert)];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Wait" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alert addAction:okAction];

@@ -72,18 +72,20 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
                     completion(wall, nil);
                 }
             }];
-        } else if ([likesLeft isEqualToNumber:@0]) {
-            if ([self hoursSinceFirstLike:[PFUser currentUser][timeSinceFirstLike]]) {
-                [PFUser currentUser][userLikesLeft] = @20;  //adjust to var
+        } else if ([likesLeft isEqualToNumber:@0] || [likesLeft isEqualToNumber:@-1]) {
+            if ([self ifTimeForRefill]) {
+                [PFUser currentUser][userLikesLeft] = @10;  //adjust to var
                 [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     if (succeeded) {
                         completion(wall, nil);
                     }
                 }];
             } else {
+                double numberOfHours = [self hoursSinceFirstLike];
+                NSString *hours = [NSString stringWithFormat: @"%f", numberOfHours];
                 [[NSNotificationCenter defaultCenter]
                         postNotificationName:@"OutOfLikes"
-                        object:self];
+                 object:self userInfo:@{hours: @""}];
             }
         } else {
             [PFUser currentUser][userLikesLeft] = @([likesLeft intValue] - 1);
@@ -106,12 +108,17 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
 }
 
 
-- (BOOL) hoursSinceFirstLike:(NSDate*)timeOfFirstLike {
-    NSTimeInterval secondsBetween = [[self dateNow] timeIntervalSinceDate:timeOfFirstLike];
-    NSInteger numberOfHours = secondsBetween / 3600;
+- (BOOL) ifTimeForRefill {
+    double numberOfHours = [self hoursSinceFirstLike];
     return numberOfHours >= 6;
 }
 
+
+- (double) hoursSinceFirstLike {
+    NSTimeInterval secondsBetween = [[self dateNow] timeIntervalSinceDate:[PFUser currentUser][timeSinceFirstLike]];
+    double numberOfHours = secondsBetween / 3600;
+    return numberOfHours;
+}
 
 
 @end
