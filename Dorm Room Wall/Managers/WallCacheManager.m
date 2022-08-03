@@ -27,11 +27,35 @@
 
 - (instancetype)init {
     if (self) {
+        self.wallCache = [[NSCache alloc] init];
+        self.expiryTimeInterval = 3600;
     }
     return self;
 }
 
 
+- (id)objectForKey:(id)key {
+    @try {
+        NSObject <ExpiringWallCacheItem> *object = [self.wallCache objectForKey:key];
+        if (object) {
+            NSTimeInterval timeSinceCache = fabs([object.expiringCacheItemDate timeIntervalSinceNow]);
+            if (timeSinceCache > self.expiryTimeInterval) {
+                [self.wallCache removeObjectForKey:key];
+                return nil;
+            }
+        }
+        return object;
+    }
+    
+    @catch (NSException *exception) {
+        return nil;
+    }
+}
+
+- (void)setObject:(NSObject <ExpiringWallCacheItem> *)obj forKey:(id)key {
+    obj.expiringCacheItemDate = [NSDate date];
+    [self.wallCache setObject:obj forKey:key];
+}
 
 
 @end
