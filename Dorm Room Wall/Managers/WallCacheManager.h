@@ -22,8 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSCache *wallCache;
 @property (nonatomic, assign) NSTimeInterval expiryTimeInterval;
 
-- (id)objectForKey:(id)key;
-- (void)setObject:(NSObject <ExpiringWallCacheItem> *)obj forKey:(id)key;
+- (id)expireWallMethod:(id)key;
+- (void)setWallArrayInCache:(NSMutableArray*)wallArray forKey:(id)key;
+- (NSMutableArray*)getWallArrayInCacheforKey:(id)key;
 
 + (instancetype)shared;
 

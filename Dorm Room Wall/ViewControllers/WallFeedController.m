@@ -6,6 +6,7 @@
 //
 
 #import "WallFeedController.h"
+#import "WallCacheManager.h"
 #import "SceneDelegate.h"
 #import "LoginViewController.h"
 #import "ComposeViewController.h"
@@ -45,7 +46,6 @@ NSInteger const rowCount = 1;
 
 - (void) postNotification:(NSNotification *) notification {
     if ([[notification name] isEqualToString:postNotification]) {
-        self.wallArray = [self.wallCache objectForKey:wallArrayCached];
         [self.wallFeedTableView reloadData];
     }
 }
@@ -70,13 +70,13 @@ NSInteger const rowCount = 1;
     [self.wallFeedTableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:wallHeaderViewId];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-        selector:@selector(postNotification:)
-        name:postNotification
-        object:nil];
+                                             selector:@selector(postNotification:)
+                                                 name:postNotification
+                                               object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-        selector:@selector(finishedLikeNotification:)
-        name:finishedLikeNotification
-        object:nil];
+                                             selector:@selector(finishedLikeNotification:)
+                                                 name:finishedLikeNotification
+                                               object:nil];
     
     [self.wallFeedTableView reloadData];
     
@@ -85,19 +85,18 @@ NSInteger const rowCount = 1;
     [self.wallFeedTableView insertSubview:refreshControl atIndex:0];
     [self.wallFeedTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.wallFeedTableView setShowsVerticalScrollIndicator:FALSE];
-    self.wallCache = [[NSCache alloc] init];
     [self fetchFeedWalls];
 }
 
 
 - (void)fetchFeedWalls {
     // check memory cache else upload from parse cache
-    self.wallArray = [self.wallCache objectForKey:wallArrayCached];
+    self.wallArray = [[WallCacheManager shared] getWallArrayInCacheforKey:wallArrayCached];
     if (!self.wallArray) {
         [[ParseQueryManager shared] fetchWalls:QueryDefaultState withCompletion:^(NSArray *feedWalls, NSError *error) {
             if (feedWalls) {
                 self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
-                [self.wallCache setObject:self.wallArray forKey:wallArrayCached];
+                [[WallCacheManager shared] setWallArrayInCache:self.wallArray forKey:wallArrayCached];
             } else {
             }
             [self.wallFeedTableView reloadData];
@@ -117,7 +116,7 @@ NSInteger const rowCount = 1;
         } else {
         }
         [self.wallFeedTableView reloadData];
-        }];
+    }];
 }
 
 
@@ -192,7 +191,7 @@ NSInteger const rowCount = 1;
     return container.preferredContentSize;
 }
 
- 
+
 - (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
     return YES;
 }

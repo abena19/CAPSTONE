@@ -34,7 +34,7 @@
 }
 
 
-- (id)objectForKey:(id)key {
+- (id)expireWallMethod:(id)key {
     @try {
         NSObject <ExpiringWallCacheItem> *object = [self.wallCache objectForKey:key];
         if (object) {
@@ -52,10 +52,18 @@
     }
 }
 
-- (void)setObject:(NSObject <ExpiringWallCacheItem> *)obj forKey:(id)key {
-    obj.expiringCacheItemDate = [NSDate date];
-    [self.wallCache setObject:obj forKey:key];
+
+- (void)setWallArrayInCache:(NSMutableArray*)wallArray forKey:(id)key {
+    NSObject<ExpiringWallCacheItem> *expiringWallArrayItem = (NSObject<ExpiringWallCacheItem> *)wallArray;
+    expiringWallArrayItem.expiringCacheItemDate = [NSDate date];
+    [self.wallCache setObject:expiringWallArrayItem forKey:key];
 }
 
+
+- (NSMutableArray*)getWallArrayInCacheforKey:(id)key {
+    NSObject<ExpiringWallCacheItem> *expiringWallArrayItem = [self.wallCache objectForKey:key];
+    NSMutableArray* wallArray = (NSMutableArray*)expiringWallArrayItem;
+    return wallArray;
+}
 
 @end
