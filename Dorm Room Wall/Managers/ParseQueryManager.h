@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void) fetchWalls:(NSInteger)fetchMethod withCompletion:(void(^)(NSArray *feedWalls, NSError *error))completion;
 - (void)updateLike:(Wall *)wall withCompletion:(void (^)(Wall *wall, NSError *error))completion;
-- (void) addToUserWallArray:(NSString*) wallId;
+- (void) addToUserWallNumber;
 
 typedef NS_ENUM(NSInteger , cacheState) {
     QueryDefaultState = 1,

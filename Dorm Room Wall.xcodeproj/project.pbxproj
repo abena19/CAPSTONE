@@ -27,6 +27,7 @@
 		0B719524287649F900DA7114 /* WallFeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B719523287649F900DA7114 /* WallFeedController.m */; };
 		0B71952728764AD100DA7114 /* MyWallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B71952628764AD100DA7114 /* MyWallViewController.m */; };
 		0B71952A28764C6800DA7114 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B71952928764C6800DA7114 /* ChatViewController.m */; };
+		0B71EE11289AF52E00B75F06 /* WallCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B71EE10289AF52E00B75F06 /* WallCacheManager.m */; };
 		0B990A472876B83F005B88C1 /* WallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B990A462876B83F005B88C1 /* WallCell.m */; };
 		0B990A4A2876B8F6005B88C1 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B990A492876B8F6005B88C1 /* Wall.m */; };
 		0B990A4D2877644A005B88C1 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B990A4C2877644A005B88C1 /* ComposeViewController.m */; };
@@ -86,6 +87,8 @@
 		0B71952628764AD100DA7114 /* MyWallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWallViewController.m; sourceTree = "<group>"; };
 		0B71952828764C6800DA7114 /* ChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		0B71952928764C6800DA7114 /* ChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		0B71EE0F289AF52E00B75F06 /* WallCacheManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WallCacheManager.h; sourceTree = "<group>"; };
+		0B71EE10289AF52E00B75F06 /* WallCacheManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallCacheManager.m; sourceTree = "<group>"; };
 		0B990A452876B83F005B88C1 /* WallCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WallCell.h; sourceTree = "<group>"; };
 		0B990A462876B83F005B88C1 /* WallCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallCell.m; sourceTree = "<group>"; };
 		0B990A482876B8F6005B88C1 /* Wall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
@@ -191,6 +194,8 @@
 		0B68EA97288A1822006E92AA /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				0B71EE0F289AF52E00B75F06 /* WallCacheManager.h */,
+				0B71EE10289AF52E00B75F06 /* WallCacheManager.m */,
 				0B68EA94288A1728006E92AA /* GMapsAPIManager.h */,
 				0B68EA95288A1728006E92AA /* GMapsAPIManager.m */,
 				0B4D1EF92888728C001D0F3F /* ParseQueryManager.h */,
@@ -565,6 +570,7 @@
 				0B7194FA2874E44300DA7114 /* main.m in Sources */,
 				0B7194EC2874E44200DA7114 /* SceneDelegate.m in Sources */,
 				0B71952728764AD100DA7114 /* MyWallViewController.m in Sources */,
+				0B71EE11289AF52E00B75F06 /* WallCacheManager.m in Sources */,
 				0B68EA9A288A198F006E92AA /* GMapViewController.m in Sources */,
 				0B990A472876B83F005B88C1 /* WallCell.m in Sources */,
 				0B71952A28764C6800DA7114 /* ChatViewController.m in Sources */,

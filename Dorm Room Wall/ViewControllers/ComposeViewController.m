@@ -109,7 +109,7 @@
         }
     }];
     self.wallToPass = wall;
-    
+    [[ParseQueryManager shared] addToUserWallNumber];
     [self dismissViewControllerAnimated:YES completion:^{
     }];
 }

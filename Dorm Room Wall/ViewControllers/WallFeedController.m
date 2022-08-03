@@ -106,6 +106,9 @@ NSInteger const rowCount = 1;
 }
 
 
+
+
+
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
     [[ParseQueryManager shared] fetchWalls:QueryNetworkState withCompletion:^(NSArray *feedWalls, NSError *error) {
         if (feedWalls) {

@@ -61,9 +61,7 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
    
 
 - (void)updateLike:(Wall *)wall withCompletion:(void (^)(Wall * wall, NSError *error))completion {
-    NSMutableArray *wallIdArray = [PFUser currentUser][@"userWallIds"];
-    NSUInteger arrayLen = [wallIdArray count];
-    if (wall.author != [PFUser currentUser] && arrayLen != 0) {
+    if (wall.author != [PFUser currentUser] && [PFUser currentUser][@"userWallCount"] != 0) {
         NSNumber *likesLeft = [PFUser currentUser][userLikesLeft];
         //        start of like count
         if ([likesLeft isEqualToNumber:[PFUser currentUser][@"likeCountLimit"]]) {
@@ -76,7 +74,7 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
             }];
         } else if ([likesLeft isEqualToNumber:@0] || [likesLeft isEqualToNumber:@-1]) {
             if ([self ifTimeForRefill]) {
-                [PFUser currentUser][userLikesLeft] = @10;  //adjust to var
+                [PFUser currentUser][userLikesLeft] = @10;
                 [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     if (succeeded) {
                         completion(wall, nil);
@@ -102,10 +100,8 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
 }
 
 
-- (void) addToUserWallArray:(NSString*) wallId {
-    NSMutableArray *wallArray = [PFUser currentUser][@"userWallIds"];
-    [wallArray addObject:wallId];
-    [PFUser currentUser][@"userWallIds"] = wallArray;
+- (void) addToUserWallNumber {
+    [[PFUser currentUser] incrementKey:@"userWallCount"];
     [[PFUser currentUser] saveInBackground];
 }
 

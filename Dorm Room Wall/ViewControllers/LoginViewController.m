@@ -25,7 +25,7 @@
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
     newUser[@"likeCountLimit"] = @5;
-    newUser[@"userWallIds"] = [[NSMutableArray<NSString*> alloc] init];
+    newUser[@"userWallCount"] = @0;
     self.userId = newUser.objectId;
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
