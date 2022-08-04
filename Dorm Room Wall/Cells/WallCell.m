@@ -26,25 +26,10 @@
 }
 
 - (void)setWall {
-    // convert pffile object to image
-    PFFileObject *lectureImageFile = self.wall.lectureImage;
-    [lectureImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
-        if (!error) {
-            [self setImageOnView:self.lectureImageView withData:imageData];
-        }
-    }];
-    PFFileObject *locationImageFile = self.wall.locationImage;
-    [locationImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
-        if (!error) {
-            [self setImageOnView:self.locationImageView withData:imageData];
-        }
-    }];
-    PFFileObject *mealImageFile = self.wall.mealImage;
-    [mealImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
-        if (!error) {
-            [self setImageOnView:self.mealImageView withData:imageData];
-        }
-    }];
+    [self getImageFromFile:self.wall.lectureImage setToView:self.lectureImageView];
+    [self getImageFromFile:self.wall.locationImage setToView:self.locationImageView];
+    [self getImageFromFile:self.wall.mealImage setToView:self.mealImageView];
+    
     self.captionView.text = (NSString *)self.wall.caption;
     [self.dormLocationButton setTitle:self.wall.dormAddress forState:UIControlStateNormal];
     [self setWallLikeStateWithHeart];
@@ -55,11 +40,22 @@
     [self.contentView addGestureRecognizer:doubleTap];
 }
 
+
 - (void) setImageOnView:(UIImageView*)view withData:(NSData*)imageData {
     view.image = [UIImage imageWithData:imageData];
     [view.layer setCornerRadius:5.0f];
     [view.layer setMasksToBounds:YES];
 }
+
+- (void) getImageFromFile:(PFFileObject *)imageFile setToView:(UIImageView*)view {
+    PFFileObject *wallImageFile = imageFile;
+    [wallImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+        if (!error) {
+            [self setImageOnView:view withData:imageData];
+        }
+    }];
+}
+
 
 - (void)didDoubleTap:(UITapGestureRecognizer *)recognizer {
     UIView *gestureView = recognizer.view;
