@@ -32,7 +32,7 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
 
 
 - (instancetype)init {
-    if (self) {      
+    if (self) {
     }
     return self;
 }
@@ -60,42 +60,39 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
         }
     }];
 }
-   
+
 
 - (void)updateLike:(Wall *)wall withCompletion:(void (^)(Wall * wall, NSError *error))completion {
     if (wall.author != [PFUser currentUser] && [PFUser currentUser][@"userWallCount"] != 0) {
         NSNumber *likesLeft = [PFUser currentUser][userLikesLeft];
-        //        start of like count
+        //        start of like count - initial/refill
         if ([likesLeft isEqualToNumber:[PFUser currentUser][likeCountLimit]]) {
-            [PFUser currentUser][userLikesLeft] = @([likesLeft intValue] - 1);
-            [PFUser currentUser][timeSinceFirstLike] = [self dateNow];
-            
+            [self trackInitialLike:wall:likesLeft];
             [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
                     completion(wall, nil);
                 }
             }];
-        } else if ([likesLeft isEqualToNumber:@0] || [likesLeft isEqualToNumber:@-1]) {
-            NSNumber* wallCount = [PFUser currentUser][@"userWallCount"];
+            
+        } else if ([likesLeft isEqualToNumber:@0] || [likesLeft isEqualToNumber:@-1]) {  //depleted likes
             if ([self ifTimeForRefill]) {
-                NSNumber* likeLimit = [PFUser currentUser][likeCountLimit];
-                NSNumber* refillLikeNumber = @(([wallCount intValue] * [likeLimit intValue]) / 5);
-                [PFUser currentUser][likeCountLimit] = @([likeLimit intValue] + [refillLikeNumber intValue]);
-                [PFUser currentUser][userLikesLeft] = [PFUser currentUser][likeCountLimit];
+                [self refillLikesAndLimit:wall];
                 [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     if (succeeded) {
                         completion(wall, nil);
                     }
                 }];
+                
             } else {
                 double numberOfHours = [self hoursSinceFirstLike];
                 NSString *hours = [NSString stringWithFormat: @"%f", numberOfHours];
                 [[NSNotificationCenter defaultCenter]
-                        postNotificationName:@"OutOfLikes"
+                 postNotificationName:@"OutOfLikes"
                  object:self userInfo:@{hours: @""}];
             }
+            
         } else {
-            [PFUser currentUser][userLikesLeft] = @([likesLeft intValue] - 1);
+            [self decrementUserLikes:wall :likesLeft];
             [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
                     completion(wall, nil);
@@ -132,6 +129,37 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
     double numberOfHours = secondsBetween / 3600;
     return numberOfHours;
 }
+
+
+- (void) trackInitialLike:(Wall*) wall :(NSNumber*) likesLeft {
+    [self decrementUserLikes:wall :likesLeft];
+    [PFUser currentUser][timeSinceFirstLike] = [self dateNow];
+}
+
+
+- (void) refillLikesAndLimit:(Wall*) wall {
+    NSNumber* wallCount = [PFUser currentUser][@"userWallCount"];
+    NSNumber* likeLimit = [PFUser currentUser][likeCountLimit];
+    NSNumber* refillLikeNumber = @(([wallCount intValue] * [likeLimit intValue]) / 5);
+    [PFUser currentUser][likeCountLimit] = @([likeLimit intValue] + [refillLikeNumber intValue]);
+    [PFUser currentUser][userLikesLeft] = [PFUser currentUser][likeCountLimit];
+    wall[@"usersLikeDictionary"] = [self setLikeDictionary:wall[@"usersLikeDictionary"]];
+}
+
+
+- (void) decrementUserLikes:(Wall*) wall :(NSNumber*) likesLeft {
+    [PFUser currentUser][userLikesLeft] = @([likesLeft intValue] - 1);
+    wall[@"usersLikeDictionary"] = [self setLikeDictionary:wall[@"usersLikeDictionary"]];
+}
+
+
+- (NSMutableDictionary<NSString*, NSString*> *) setLikeDictionary:(NSMutableDictionary<NSString*, NSString*>*)likeDictionary {
+    NSMutableDictionary<NSString*, NSString*> *dict = likeDictionary;
+    [dict setValue:@"" forKey:[PFUser currentUser].objectId];
+    
+    return dict;
+}
+
 
 
 @end

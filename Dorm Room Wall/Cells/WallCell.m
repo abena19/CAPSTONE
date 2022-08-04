@@ -93,7 +93,6 @@
             [[ParseQueryManager shared] updateLike:self.wall withCompletion:^(Wall * _Nonnull wall, NSError * _Nonnull error) {
                 [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart.fill"]
                                      forState:UIControlStateNormal];
-                wall[@"usersLikeDictionary"] = [self setLikeDictionary:wall[@"usersLikeDictionary"]];
             }];
             
         }
@@ -105,13 +104,6 @@
 
 - (BOOL) isInLikeDictionary {
     return [self.wall[@"usersLikeDictionary"] objectForKey:[PFUser currentUser].objectId] != nil;
-}
-
-
-- (NSMutableDictionary<NSString*, NSString*> *) setLikeDictionary:(NSMutableDictionary<NSString*, NSString*>*)likeDictionary {
-    NSMutableDictionary<NSString*, NSString*> *dict = likeDictionary;
-    [dict setValue:@"" forKey:[PFUser currentUser].objectId];
-    return dict;
 }
 
 
