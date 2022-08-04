@@ -12,12 +12,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-//@protocol ExpiringWallCacheItem <NSObject>
-//
-//@property (nonatomic, strong) NSDate *expiringCacheItemDate;
-//
-//@end
-
 @interface WallCacheManager : NSObject
 
 @property (nonatomic, strong) NSCache *wallCache;
