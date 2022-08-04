@@ -49,9 +49,9 @@ This app allows for a user to post and relate to other students within school by
 
 **Optional Nice-to-have Stories**
 
-* Auto suggest other people who have signed up based on classes, halls, location, preferences
-* Trending locations/ dorm room walls
-* User can customise dorm room wall based on predetermined templates/ or toggle picture arrangements
+* Restricted liking feature with refills
+* Like levels indicated by colors
+* Auto suggest other people who have signed up based on preferences
 * User can view a history of their walls
 * Create statuses to disappear within 24 hours
 * User can tap on wall components for details
@@ -60,14 +60,14 @@ This app allows for a user to post and relate to other students within school by
 
 * Login Screen
    * User can login
-       * FB, email
+   
 * Registration Screen
    * User can create a new account
-   * Create preferences, interests
+   * Create preferences
 
 * Home page
     * User can view home feed, other walls
-    * User can view, like or follow other wall accounts
+    * User can view, like other wall accounts
 
 * Profile page
     * User can view profile page with username, followers (not based on counts), wall interaction level from other people
@@ -75,15 +75,6 @@ This app allows for a user to post and relate to other students within school by
 * My Wall page
     * User can upload posts components onto the wall
     * User can modify arrangement of wall components(stretch feature)
-    * User can share wall to follwers
-
-* Chat page
-    * User can see a list of conversations and create new conversations with followers (to prevent random chats from others except in comments)
-
-* Update page
-    * User can update preferences, add categories, etc
-    * User can view and change current status
-    * User can notify group of change 
     
 * Settings page
     * Change profile details
