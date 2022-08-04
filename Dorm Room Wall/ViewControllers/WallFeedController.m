@@ -6,6 +6,7 @@
 //
 
 #import "WallFeedController.h"
+#import "WallCacheManager.h"
 #import "SceneDelegate.h"
 #import "LoginViewController.h"
 #import "ComposeViewController.h"
@@ -18,7 +19,7 @@
 @import GoogleMaps;
 
 
-@interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
+@interface WallFeedController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, WallCellDelegate>
 
 - (IBAction)didTapLogout:(id)sender;
 - (IBAction)didTapLocation:(id)sender;
@@ -32,20 +33,29 @@ NSString *const wallCellId = @"WallCell";
 NSString *const wallHeaderViewId = @"WallHeaderView";
 NSString *const mapControllerId = @"GMapViewController";
 NSString *const postNotification = @"TestNotification";
+NSString *const finishedLikeNotification = @"OutOfLikes";
 NSString *const wallArrayCached = @"wallArrayCached";
 NSInteger const rowCount = 1;
 
 
-
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:postNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:finishedLikeNotification object:nil];
 }
 
 
 - (void) postNotification:(NSNotification *) notification {
     if ([[notification name] isEqualToString:postNotification]) {
-        self.wallArray = [self.wallCache objectForKey:wallArrayCached];
         [self.wallFeedTableView reloadData];
+    }
+}
+
+
+- (void) finishedLikeNotification:(NSNotification *) notification {
+    if ([[notification name] isEqualToString:finishedLikeNotification]) {
+        NSDictionary *hoursToRefillDict = notification.userInfo;
+        NSNumber *hoursToRefill = [hoursToRefillDict allKeys].firstObject;
+        [self outOfLikes:hoursToRefill];
     }
 }
 
@@ -56,12 +66,17 @@ NSInteger const rowCount = 1;
     self.wallFeedTableView.delegate = self;
     
     UINib *headerNib = [UINib nibWithNibName:wallHeaderViewId bundle:nil];
+    
     [self.wallFeedTableView registerNib:headerNib forHeaderFooterViewReuseIdentifier:wallHeaderViewId];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-        selector:@selector(postNotification:)
-        name:postNotification
-        object:nil];
+                                             selector:@selector(postNotification:)
+                                                 name:postNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(finishedLikeNotification:)
+                                                 name:finishedLikeNotification
+                                               object:nil];
     
     [self.wallFeedTableView reloadData];
     
@@ -70,25 +85,27 @@ NSInteger const rowCount = 1;
     [self.wallFeedTableView insertSubview:refreshControl atIndex:0];
     [self.wallFeedTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.wallFeedTableView setShowsVerticalScrollIndicator:FALSE];
-    self.wallCache = [[NSCache alloc] init];
     [self fetchFeedWalls];
 }
 
 
 - (void)fetchFeedWalls {
     // check memory cache else upload from parse cache
-    self.wallArray = [self.wallCache objectForKey:wallArrayCached];
+    self.wallArray = [[WallCacheManager shared] getWallArrayInCacheforKey:wallArrayCached];
     if (!self.wallArray) {
         [[ParseQueryManager shared] fetchWalls:QueryDefaultState withCompletion:^(NSArray *feedWalls, NSError *error) {
             if (feedWalls) {
                 self.wallArray = [NSMutableArray arrayWithArray:(NSArray*)feedWalls];
-                [self.wallCache setObject:self.wallArray forKey:wallArrayCached];
+                [[WallCacheManager shared] setWallArrayInCache:self.wallArray forKey:wallArrayCached];
             } else {
             }
             [self.wallFeedTableView reloadData];
         }];
     }
 }
+
+
+
 
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
@@ -99,7 +116,7 @@ NSInteger const rowCount = 1;
         } else {
         }
         [self.wallFeedTableView reloadData];
-        }];
+    }];
 }
 
 
@@ -107,13 +124,8 @@ NSInteger const rowCount = 1;
     WallCell *cell = [tableView dequeueReusableCellWithIdentifier:wallCellId forIndexPath:indexPath];
     Wall *wall = self.wallArray[indexPath.section];
     cell.wall = wall;
-    cell.contentView.layer.shadowRadius = 2;
     [cell setWall];
-    UITapGestureRecognizer *doubleTap =
-          [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                  action:@selector(didDoubleTap:)];
-        doubleTap.numberOfTapsRequired = 2;
-        [cell.contentView addGestureRecognizer:doubleTap];
+    cell.delegate = self;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
@@ -143,24 +155,6 @@ NSInteger const rowCount = 1;
 }
 
 
-- (void)didDoubleTap:(UITapGestureRecognizer *)recognizer {
-    UIView *gestureView = recognizer.view;
-    UIImageView *heart =[[UIImageView alloc] initWithFrame:CGRectMake(gestureView.center.x, gestureView.center.y, gestureView.frame.size.width/4, gestureView.frame.size.width/4)];
-    heart.tintColor = [UIColor redColor];
-    heart.alpha = 0;
-    [heart setImage:[UIImage systemImageNamed:@"heart.fill"]];
-    [gestureView addSubview:heart];
-    [gestureView layoutIfNeeded];
-    dispatch_after(DISPATCH_TIME_NOW, dispatch_get_main_queue(), ^{
-        [UIView transitionWithView:gestureView duration:1 options:UIViewAnimationOptionTransitionNone animations:^{heart.alpha = 1;} completion:^(BOOL finished) {
-                [UIView transitionWithView:gestureView duration:0.5 options:UIViewAnimationOptionTransitionCurlUp animations:^{heart.alpha = 0;} completion:^(BOOL finished) {
-                    [heart removeFromSuperview];
-                }];
-            }];
-        });
-}
-
-
 - (IBAction)didTapLocation:(id)sender {
     SceneDelegate *mapSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -179,6 +173,38 @@ NSInteger const rowCount = 1;
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:loginControllerId];
     loginSceneDelegate.window.rootViewController = loginViewController;
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+    }];
+}
+
+
+- (void)didLikeOwnPost {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Restricted!" message:@"You cannot like your own post!" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:^{
+    }];
+}
+
+
+- (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
+    return container.preferredContentSize;
+}
+
+
+- (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
+    return YES;
+}
+
+
+- (void)outOfLikes: (NSNumber*) timeLeftToRefill {
+    NSString *timeLeft = [NSString stringWithFormat: @"%@", timeLeftToRefill];
+    NSString *timeStatement = @"Hours spent:";
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[timeStatement stringByAppendingString:timeLeft] message:@"You are out of likes for now!" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Wait" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:^{
     }];
 }
 

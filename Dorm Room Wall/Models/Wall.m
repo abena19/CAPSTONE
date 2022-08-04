@@ -18,6 +18,8 @@
 @dynamic locationImage;
 @dynamic lectureImage;
 @dynamic mealImage;
+@dynamic usersLikeDictionary;
+
 
 + (nonnull NSString *)parseClassName {
     return @"Wall";
@@ -32,6 +34,7 @@
     newWall.author = [PFUser currentUser];
     newWall.caption = caption;
     newWall.dormAddress = dormLocation;
+    newWall.usersLikeDictionary = [[NSMutableDictionary<NSString*, NSString*> alloc] init];
     [newWall saveInBackgroundWithBlock: completion];
     return newWall;
 }

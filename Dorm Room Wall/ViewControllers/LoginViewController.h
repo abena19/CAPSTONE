@@ -20,7 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)registerUser:(id)sender;
 - (IBAction)registerUserFB:(id)sender;
 - (IBAction)registerUserGoogle:(id)sender;
-- (IBAction)registerUserEmail:(id)sender;
 
 @end
 

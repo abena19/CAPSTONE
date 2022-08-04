@@ -6,15 +6,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Wall.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ParseQueryManager : NSObject
 
-
 + (instancetype)shared;
 
 - (void) fetchWalls:(NSInteger)fetchMethod withCompletion:(void(^)(NSArray *feedWalls, NSError *error))completion;
+- (void)updateLike:(Wall *)wall withCompletion:(void (^)(Wall *wall, NSError *error))completion;
+- (void) addToUserWallNumber;
 
 typedef NS_ENUM(NSInteger , cacheState) {
     QueryDefaultState = 1,

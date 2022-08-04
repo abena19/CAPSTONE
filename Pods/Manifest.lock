@@ -28,11 +28,13 @@ PODS:
     - Parse/Core (= 1.19.3)
   - Parse/Core (1.19.3):
     - Bolts/Tasks (= 1.9.1)
+  - RNFrostedSidebar (0.2.0)
 
 DEPENDENCIES:
   - Google-Maps-iOS-Utils
   - GoogleMaps
   - Parse
+  - RNFrostedSidebar (~> 0.2.0)
 
 SPEC REPOS:
   trunk:
@@ -40,13 +42,15 @@ SPEC REPOS:
     - Google-Maps-iOS-Utils
     - GoogleMaps
     - Parse
+    - RNFrostedSidebar
 
 SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
   Google-Maps-iOS-Utils: 3343332b18dfd5be8f1f44edd7d481ace3da4d9a
   GoogleMaps: 6e9c923ca035989709fcb5771544fda4cc5fa2a4
   Parse: 0abb63a0ff6fa34a3f64b81d595a294e2ece143a
+  RNFrostedSidebar: 9491d8627e5e99b92334d36def432c0faf7ebae4
 
-PODFILE CHECKSUM: 837a5f5c2f627db41f0a18b0388b3f0284feebdf
+PODFILE CHECKSUM: 089e1b1de80677278e70a3fca77009d61f85a9e3
 
 COCOAPODS: 1.11.3
