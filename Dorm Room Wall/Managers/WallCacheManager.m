@@ -28,7 +28,7 @@
 - (instancetype)init {
     if (self) {
         self.wallCache = [[NSCache alloc] init];
-        self.expiryTimeInterval = 3600;
+        self.expiryTimeInterval = 300;
     }
     return self;
 }
@@ -36,15 +36,15 @@
 
 - (id)expireWallMethod:(id)key {
     @try {
-        NSObject <ExpiringWallCacheItem> *object = [self.wallCache objectForKey:key];
-        if (object) {
-            NSTimeInterval timeSinceCache = fabs([object.expiringCacheItemDate timeIntervalSinceNow]);
+        ExpiringWallArray *expiringWallArrayCached = [self.wallCache objectForKey:key];
+        if (expiringWallArrayCached) {
+            NSTimeInterval timeSinceCache = fabs([expiringWallArrayCached.expiringCacheItemDate timeIntervalSinceNow]);
             if (timeSinceCache > self.expiryTimeInterval) {
                 [self.wallCache removeObjectForKey:key];
                 return nil;
             }
         }
-        return object;
+        return expiringWallArrayCached;
     }
     
     @catch (NSException *exception) {
@@ -54,15 +54,17 @@
 
 
 - (void)setWallArrayInCache:(NSMutableArray*)wallArray forKey:(id)key {
-    NSObject<ExpiringWallCacheItem> *expiringWallArrayItem = (NSObject<ExpiringWallCacheItem> *)wallArray;
+    ExpiringWallArray *expiringWallArrayItem = [[ExpiringWallArray alloc]init];
+    expiringWallArrayItem.expiringWallArray = wallArray;
     expiringWallArrayItem.expiringCacheItemDate = [NSDate date];
     [self.wallCache setObject:expiringWallArrayItem forKey:key];
 }
 
 
 - (NSMutableArray*)getWallArrayInCacheforKey:(id)key {
-    NSObject<ExpiringWallCacheItem> *expiringWallArrayItem = [self.wallCache objectForKey:key];
-    NSMutableArray* wallArray = (NSMutableArray*)expiringWallArrayItem;
+    [[WallCacheManager shared] expireWallMethod:key];
+    ExpiringWallArray *expiringWallArrayItem = [self.wallCache objectForKey:key];
+    NSMutableArray* wallArray = expiringWallArrayItem.expiringWallArray;
     return wallArray;
 }
 

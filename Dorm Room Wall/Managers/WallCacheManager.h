@@ -7,15 +7,16 @@
 
 #import <Foundation/Foundation.h>
 #import "Wall.h"
+#import "ExpiringWallArray.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 
-@protocol ExpiringWallCacheItem <NSObject>
-
-@property (nonatomic, strong) NSDate *expiringCacheItemDate;
-
-@end
+//@protocol ExpiringWallCacheItem <NSObject>
+//
+//@property (nonatomic, strong) NSDate *expiringCacheItemDate;
+//
+//@end
 
 @interface WallCacheManager : NSObject
 

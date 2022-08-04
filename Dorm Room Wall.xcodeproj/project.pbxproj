@@ -31,6 +31,7 @@
 		0B990A472876B83F005B88C1 /* WallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B990A462876B83F005B88C1 /* WallCell.m */; };
 		0B990A4A2876B8F6005B88C1 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B990A492876B8F6005B88C1 /* Wall.m */; };
 		0B990A4D2877644A005B88C1 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B990A4C2877644A005B88C1 /* ComposeViewController.m */; };
+		0BBDA4C2289B32A800FE55F7 /* ExpiringWallArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDA4C1289B32A800FE55F7 /* ExpiringWallArray.m */; };
 		134C9C4568381B36EDA0EA58 /* Pods_Dorm_Room_WallTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79A86AFA772E657A3502DE0 /* Pods_Dorm_Room_WallTests.framework */; };
 		BD9DDEA1F7FE470A46E13FCF /* Pods_Dorm_Room_Wall_Dorm_Room_WallUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2AC8745A9547ACB1C97D51C /* Pods_Dorm_Room_Wall_Dorm_Room_WallUITests.framework */; };
 /* End PBXBuildFile section */
@@ -95,6 +96,8 @@
 		0B990A492876B8F6005B88C1 /* Wall.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Wall.m; sourceTree = "<group>"; };
 		0B990A4B2877644A005B88C1 /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
 		0B990A4C2877644A005B88C1 /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
+		0BBDA4C0289B32A800FE55F7 /* ExpiringWallArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpiringWallArray.h; sourceTree = "<group>"; };
+		0BBDA4C1289B32A800FE55F7 /* ExpiringWallArray.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExpiringWallArray.m; sourceTree = "<group>"; };
 		0BF4AAF191067986D5DF5D60 /* Pods_Dorm_Room_Wall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dorm_Room_Wall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4420F7F39F798B113B04DD56 /* Pods-Dorm Room Wall-Dorm Room WallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dorm Room Wall-Dorm Room WallUITests.release.xcconfig"; path = "Target Support Files/Pods-Dorm Room Wall-Dorm Room WallUITests/Pods-Dorm Room Wall-Dorm Room WallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6635A27A7198C096730137A3 /* Pods-Dorm Room WallTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dorm Room WallTests.release.xcconfig"; path = "Target Support Files/Pods-Dorm Room WallTests/Pods-Dorm Room WallTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 		0B4D1EEB2880DBED001D0F3F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0BBDA4C0289B32A800FE55F7 /* ExpiringWallArray.h */,
+				0BBDA4C1289B32A800FE55F7 /* ExpiringWallArray.m */,
 				0B990A492876B8F6005B88C1 /* Wall.m */,
 				0B990A482876B8F6005B88C1 /* Wall.h */,
 			);
@@ -564,6 +569,7 @@
 				0B4D1EF52885ED52001D0F3F /* WallHeaderView.m in Sources */,
 				0B719524287649F900DA7114 /* WallFeedController.m in Sources */,
 				0B7194E92874E44200DA7114 /* AppDelegate.m in Sources */,
+				0BBDA4C2289B32A800FE55F7 /* ExpiringWallArray.m in Sources */,
 				0B990A4A2876B8F6005B88C1 /* Wall.m in Sources */,
 				0B990A4D2877644A005B88C1 /* ComposeViewController.m in Sources */,
 				0B68EA96288A1728006E92AA /* GMapsAPIManager.m in Sources */,

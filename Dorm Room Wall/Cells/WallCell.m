@@ -30,25 +30,28 @@
     PFFileObject *lectureImageFile = self.wall.lectureImage;
     [lectureImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
         if (!error) {
-            self.lectureImageView.image = [UIImage imageWithData:imageData];
-            [self.lectureImageView.layer setCornerRadius:5.0f];
-            [self.lectureImageView.layer setMasksToBounds:YES];
+            [self setImageOnView:self.lectureImageView withData:imageData];
+//            self.lectureImageView.image = [UIImage imageWithData:imageData];
+//            [self.lectureImageView.layer setCornerRadius:5.0f];
+//            [self.lectureImageView.layer setMasksToBounds:YES];
         }
     }];
     PFFileObject *locationImageFile = self.wall.locationImage;
     [locationImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
         if (!error) {
-            self.locationImageView.image = [UIImage imageWithData:imageData];
-            [self.locationImageView.layer setCornerRadius:5.0f];
-            [self.locationImageView.layer setMasksToBounds:YES];
+            [self setImageOnView:self.locationImageView withData:imageData];
+//            self.locationImageView.image = [UIImage imageWithData:imageData];
+//            [self.locationImageView.layer setCornerRadius:5.0f];
+//            [self.locationImageView.layer setMasksToBounds:YES];
         }
     }];
     PFFileObject *mealImageFile = self.wall.mealImage;
     [mealImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
         if (!error) {
-            self.mealImageView.image = [UIImage imageWithData:imageData];
-            [self.mealImageView.layer setCornerRadius:5.0f];
-            [self.mealImageView.layer setMasksToBounds:YES];
+            [self setImageOnView:self.mealImageView withData:imageData];
+//            self.mealImageView.image = [UIImage imageWithData:imageData];
+//            [self.mealImageView.layer setCornerRadius:5.0f];
+//            [self.mealImageView.layer setMasksToBounds:YES];
         }
     }];
     self.captionView.text = (NSString *)self.wall.caption;
@@ -61,7 +64,11 @@
     [self.contentView addGestureRecognizer:doubleTap];
 }
 
-
+- (void) setImageOnView:(UIImageView*)view withData:(NSData*)imageData {
+    view.image = [UIImage imageWithData:imageData];
+    [view.layer setCornerRadius:5.0f];
+    [view.layer setMasksToBounds:YES];
+}
 
 - (void)didDoubleTap:(UITapGestureRecognizer *)recognizer {
     UIView *gestureView = recognizer.view;
@@ -86,7 +93,6 @@
 - (IBAction)didTapLike:(id)sender {
     [self likeCheck];
 }
-
 
 
 - (void) likeCheck {

@@ -100,6 +100,8 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
 }
 
 
+
+
 - (void) addToUserWallNumber {
     [[PFUser currentUser] incrementKey:@"userWallCount"];
     [[PFUser currentUser] saveInBackground];
@@ -117,6 +119,11 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
 - (BOOL) ifTimeForRefill {
     double numberOfHours = [self hoursSinceFirstLike];
     return numberOfHours >= 6;
+}
+
+
+- (BOOL) isNumber:(NSNumber*)firstNumber equalTo:(NSNumber*)secondNumber {
+    return YES;
 }
 
 
