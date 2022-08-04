@@ -17,7 +17,9 @@
 
 NSString *const usersLikeDictionary = @"usersLikeDictionary";
 NSString *const userLikesLeft = @"userLikesLeft";
+NSString *const likeCountLimit = @"likeCountLimit";
 NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
+
 
 + (instancetype)shared {
     static ParseQueryManager *sharedManager = nil;
@@ -64,17 +66,22 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
     if (wall.author != [PFUser currentUser] && [PFUser currentUser][@"userWallCount"] != 0) {
         NSNumber *likesLeft = [PFUser currentUser][userLikesLeft];
         //        start of like count
-        if ([likesLeft isEqualToNumber:[PFUser currentUser][@"likeCountLimit"]]) {
+        if ([likesLeft isEqualToNumber:[PFUser currentUser][likeCountLimit]]) {
             [PFUser currentUser][userLikesLeft] = @([likesLeft intValue] - 1);
             [PFUser currentUser][timeSinceFirstLike] = [self dateNow];
+            
             [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
                     completion(wall, nil);
                 }
             }];
         } else if ([likesLeft isEqualToNumber:@0] || [likesLeft isEqualToNumber:@-1]) {
+            NSNumber* wallCount = [PFUser currentUser][@"userWallCount"];
             if ([self ifTimeForRefill]) {
-                [PFUser currentUser][userLikesLeft] = @10;
+                NSNumber* likeLimit = [PFUser currentUser][likeCountLimit];
+                NSNumber* refillLikeNumber = @(([wallCount intValue] * [likeLimit intValue]) / 5);
+                [PFUser currentUser][likeCountLimit] = @([likeLimit intValue] + [refillLikeNumber intValue]);
+                [PFUser currentUser][userLikesLeft] = [PFUser currentUser][likeCountLimit];
                 [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     if (succeeded) {
                         completion(wall, nil);
@@ -100,8 +107,6 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
 }
 
 
-
-
 - (void) addToUserWallNumber {
     [[PFUser currentUser] incrementKey:@"userWallCount"];
     [[PFUser currentUser] saveInBackground];
@@ -119,11 +124,6 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
 - (BOOL) ifTimeForRefill {
     double numberOfHours = [self hoursSinceFirstLike];
     return numberOfHours >= 6;
-}
-
-
-- (BOOL) isNumber:(NSNumber*)firstNumber equalTo:(NSNumber*)secondNumber {
-    return YES;
 }
 
 
