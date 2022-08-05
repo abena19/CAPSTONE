@@ -18,14 +18,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     ParseClientConfiguration *config = [ParseClientConfiguration  configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-            configuration.applicationId = @"tJ6qdBURpjHaQp8O7mgPutIL8tPIhjJyAkn8l0OO";
-            configuration.clientKey = @"0GNLZ6RMHNjQJfU6GwFp1ZzFhnzJm7mpvukIDQCs";
-            configuration.server = @"https://parseapi.back4app.com";
+            configuration.applicationId = parseAppId;
+            configuration.clientKey = parseAppClient;
+            configuration.server = parseServerLink;
         }];
     [Parse initializeWithConfiguration:config];
-    NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:keysString ofType:plistString];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];;
-    NSString *GoogleMapsAPIKey = [dict objectForKey: @"GMapsAPIKey"];
+    NSString *GoogleMapsAPIKey = [dict objectForKey:googleMapsGetKey];
     [GMSServices provideAPIKey:GoogleMapsAPIKey];
     return YES;
 }
@@ -35,7 +35,7 @@
 
 
 - (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options {
-    return [[UISceneConfiguration alloc] initWithName:@"Default Configuration" sessionRole:connectingSceneSession.role];
+    return [[UISceneConfiguration alloc] initWithName:configurationString sessionRole:connectingSceneSession.role];
 }
 
 
@@ -44,7 +44,7 @@
 
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
-    if ([shortcutItem.type  isEqual: @"com.abena.Dorm-Room-Wall.viewImage"]) {
+    if ([shortcutItem.type  isEqual:appShortcutString]) {
     }
 }
 

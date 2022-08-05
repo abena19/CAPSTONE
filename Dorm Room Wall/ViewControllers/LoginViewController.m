@@ -15,6 +15,7 @@
 
 @implementation LoginViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
@@ -24,13 +25,13 @@
     PFUser *newUser = [PFUser user];  // initialize a user object
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
-    newUser[@"likeCountLimit"] = @5;
-    newUser[@"userWallCount"] = @0;
+    newUser[likeCountLimit] = @5;
+    newUser[userWallCount] = @0;
     self.userId = newUser.objectId;
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
         } else {
-            [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+            [self performSegueWithIdentifier:loginSegue sender:nil];
         }
     }];
 }
@@ -43,14 +44,14 @@
         if (error != nil) {
         } else {
             // display view controller that needs to shown after successful login
-            [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+            [self performSegueWithIdentifier:loginSegue sender:nil];
         }
     }];
 }
 
 
 - (IBAction)loginUser:(id)sender {
-    if ([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]) {
+    if ([self.usernameField.text isEqual:emptyString] || [self.passwordField.text isEqual:emptyString]) {
         [self emptyFieldHandler];;
     } else {
         [self loginUser];
@@ -58,7 +59,7 @@
 }
 
 - (IBAction)registerUser:(id)sender {
-    if ([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]) {
+    if ([self.usernameField.text isEqual:emptyString] || [self.passwordField.text isEqual:emptyString]) {
         [self emptyFieldHandler];
     } else {
         [self registerUser];
@@ -67,12 +68,12 @@
 
 
 - (void) emptyFieldHandler {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Empty Field!" message:@"Provide username or password" preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertControllerTitle message:alertControllerMessage preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelString style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         }];
         [alert addAction:cancelAction];
 
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:okString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         }];
         [alert addAction:okAction];
         [self presentViewController:alert animated:YES completion:^{

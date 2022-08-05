@@ -1,21 +1,21 @@
 //
-//  ChatViewController.m
+//  ProfileViewController.m
 //  Dorm Room Wall
 //
 //  Created by Abena Ofosu on 7/6/22.
 //
 
-#import "ChatViewController.h"
+#import "ProfileViewController.h"
 #import <Parse/Parse.h>
 #import "RNFrostedSidebar.h"
 
-@interface ChatViewController () <RNFrostedSidebarDelegate>
+@interface ProfileViewController () <RNFrostedSidebarDelegate>
 - (IBAction)didTapSideBar:(id)sender;
 @property (nonatomic, weak) RNFrostedSidebar *frostedSideBar;
 
 @end
 
-@implementation ChatViewController
+@implementation ProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,12 +25,12 @@
 
 - (void) setSideBar {
     NSArray *images = @[
-                        [UIImage systemImageNamed:@"square.and.pencil"],
-                        [UIImage systemImageNamed:@"trash.slash"],
-                        [UIImage systemImageNamed:@"paperplane"],
-                        [UIImage systemImageNamed:@"heart"],
-                        [UIImage systemImageNamed:@"heart.fill"],
-                        [UIImage systemImageNamed:@"person.circle.fill"]
+                        [UIImage systemImageNamed:squarePencilName],
+                        [UIImage systemImageNamed:trashName],
+                        [UIImage systemImageNamed:paperPlaneName],
+                        [UIImage systemImageNamed:heartImageName],
+                        [UIImage systemImageNamed:heartFillImageName],
+                        [UIImage systemImageNamed:profileImageName]
                         ];
 
     RNFrostedSidebar *callout = [[RNFrostedSidebar alloc] initWithImages:images];

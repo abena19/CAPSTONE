@@ -26,12 +26,13 @@
 		0B71951E287500BC00DA7114 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B71951D287500BC00DA7114 /* LoginViewController.m */; };
 		0B719524287649F900DA7114 /* WallFeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B719523287649F900DA7114 /* WallFeedController.m */; };
 		0B71952728764AD100DA7114 /* MyWallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B71952628764AD100DA7114 /* MyWallViewController.m */; };
-		0B71952A28764C6800DA7114 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B71952928764C6800DA7114 /* ChatViewController.m */; };
+		0B71952A28764C6800DA7114 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B71952928764C6800DA7114 /* ProfileViewController.m */; };
 		0B71EE11289AF52E00B75F06 /* WallCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B71EE10289AF52E00B75F06 /* WallCacheManager.m */; };
 		0B990A472876B83F005B88C1 /* WallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B990A462876B83F005B88C1 /* WallCell.m */; };
 		0B990A4A2876B8F6005B88C1 /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B990A492876B8F6005B88C1 /* Wall.m */; };
 		0B990A4D2877644A005B88C1 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B990A4C2877644A005B88C1 /* ComposeViewController.m */; };
 		0BBDA4C2289B32A800FE55F7 /* ExpiringWallArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDA4C1289B32A800FE55F7 /* ExpiringWallArray.m */; };
+		0BBDA4C5289D86D400FE55F7 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDA4C4289D86D400FE55F7 /* Constants.m */; };
 		134C9C4568381B36EDA0EA58 /* Pods_Dorm_Room_WallTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79A86AFA772E657A3502DE0 /* Pods_Dorm_Room_WallTests.framework */; };
 		BD9DDEA1F7FE470A46E13FCF /* Pods_Dorm_Room_Wall_Dorm_Room_WallUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2AC8745A9547ACB1C97D51C /* Pods_Dorm_Room_Wall_Dorm_Room_WallUITests.framework */; };
 /* End PBXBuildFile section */
@@ -86,8 +87,8 @@
 		0B719523287649F900DA7114 /* WallFeedController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallFeedController.m; sourceTree = "<group>"; };
 		0B71952528764AD100DA7114 /* MyWallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyWallViewController.h; sourceTree = "<group>"; };
 		0B71952628764AD100DA7114 /* MyWallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWallViewController.m; sourceTree = "<group>"; };
-		0B71952828764C6800DA7114 /* ChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
-		0B71952928764C6800DA7114 /* ChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		0B71952828764C6800DA7114 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		0B71952928764C6800DA7114 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		0B71EE0F289AF52E00B75F06 /* WallCacheManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WallCacheManager.h; sourceTree = "<group>"; };
 		0B71EE10289AF52E00B75F06 /* WallCacheManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallCacheManager.m; sourceTree = "<group>"; };
 		0B990A452876B83F005B88C1 /* WallCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WallCell.h; sourceTree = "<group>"; };
@@ -98,6 +99,8 @@
 		0B990A4C2877644A005B88C1 /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		0BBDA4C0289B32A800FE55F7 /* ExpiringWallArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpiringWallArray.h; sourceTree = "<group>"; };
 		0BBDA4C1289B32A800FE55F7 /* ExpiringWallArray.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExpiringWallArray.m; sourceTree = "<group>"; };
+		0BBDA4C3289D86D400FE55F7 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		0BBDA4C4289D86D400FE55F7 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		0BF4AAF191067986D5DF5D60 /* Pods_Dorm_Room_Wall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dorm_Room_Wall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4420F7F39F798B113B04DD56 /* Pods-Dorm Room Wall-Dorm Room WallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dorm Room Wall-Dorm Room WallUITests.release.xcconfig"; path = "Target Support Files/Pods-Dorm Room Wall-Dorm Room WallUITests/Pods-Dorm Room Wall-Dorm Room WallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6635A27A7198C096730137A3 /* Pods-Dorm Room WallTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dorm Room WallTests.release.xcconfig"; path = "Target Support Files/Pods-Dorm Room WallTests/Pods-Dorm Room WallTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -163,13 +166,13 @@
 				0B68EA99288A198F006E92AA /* GMapViewController.m */,
 				0B990A4B2877644A005B88C1 /* ComposeViewController.h */,
 				0B990A4C2877644A005B88C1 /* ComposeViewController.m */,
-				0B71952828764C6800DA7114 /* ChatViewController.h */,
+				0B71952828764C6800DA7114 /* ProfileViewController.h */,
 				0B71951C287500BC00DA7114 /* LoginViewController.h */,
 				0B71951D287500BC00DA7114 /* LoginViewController.m */,
 				0B719522287649F900DA7114 /* WallFeedController.h */,
 				0B719523287649F900DA7114 /* WallFeedController.m */,
 				0B71952528764AD100DA7114 /* MyWallViewController.h */,
-				0B71952928764C6800DA7114 /* ChatViewController.m */,
+				0B71952928764C6800DA7114 /* ProfileViewController.m */,
 				0B71952628764AD100DA7114 /* MyWallViewController.m */,
 			);
 			path = ViewControllers;
@@ -199,6 +202,8 @@
 		0B68EA97288A1822006E92AA /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				0BBDA4C3289D86D400FE55F7 /* Constants.h */,
+				0BBDA4C4289D86D400FE55F7 /* Constants.m */,
 				0B71EE0F289AF52E00B75F06 /* WallCacheManager.h */,
 				0B71EE10289AF52E00B75F06 /* WallCacheManager.m */,
 				0B68EA94288A1728006E92AA /* GMapsAPIManager.h */,
@@ -574,12 +579,13 @@
 				0B990A4D2877644A005B88C1 /* ComposeViewController.m in Sources */,
 				0B68EA96288A1728006E92AA /* GMapsAPIManager.m in Sources */,
 				0B7194FA2874E44300DA7114 /* main.m in Sources */,
+				0BBDA4C5289D86D400FE55F7 /* Constants.m in Sources */,
 				0B7194EC2874E44200DA7114 /* SceneDelegate.m in Sources */,
 				0B71952728764AD100DA7114 /* MyWallViewController.m in Sources */,
 				0B71EE11289AF52E00B75F06 /* WallCacheManager.m in Sources */,
 				0B68EA9A288A198F006E92AA /* GMapViewController.m in Sources */,
 				0B990A472876B83F005B88C1 /* WallCell.m in Sources */,
-				0B71952A28764C6800DA7114 /* ChatViewController.m in Sources */,
+				0B71952A28764C6800DA7114 /* ProfileViewController.m in Sources */,
 				0B4D1EFB2888728C001D0F3F /* ParseQueryManager.m in Sources */,
 				0B71951E287500BC00DA7114 /* LoginViewController.m in Sources */,
 			);

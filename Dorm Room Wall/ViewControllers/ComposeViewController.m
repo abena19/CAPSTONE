@@ -100,11 +100,11 @@
         } else {
             // move to wall feed if successful
             SceneDelegate *homeSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:@"HomeTabController"];
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:mainString bundle:nil];
+            UITabBarController *tabController = [storyboard instantiateViewControllerWithIdentifier:homeTabControllerId];
             homeSceneDelegate.window.rootViewController = tabController;
             [[NSNotificationCenter defaultCenter]
-                    postNotificationName:@"TestNotification"
+                    postNotificationName:postNotification
                     object:self];
         }
     }];

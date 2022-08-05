@@ -22,7 +22,7 @@
 
 
 + (nonnull NSString *)parseClassName {
-    return @"Wall";
+    return wallString;
 }
 
 
@@ -49,7 +49,7 @@
     if (!imageData) {
         return nil;
     }
-    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
+    return [PFFileObject fileObjectWithName:imageString data:imageData];
 }
 
 

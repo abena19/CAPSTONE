@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Wall.h"
+#import "Constants.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,14 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (IBAction)didTapMealPhoto:(UITapGestureRecognizer *)sender;
 
 @property (strong, nonatomic) Wall *wallToPass;
-
-
-typedef NS_ENUM(NSInteger , tapWallEditHandlerState) {
-    DefaultState = 0,
-    MealPhoto = 1,
-    LocationPhoto = 2,
-    LecturePhoto =3,
-};
 
 
 @end

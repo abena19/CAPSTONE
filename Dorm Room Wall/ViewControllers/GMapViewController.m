@@ -53,9 +53,9 @@
     self.view = _mapView;
     CLLocationCoordinate2D mapCenter = CLLocationCoordinate2DMake(coordinates.coordinate.latitude, coordinates.coordinate.longitude);
     GMSMarker *marker = [GMSMarker markerWithPosition:mapCenter];
-    marker.icon = [UIImage imageNamed:@"custom_pin.png"];
+    marker.icon = [UIImage imageNamed:pinString];
     marker.map = _mapView;
-    marker.title = @"Here!";
+    marker.title = markerTitleString;
 }
 
 

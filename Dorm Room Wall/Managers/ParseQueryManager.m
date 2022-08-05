@@ -15,11 +15,6 @@
 
 @implementation ParseQueryManager
 
-NSString *const usersLikeDictionary = @"usersLikeDictionary";
-NSString *const userLikesLeft = @"userLikesLeft";
-NSString *const likeCountLimit = @"likeCountLimit";
-NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
-
 
 + (instancetype)shared {
     static ParseQueryManager *sharedManager = nil;
@@ -40,8 +35,8 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
 
 - (void) fetchWalls:(NSInteger)fetchMethod withCompletion:(void(^)(NSArray *feedWalls, NSError *error))completion {
     PFQuery *wallQuery = [Wall query];
-    [wallQuery orderByDescending:@"createdAt"];
-    [wallQuery includeKey:@"author"];
+    [wallQuery orderByDescending:createdAt];
+    [wallQuery includeKey:author];
     wallQuery.limit = 8;
     switch (fetchMethod) {
         case QueryDefaultState:
@@ -63,7 +58,7 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
 
 
 - (void)updateLike:(Wall *)wall withCompletion:(void (^)(Wall * wall, NSError *error))completion {
-    if (wall.author != [PFUser currentUser] && [PFUser currentUser][@"userWallCount"] != 0) {
+    if (wall.author != [PFUser currentUser] && [PFUser currentUser][userWallCount] != 0) {
         NSNumber *likesLeft = [PFUser currentUser][userLikesLeft];
         //        start of like count - initial/refill
         if ([likesLeft isEqualToNumber:[PFUser currentUser][likeCountLimit]]) {
@@ -85,10 +80,8 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
                 
             } else {
                 double numberOfHours = [self hoursSinceFirstLike];
-                NSString *hours = [NSString stringWithFormat: @"%f", numberOfHours];
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"OutOfLikes"
-                 object:self userInfo:@{hours: @""}];
+                NSString *hours = [NSString stringWithFormat:doubleFormat, numberOfHours];
+                [[NSNotificationCenter defaultCenter] postNotificationName:outOfLikes object:self userInfo:@{hours:emptyString}];
             }
             
         } else {
@@ -105,7 +98,7 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
 
 
 - (void) addToUserWallNumber {
-    [[PFUser currentUser] incrementKey:@"userWallCount"];
+    [[PFUser currentUser] incrementKey:userWallCount];
     [[PFUser currentUser] saveInBackground];
 }
 
@@ -113,7 +106,7 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
 - (NSDate*) dateNow {
     NSDate * now = [NSDate date];
     NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
-    [outputFormatter setDateFormat:@"HH:mm:ss"];
+    [outputFormatter setDateFormat:dateStringFormat];
     return now;
 }
 
@@ -138,24 +131,24 @@ NSString *const timeSinceFirstLike = @"timeSinceFirstLike";
 
 
 - (void) refillLikesAndLimit:(Wall*) wall {
-    NSNumber* wallCount = [PFUser currentUser][@"userWallCount"];
+    NSNumber* wallCount = [PFUser currentUser][userWallCount];
     NSNumber* likeLimit = [PFUser currentUser][likeCountLimit];
     NSNumber* refillLikeNumber = @(([wallCount intValue] * [likeLimit intValue]) / 5);
     [PFUser currentUser][likeCountLimit] = @([likeLimit intValue] + [refillLikeNumber intValue]);
     [PFUser currentUser][userLikesLeft] = [PFUser currentUser][likeCountLimit];
-    wall[@"usersLikeDictionary"] = [self setLikeDictionary:wall[@"usersLikeDictionary"]];
+    wall[usersLikeDictionary] = [self setLikeDictionary:wall[usersLikeDictionary]];
 }
 
 
 - (void) decrementUserLikes:(Wall*) wall :(NSNumber*) likesLeft {
     [PFUser currentUser][userLikesLeft] = @([likesLeft intValue] - 1);
-    wall[@"usersLikeDictionary"] = [self setLikeDictionary:wall[@"usersLikeDictionary"]];
+    wall[usersLikeDictionary] = [self setLikeDictionary:wall[usersLikeDictionary]];
 }
 
 
 - (NSMutableDictionary<NSString*, NSString*> *) setLikeDictionary:(NSMutableDictionary<NSString*, NSString*>*)likeDictionary {
     NSMutableDictionary<NSString*, NSString*> *dict = likeDictionary;
-    [dict setValue:@"" forKey:[PFUser currentUser].objectId];
+    [dict setValue:emptyString forKey:[PFUser currentUser].objectId];
     
     return dict;
 }

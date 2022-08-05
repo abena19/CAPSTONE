@@ -89,3 +89,6 @@ fastlane/test_output
 
 iOSInjectionProject/
 Keys.plist
+Constants.m
+
+Constants.m

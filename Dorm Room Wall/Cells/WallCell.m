@@ -11,10 +11,7 @@
 #import "WallCell.h"
 #import "ParseQueryManager.h"
 
-
-
 @implementation WallCell
-
 
 
 - (void)awakeFromNib {
@@ -62,7 +59,7 @@
     UIImageView *heart =[[UIImageView alloc] initWithFrame:CGRectMake(gestureView.center.x, gestureView.center.y, gestureView.frame.size.width/4, gestureView.frame.size.width/4)];
     heart.tintColor = [UIColor redColor];
     heart.alpha = 0;
-    [heart setImage:[UIImage systemImageNamed:@"heart.fill"]];
+    [heart setImage:[UIImage systemImageNamed:heartFillImageName]];
     [gestureView addSubview:heart];
     [gestureView layoutIfNeeded];
     dispatch_after(DISPATCH_TIME_NOW, dispatch_get_main_queue(), ^{
@@ -87,7 +84,7 @@
     if (!isUserAuthor) {
         if (![self isInLikeDictionary]) {
             [[ParseQueryManager shared] updateLike:self.wall withCompletion:^(Wall * _Nonnull wall, NSError * _Nonnull error) {
-                [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart.fill"]
+                [self.wallLikeButton setImage:[UIImage systemImageNamed:heartFillImageName]
                                      forState:UIControlStateNormal];
             }];
             
@@ -99,16 +96,16 @@
 
 
 - (BOOL) isInLikeDictionary {
-    return [self.wall[@"usersLikeDictionary"] objectForKey:[PFUser currentUser].objectId] != nil;
+    return [self.wall[userLikesDictionary] objectForKey:[PFUser currentUser].objectId] != nil;
 }
 
 
 - (void) setWallLikeStateWithHeart {
     if (![self isInLikeDictionary]) {
-        [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart"]
+        [self.wallLikeButton setImage:[UIImage systemImageNamed:heartImageName]
                   forState:UIControlStateNormal];
     } else {
-        [self.wallLikeButton setImage:[UIImage systemImageNamed:@"heart.fill"]
+        [self.wallLikeButton setImage:[UIImage systemImageNamed:heartFillImageName]
                   forState:UIControlStateNormal];
     }
 }

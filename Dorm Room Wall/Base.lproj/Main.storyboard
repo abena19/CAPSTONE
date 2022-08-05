@@ -153,10 +153,10 @@
             </objects>
             <point key="canvasLocation" x="-1875" y="-1411"/>
         </scene>
-        <!--Chat View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="x9U-oF-hgP">
             <objects>
-                <viewController id="zjf-IQ-N0y" customClass="ChatViewController" sceneMemberID="viewController">
+                <viewController id="zjf-IQ-N0y" customClass="ProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bQ5-7n-MVf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

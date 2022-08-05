@@ -28,15 +28,6 @@
 
 @implementation WallFeedController
 
-NSString *const loginControllerId = @"LoginViewController";
-NSString *const wallCellId = @"WallCell";
-NSString *const wallHeaderViewId = @"WallHeaderView";
-NSString *const mapControllerId = @"GMapViewController";
-NSString *const postNotification = @"TestNotification";
-NSString *const finishedLikeNotification = @"OutOfLikes";
-NSString *const wallArrayCached = @"wallArrayCached";
-NSInteger const rowCount = 1;
-
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:postNotification object:nil];
@@ -157,7 +148,7 @@ NSInteger const rowCount = 1;
 
 - (IBAction)didTapLocation:(id)sender {
     SceneDelegate *mapSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:mainString bundle:nil];
     UINavigationController *navController = [storyboard instantiateViewControllerWithIdentifier:mapControllerId];
     GMapViewController *mapViewController = navController.childViewControllers[0];
     NSIndexPath *myIndexPath = [self.wallFeedTableView indexPathForCell:sender];
@@ -169,7 +160,7 @@ NSInteger const rowCount = 1;
 
 - (IBAction)didTapLogout:(id)sender {
     SceneDelegate *loginSceneDelegate = (SceneDelegate *) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:mainString bundle:nil];
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:loginControllerId];
     loginSceneDelegate.window.rootViewController = loginViewController;
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
@@ -178,8 +169,8 @@ NSInteger const rowCount = 1;
 
 
 - (void)didLikeOwnPost {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Restricted!" message:@"You cannot like your own post!" preferredStyle:(UIAlertControllerStyleAlert)];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertRestrictTitle message:alertRestrictMessage preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okString style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alert addAction:okAction];
     [self presentViewController:alert animated:YES completion:^{
@@ -198,10 +189,10 @@ NSInteger const rowCount = 1;
 
 
 - (void)outOfLikes: (NSNumber*) timeLeftToRefill {
-    NSString *timeLeft = [NSString stringWithFormat: @"%@", timeLeftToRefill];
-    NSString *timeStatement = @"Hours spent:";
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[timeStatement stringByAppendingString:timeLeft] message:@"You are out of likes for now!" preferredStyle:(UIAlertControllerStyleAlert)];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Wait" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    NSString *timeLeft = [NSString stringWithFormat:idStringFormat, timeLeftToRefill];
+    NSString *timeStatement = hoursSpent;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[timeStatement stringByAppendingString:timeLeft] message:alertOutOfLikesTitle preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:alertOutOfLikesAction style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alert addAction:okAction];
     [self presentViewController:alert animated:YES completion:^{
