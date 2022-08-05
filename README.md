@@ -39,7 +39,6 @@ This app allows for a user to post and relate to other students within school by
 
 [X] User can login, register and sign out
 [X] User can add images to dorm room wall
-[X] User can create preferences on different categories
 [X] User can view location functionalities(current location, other location displayed on wall)
 [X] User can track location in real time
 [X] User profiles
@@ -245,3 +244,20 @@ This app allows for a user to post and relate to other students within school by
             }];
     ```
     
+##DEMO GIFS
+###User can login, register and sign out
+<img src='https://imgur.com/FLHhQ3V.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+###User can add images to dorm room wall
+<img src='https://imgur.com/kC1aT1n.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+###User can view location functionalities(current location, other location displayed on wall)
+###User can track location in real time
+<img src='https://imgur.com/h1LCfbi.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+###User can view and like walls
+###Like restrictions
+<img src='https://imgur.com/HHMxT79.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://imgur.com/D5QVdHl.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+
