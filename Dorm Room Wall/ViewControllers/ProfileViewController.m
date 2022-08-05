@@ -10,10 +10,13 @@
 #import "RNFrostedSidebar.h"
 
 @interface ProfileViewController () <RNFrostedSidebarDelegate>
-- (IBAction)didTapSideBar:(id)sender;
+
 @property (nonatomic, weak) RNFrostedSidebar *frostedSideBar;
 
+- (IBAction)didTapSideBar:(id)sender;
+
 @end
+
 
 @implementation ProfileViewController
 

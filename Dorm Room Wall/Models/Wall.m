@@ -56,7 +56,7 @@
 
 
 - (void) likeObjectWithCompletion:(void (^)(BOOL succeeded, NSError *error))completion {
-    [[ParseQueryManager shared] updateLike:self withCompletion:completion];
+    [[ParseQueryManager shared] updateLike:self withObjectClass:self.class withCompletion:completion];
 }
 
 

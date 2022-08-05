@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "Wall.h"
 #import "Constants.h"
+#import "Protocols.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -17,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)shared;
 
 - (void) fetchWalls:(NSInteger)fetchMethod withCompletion:(void(^)(NSArray *feedWalls, NSError *error))completion;
-- (void)updateLike:(PFObject *)object withCompletion:(void (^)(BOOL succeeded, NSError *error))completion;
+- (void)updateLike:(PFObject *)object withObjectClass:(Class)class withCompletion:(void (^)(BOOL succeeded, NSError *error))completion;
 - (void) addToUserWallNumber;
 - (BOOL) isInLikeDictionary:(PFObject *)object;
 

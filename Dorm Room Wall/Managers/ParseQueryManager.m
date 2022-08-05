@@ -9,11 +9,14 @@
 #import <Parse/Parse.h>
 #import "Wall.h"
 
+@protocol Likeable;
+
 @interface ParseQueryManager()
 
 @end
 
 @implementation ParseQueryManager
+
 
 
 + (instancetype)shared {
@@ -57,7 +60,14 @@
 }
 
 
-- (void)updateLike:(PFObject *)object withCompletion:(void (^)(BOOL succeeded, NSError *error))completion {
+- (void)updateLike:(PFObject *)object withObjectClass:(Class)class withCompletion:(void (^)(BOOL succeeded, NSError *error))completion {
+    
+    BOOL isLikable = [class conformsToProtocol:@protocol(Likeable)];
+    if (!isLikable) {
+        NSAssert(isLikable, @"Assert: class is not Likeable");
+        return;
+    }
+    
     if ([self checkWallAuthor]) {
         NSNumber *likesLeft = [PFUser currentUser][userLikesLeft];
         //        start of like count - initial/refill
@@ -77,7 +87,6 @@
                         completion(TRUE, nil);
                     }
                 }];
-                
             } else {
                 double numberOfHours = [self hoursSinceFirstLike];
                 NSString *hours = [NSString stringWithFormat:doubleFormat, numberOfHours];
