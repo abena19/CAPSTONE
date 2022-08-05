@@ -11,6 +11,7 @@
 #import "WallCell.h"
 #import "ParseQueryManager.h"
 
+
 @implementation WallCell
 
 
@@ -80,14 +81,12 @@
 
 
 - (void) likeCheck {
-    BOOL isUserAuthor = self.wall.author != [PFUser currentUser];
-    if (!isUserAuthor) {
-        if (![self isInLikeDictionary]) {
-            [[ParseQueryManager shared] updateLike:self.wall withCompletion:^(BOOL likeSucceeded, NSError * _Nonnull error) {
+    if ([self.wall canLikeObject]) {
+        if (![[ParseQueryManager shared] isInLikeDictionary:self.wall]) {
+            [self.wall likeObjectWithCompletion:^(BOOL succeeded, NSError * _Nonnull error) {
                 [self.wallLikeButton setImage:[UIImage systemImageNamed:heartFillImageName]
                                      forState:UIControlStateNormal];
-            }];
-            
+            }];  
         }
     } else {
         [self.delegate didLikeOwnPost];
@@ -95,13 +94,9 @@
 }
 
 
-- (BOOL) isInLikeDictionary {
-    return [self.wall[userLikesDictionary] objectForKey:[PFUser currentUser].objectId] != nil;
-}
-
 
 - (void) setWallLikeStateWithHeart {
-    if (![self isInLikeDictionary]) {
+    if (![[ParseQueryManager shared] isInLikeDictionary:self.wall]) {
         [self.wallLikeButton setImage:[UIImage systemImageNamed:heartImageName]
                   forState:UIControlStateNormal];
     } else {

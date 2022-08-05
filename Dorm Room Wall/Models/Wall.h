@@ -7,11 +7,20 @@
 #import <Foundation/Foundation.h>
 #import "Parse/Parse.h"
 #import "Constants.h"
+#import "ParseQueryManager.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Wall : PFObject<PFSubclassing>
+@protocol Likeable
+
+- (void) likeObjectWithCompletion:(void (^)(BOOL succeeded, NSError *error))completion;
+- (BOOL) canLikeObject;
+
+@end
+
+
+@interface Wall : PFObject<PFSubclassing, Likeable>
 
 @property (nonatomic, strong) NSString *wallID;
 @property (nonatomic, strong) NSString *userID;
@@ -23,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PFFileObject *mealImage;
 @property (nonatomic, strong) NSMutableDictionary<NSString*,  NSString* >* _Nullable usersLikeDictionary;
 + (Wall *) postWallImage: (NSMutableArray *) imageArray withAddress:( NSString * _Nullable )dormLocation withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion;
+
 
 @end
 

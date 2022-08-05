@@ -17,8 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)shared;
 
 - (void) fetchWalls:(NSInteger)fetchMethod withCompletion:(void(^)(NSArray *feedWalls, NSError *error))completion;
-- (void)updateLike:(Wall *)wall withCompletion:(void (^)(BOOL succeeded, NSError *error))completion;
+- (void)updateLike:(PFObject *)object withCompletion:(void (^)(BOOL succeeded, NSError *error))completion;
 - (void) addToUserWallNumber;
+- (BOOL) isInLikeDictionary:(PFObject *)object;
 
 typedef NS_ENUM(NSInteger , cacheState) {
     QueryDefaultState = 1,

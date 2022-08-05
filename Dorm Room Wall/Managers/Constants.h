@@ -53,6 +53,7 @@ extern NSString *const homeTabControllerId;
 //WALL CLASS CONSTANTS
 extern NSString *const wallString;
 extern NSString *const imageString;
+extern NSString *const objectIdString;
 
 
 
@@ -61,6 +62,7 @@ extern NSString *const imageString;
 extern NSString *const heartFillImageName;
 extern NSString *const heartImageName;
 extern NSString *const userLikesDictionary;
+
 
 
 //GMAPVC CONSTANTS
@@ -76,7 +78,6 @@ typedef NS_ENUM(NSInteger , tapWallEditHandlerState) {
     LocationPhoto = 2,
     LecturePhoto =3,
 };
-
 
 
 

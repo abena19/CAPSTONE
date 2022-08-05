@@ -47,6 +47,7 @@ NSString *const homeTabControllerId = @"HomeTabController";
 //WALL CLASS CONSTANTS
 NSString *const wallString = @"Wall";
 NSString *const imageString = @"image.png";
+NSString *const objectIdString = @"objectId";
 
 
 // WALLCELL CONSTANTS

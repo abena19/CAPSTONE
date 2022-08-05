@@ -57,12 +57,12 @@
 }
 
 
-- (void)updateLike:(Wall *)wall withCompletion:(void (^)(BOOL succeeded, NSError *error))completion {
+- (void)updateLike:(PFObject *)object withCompletion:(void (^)(BOOL succeeded, NSError *error))completion {
     if ([self checkWallAuthor]) {
         NSNumber *likesLeft = [PFUser currentUser][userLikesLeft];
         //        start of like count - initial/refill
         if ([likesLeft isEqualToNumber:[PFUser currentUser][likeCountLimit]]) {
-            [self trackInitialLike:wall:likesLeft];
+            [self trackInitialLike:object:likesLeft];
             [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
                     completion(TRUE, nil);
@@ -71,7 +71,7 @@
             
         } else if ([likesLeft isEqualToNumber:@0] || [likesLeft isEqualToNumber:@-1]) {  //depleted likes
             if ([self ifTimeForRefill]) {
-                [self refillLikesAndLimit:wall];
+                [self refillLikesAndLimit:object];
                 [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     if (succeeded) {
                         completion(TRUE, nil);
@@ -85,14 +85,14 @@
             }
             
         } else {
-            [self decrementUserLikes:wall :likesLeft];
+            [self decrementUserLikes:object :likesLeft];
             [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
                     completion(TRUE, nil);
                 }
             }];
         }
-        [wall saveInBackground];
+        [object saveInBackground];
     }
 }
 
@@ -130,25 +130,25 @@
 }
 
 
-- (void) trackInitialLike:(Wall*) wall :(NSNumber*) likesLeft {
-    [self decrementUserLikes:wall :likesLeft];
+- (void) trackInitialLike:(PFObject *)object :(NSNumber*) likesLeft {
+    [self decrementUserLikes:object :likesLeft];
     [PFUser currentUser][timeSinceFirstLike] = [self dateNow];
 }
 
 
-- (void) refillLikesAndLimit:(Wall*) wall {
+- (void) refillLikesAndLimit:(PFObject *)object {
     NSNumber* wallCount = [PFUser currentUser][userWallCount];
     NSNumber* likeLimit = [PFUser currentUser][likeCountLimit];
     NSNumber* refillLikeNumber = @(([wallCount intValue] * [likeLimit intValue]) / 5);
     [PFUser currentUser][likeCountLimit] = @([likeLimit intValue] + [refillLikeNumber intValue]);
     [PFUser currentUser][userLikesLeft] = [PFUser currentUser][likeCountLimit];
-    wall[usersLikeDictionary] = [self setLikeDictionary:wall[usersLikeDictionary]];
+    object[usersLikeDictionary] = [self setLikeDictionary:object[usersLikeDictionary]];
 }
 
 
-- (void) decrementUserLikes:(Wall*) wall :(NSNumber*) likesLeft {
+- (void) decrementUserLikes:(PFObject *)object :(NSNumber*) likesLeft {
     [PFUser currentUser][userLikesLeft] = @([likesLeft intValue] - 1);
-    wall[usersLikeDictionary] = [self setLikeDictionary:wall[usersLikeDictionary]];
+    object[usersLikeDictionary] = [self setLikeDictionary:object[usersLikeDictionary]];
 }
 
 
@@ -157,6 +157,11 @@
     [dict setValue:emptyString forKey:[PFUser currentUser].objectId];
     
     return dict;
+}
+
+
+- (BOOL) isInLikeDictionary:(PFObject *)object {
+    return [object[userLikesDictionary] objectForKey:[PFUser currentUser].objectId] != nil;
 }
 
 

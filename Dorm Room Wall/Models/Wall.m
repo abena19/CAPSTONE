@@ -8,6 +8,7 @@
 #import "Wall.h"
 #import <Parse/Parse.h>
 
+
 @implementation Wall
 
 @dynamic wallID;
@@ -50,6 +51,18 @@
         return nil;
     }
     return [PFFileObject fileObjectWithName:imageString data:imageData];
+}
+
+
+
+- (void) likeObjectWithCompletion:(void (^)(BOOL succeeded, NSError *error))completion {
+    [[ParseQueryManager shared] updateLike:self withCompletion:completion];
+}
+
+
+- (BOOL) canLikeObject {
+    NSString *authorId = [[PFUser currentUser] valueForKey:objectIdString];
+    return ![self.author.objectId isEqual:authorId];
 }
 
 
