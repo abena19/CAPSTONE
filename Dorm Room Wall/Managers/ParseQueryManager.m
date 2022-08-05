@@ -71,15 +71,14 @@
     if ([self checkWallAuthor]) {
         NSNumber *likesLeft = [PFUser currentUser][userLikesLeft];
         //        start of like count - initial/refill
-        if ([likesLeft isEqualToNumber:[PFUser currentUser][likeCountLimit]]) {
+        if ([self islikesLeftEqualToLimit:likesLeft]) {
             [self trackInitialLike:object:likesLeft];
             [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
                     completion(TRUE, nil);
                 }
             }];
-            
-        } else if ([likesLeft isEqualToNumber:@0] || [likesLeft isEqualToNumber:@-1]) {  //depleted likes
+        } else if ([self isLikesDepleted:likesLeft]) {  //depleted likes
             if ([self ifTimeForRefill]) {
                 [self refillLikesAndLimit:object];
                 [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -106,12 +105,6 @@
 }
 
 
--(BOOL) checkWallAuthor {
-    return [PFUser currentUser][userWallCount] != 0;
-
-}
- 
-
 - (void) addToUserWallNumber {
     [[PFUser currentUser] incrementKey:userWallCount];
     [[PFUser currentUser] saveInBackground];
@@ -123,12 +116,6 @@
     NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
     [outputFormatter setDateFormat:dateStringFormat];
     return now;
-}
-
-
-- (BOOL) ifTimeForRefill {
-    double numberOfHours = [self hoursSinceFirstLike];
-    return numberOfHours >= hoursForRefill;
 }
 
 
@@ -172,6 +159,31 @@
 - (BOOL) isInLikeDictionary:(PFObject *)object {
     return [object[userLikesDictionary] objectForKey:[PFUser currentUser].objectId] != nil;
 }
+
+
+
+- (BOOL) ifTimeForRefill {
+    double numberOfHours = [self hoursSinceFirstLike];
+    return numberOfHours >= hoursForRefill;
+}
+
+
+
+- (BOOL) isLikesDepleted:(NSNumber*)likesLeft {
+    return [likesLeft isEqualToNumber:@0] || [likesLeft isEqualToNumber:@-1];  //comparison operators don't read values
+}
+
+
+- (BOOL) checkWallAuthor {
+    return [PFUser currentUser][userWallCount] != 0;
+
+}
+ 
+
+- (BOOL) islikesLeftEqualToLimit:(NSNumber*)likesLeft {
+    return [likesLeft isEqualToNumber:[PFUser currentUser][likeCountLimit]];
+}
+
 
 
 
