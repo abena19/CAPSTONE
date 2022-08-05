@@ -39,7 +39,6 @@ This app allows for a user to post and relate to other students within school by
 
 * User can login, register and sign out
 * User can add images to dorm room wall
-* User can create preferences on different categories
 * User can view location functionalities(current location, other location displayed on wall)
 * User can track location in real time
 * User profiles
