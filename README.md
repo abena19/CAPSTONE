@@ -37,14 +37,14 @@ This app allows for a user to post and relate to other students within school by
 
 **Required Must-have Stories**
 
-* User can login, register and sign out
-* User can add images to dorm room wall
-* User can create preferences on different categories
-* User can view location functionalities(current location, other location displayed on wall)
-* User can track location in real time
-* User profiles
-* User can view and like walls
-* User can view walls in airplane mode, or without connection
+[X] User can login, register and sign out
+[X] User can add images to dorm room wall
+[X] User can create preferences on different categories
+[X] User can view location functionalities(current location, other location displayed on wall)
+[X] User can track location in real time
+[X] User profiles
+[X] User can view and like walls
+[X] User can view walls in airplane mode, or without connection
 
 
 **Optional Nice-to-have Stories**
@@ -90,12 +90,12 @@ This app allows for a user to post and relate to other students within school by
     * User can customise wall interface
 
 
-### 3. Navigation
+### 3. Navigation 
 
 **Tab Navigation** (Tab to Screen)
 
-* Home Feed
-* My wall
+[X] Home Feed
+[X] My wall
 * Chat
 
 **Flow Navigation** (Screen to Screen)
@@ -130,10 +130,10 @@ This app allows for a user to post and relate to other students within school by
 ## Schema 
 
 ### Models
-* Wall
-* User (from parse)
-* Status
-* Level Count
+[X] Wall
+[X] User (from parse)
+[X] Expiring Wall
+* Like
 
 ### Networking
 - Parse Network Requests

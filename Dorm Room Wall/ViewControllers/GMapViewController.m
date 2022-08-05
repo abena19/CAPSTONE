@@ -97,7 +97,7 @@
         case kCLAuthorizationStatusNotDetermined:
         case kCLAuthorizationStatusAuthorizedAlways:
         case kCLAuthorizationStatusAuthorizedWhenInUse:
-          NSLog(@"Location status is OK.");
+              break;
       }
 }
 
