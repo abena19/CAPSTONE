@@ -37,20 +37,20 @@ This app allows for a user to post and relate to other students within school by
 
 **Required Must-have Stories**
 
-* User can login, register and sign out
-* User can add images to dorm room wall
-* User can view location functionalities(current location, other location displayed on wall)
-* User can track location in real time
-* User profiles
-* User can view and like walls
-* User can view walls in airplane mode, or without connection
+[X] User can login, register and sign out
+[X] User can add images to dorm room wall
+[X] User can view location functionalities(current location, other location displayed on wall)
+[X] User can track location in real time
+[X] User profiles
+[X] User can view and like walls
+[X] User can view walls in airplane mode, or without connection
 
 
 **Optional Nice-to-have Stories**
 
-* Restricted liking feature with refills
-* Like levels indicated by colors
-* Auto suggest other people who have signed up based on preferences
+* Auto suggest other people who have signed up based on classes, halls, location, preferences
+* Trending locations/ dorm room walls
+* User can customise dorm room wall based on predetermined templates/ or toggle picture arrangements
 * User can view a history of their walls
 * Create statuses to disappear within 24 hours
 * User can tap on wall components for details
@@ -59,14 +59,14 @@ This app allows for a user to post and relate to other students within school by
 
 * Login Screen
    * User can login
-   
+       * FB, email
 * Registration Screen
    * User can create a new account
-   * Create preferences
+   * Create preferences, interests
 
 * Home page
     * User can view home feed, other walls
-    * User can view, like other wall accounts
+    * User can view, like or follow other wall accounts
 
 * Profile page
     * User can view profile page with username, followers (not based on counts), wall interaction level from other people
@@ -74,18 +74,27 @@ This app allows for a user to post and relate to other students within school by
 * My Wall page
     * User can upload posts components onto the wall
     * User can modify arrangement of wall components(stretch feature)
+    * User can share wall to follwers
+
+* Chat page
+    * User can see a list of conversations and create new conversations with followers (to prevent random chats from others except in comments)
+
+* Update page
+    * User can update preferences, add categories, etc
+    * User can view and change current status
+    * User can notify group of change 
     
 * Settings page
     * Change profile details
     * User can customise wall interface
 
 
-### 3. Navigation
+### 3. Navigation 
 
 **Tab Navigation** (Tab to Screen)
 
-* Home Feed
-* My wall
+[X] Home Feed
+[X] My wall
 * Chat
 
 **Flow Navigation** (Screen to Screen)
@@ -120,10 +129,10 @@ This app allows for a user to post and relate to other students within school by
 ## Schema 
 
 ### Models
-* Wall
-* User (from parse)
-* Status
-* Level Count
+[X] Wall
+[X] User (from parse)
+[X] Expiring Wall
+* Like
 
 ### Networking
 - Parse Network Requests
@@ -235,3 +244,20 @@ This app allows for a user to post and relate to other students within school by
             }];
     ```
     
+##DEMO GIFS
+###User can login, register and sign out
+<img src='https://imgur.com/FLHhQ3V.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+###User can add images to dorm room wall
+<img src='https://imgur.com/kC1aT1n.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+###User can view location functionalities(current location, other location displayed on wall)
+###User can track location in real time
+<img src='https://imgur.com/h1LCfbi.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+###User can view and like walls
+###Like restrictions
+<img src='https://imgur.com/HHMxT79.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://imgur.com/D5QVdHl.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+
