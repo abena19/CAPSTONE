@@ -24,6 +24,9 @@ extern NSString *const outOfLikes;
 extern NSString *const dateStringFormat;
 extern NSString *const emptyString;
 extern NSString *const doubleFormat;
+extern NSInteger const secondHourCount;
+extern NSInteger const hoursForRefill;
+extern NSInteger const wallQueryLimit;
 
 
 

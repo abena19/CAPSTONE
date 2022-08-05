@@ -10,6 +10,7 @@ target 'Dorm Room Wall' do
   pod 'GoogleMaps'
   pod 'Google-Maps-iOS-Utils'
   pod 'RNFrostedSidebar', '~> 0.2.0'
+  pod 'Shimmer'
 
   target 'Dorm Room WallTests' do
     inherit! :search_paths

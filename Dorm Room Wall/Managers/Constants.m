@@ -22,6 +22,9 @@ NSString *const outOfLikes = @"OutOfLikes";
 NSString *const dateStringFormat = @"HH:mm:ss";
 NSString *const emptyString = @"";
 NSString *const doubleFormat = @"%f";
+NSInteger const secondHourCount = 3600;
+NSInteger const hoursForRefill = 6;
+NSInteger const wallQueryLimit = 5;
 
 
 //APP DELEGATE CONSTS
@@ -91,7 +94,6 @@ NSString *const squarePencilName = @"square.and.pencil";
 NSString *const trashName = @"trash.slash";
 NSString *const paperPlaneName = @"paperplane";
 NSString *const profileImageName = @"person.circle.fill";
-
 
 
 

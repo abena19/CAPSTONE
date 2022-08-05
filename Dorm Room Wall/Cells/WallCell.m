@@ -80,10 +80,10 @@
 
 
 - (void) likeCheck {
-    BOOL isUserAuthor = [self.wall.author.username isEqual:[PFUser currentUser].username];
+    BOOL isUserAuthor = self.wall.author != [PFUser currentUser];
     if (!isUserAuthor) {
         if (![self isInLikeDictionary]) {
-            [[ParseQueryManager shared] updateLike:self.wall withCompletion:^(Wall * _Nonnull wall, NSError * _Nonnull error) {
+            [[ParseQueryManager shared] updateLike:self.wall withCompletion:^(BOOL likeSucceeded, NSError * _Nonnull error) {
                 [self.wallLikeButton setImage:[UIImage systemImageNamed:heartFillImageName]
                                      forState:UIControlStateNormal];
             }];

@@ -37,7 +37,7 @@
     PFQuery *wallQuery = [Wall query];
     [wallQuery orderByDescending:createdAt];
     [wallQuery includeKey:author];
-    wallQuery.limit = 8;
+    wallQuery.limit = wallQueryLimit;
     switch (fetchMethod) {
         case QueryDefaultState:
             wallQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
@@ -57,15 +57,15 @@
 }
 
 
-- (void)updateLike:(Wall *)wall withCompletion:(void (^)(Wall * wall, NSError *error))completion {
-    if (wall.author != [PFUser currentUser] && [PFUser currentUser][userWallCount] != 0) {
+- (void)updateLike:(Wall *)wall withCompletion:(void (^)(BOOL succeeded, NSError *error))completion {
+    if ([self checkWallAuthor]) {
         NSNumber *likesLeft = [PFUser currentUser][userLikesLeft];
         //        start of like count - initial/refill
         if ([likesLeft isEqualToNumber:[PFUser currentUser][likeCountLimit]]) {
             [self trackInitialLike:wall:likesLeft];
             [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
-                    completion(wall, nil);
+                    completion(TRUE, nil);
                 }
             }];
             
@@ -74,7 +74,7 @@
                 [self refillLikesAndLimit:wall];
                 [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     if (succeeded) {
-                        completion(wall, nil);
+                        completion(TRUE, nil);
                     }
                 }];
                 
@@ -88,7 +88,7 @@
             [self decrementUserLikes:wall :likesLeft];
             [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
-                    completion(wall, nil);
+                    completion(TRUE, nil);
                 }
             }];
         }
@@ -96,6 +96,12 @@
     }
 }
 
+
+-(BOOL) checkWallAuthor {
+    return [PFUser currentUser][userWallCount] != 0;
+
+}
+ 
 
 - (void) addToUserWallNumber {
     [[PFUser currentUser] incrementKey:userWallCount];
@@ -113,13 +119,13 @@
 
 - (BOOL) ifTimeForRefill {
     double numberOfHours = [self hoursSinceFirstLike];
-    return numberOfHours >= 6;
+    return numberOfHours >= hoursForRefill;
 }
 
 
 - (double) hoursSinceFirstLike {
     NSTimeInterval secondsBetween = [[self dateNow] timeIntervalSinceDate:[PFUser currentUser][timeSinceFirstLike]];
-    double numberOfHours = secondsBetween / 3600;
+    double numberOfHours = secondsBetween / secondHourCount;
     return numberOfHours;
 }
 

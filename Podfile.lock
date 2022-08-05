@@ -29,12 +29,14 @@ PODS:
   - Parse/Core (1.19.3):
     - Bolts/Tasks (= 1.9.1)
   - RNFrostedSidebar (0.2.0)
+  - Shimmer (1.0.2)
 
 DEPENDENCIES:
   - Google-Maps-iOS-Utils
   - GoogleMaps
   - Parse
   - RNFrostedSidebar (~> 0.2.0)
+  - Shimmer
 
 SPEC REPOS:
   trunk:
@@ -43,6 +45,7 @@ SPEC REPOS:
     - GoogleMaps
     - Parse
     - RNFrostedSidebar
+    - Shimmer
 
 SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
@@ -50,7 +53,8 @@ SPEC CHECKSUMS:
   GoogleMaps: 6e9c923ca035989709fcb5771544fda4cc5fa2a4
   Parse: 0abb63a0ff6fa34a3f64b81d595a294e2ece143a
   RNFrostedSidebar: 9491d8627e5e99b92334d36def432c0faf7ebae4
+  Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
 
-PODFILE CHECKSUM: 089e1b1de80677278e70a3fca77009d61f85a9e3
+PODFILE CHECKSUM: d122bc7fd6b3231d2eb3f34c65754bda111272e0
 
 COCOAPODS: 1.11.3
