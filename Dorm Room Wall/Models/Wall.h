@@ -8,16 +8,10 @@
 #import "Parse/Parse.h"
 #import "Constants.h"
 #import "ParseQueryManager.h"
+#import "Protocols.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
-
-@protocol Likeable
-
-- (void) likeObjectWithCompletion:(void (^)(BOOL succeeded, NSError *error))completion;
-- (BOOL) canLikeObject;
-
-@end
 
 
 @interface Wall : PFObject<PFSubclassing, Likeable>

@@ -33,6 +33,7 @@
 		0B990A4D2877644A005B88C1 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B990A4C2877644A005B88C1 /* ComposeViewController.m */; };
 		0BBDA4C2289B32A800FE55F7 /* ExpiringWallArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDA4C1289B32A800FE55F7 /* ExpiringWallArray.m */; };
 		0BBDA4C5289D86D400FE55F7 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDA4C4289D86D400FE55F7 /* Constants.m */; };
+		0BBDA4CA289DCBE500FE55F7 /* Protocols.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDA4C9289DCBE500FE55F7 /* Protocols.m */; };
 		134C9C4568381B36EDA0EA58 /* Pods_Dorm_Room_WallTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A79A86AFA772E657A3502DE0 /* Pods_Dorm_Room_WallTests.framework */; };
 		BD9DDEA1F7FE470A46E13FCF /* Pods_Dorm_Room_Wall_Dorm_Room_WallUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2AC8745A9547ACB1C97D51C /* Pods_Dorm_Room_Wall_Dorm_Room_WallUITests.framework */; };
 /* End PBXBuildFile section */
@@ -101,6 +102,8 @@
 		0BBDA4C1289B32A800FE55F7 /* ExpiringWallArray.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExpiringWallArray.m; sourceTree = "<group>"; };
 		0BBDA4C3289D86D400FE55F7 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		0BBDA4C4289D86D400FE55F7 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		0BBDA4C8289DCBE500FE55F7 /* Protocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Protocols.h; sourceTree = "<group>"; };
+		0BBDA4C9289DCBE500FE55F7 /* Protocols.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Protocols.m; sourceTree = "<group>"; };
 		0BF4AAF191067986D5DF5D60 /* Pods_Dorm_Room_Wall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dorm_Room_Wall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4420F7F39F798B113B04DD56 /* Pods-Dorm Room Wall-Dorm Room WallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dorm Room Wall-Dorm Room WallUITests.release.xcconfig"; path = "Target Support Files/Pods-Dorm Room Wall-Dorm Room WallUITests/Pods-Dorm Room Wall-Dorm Room WallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6635A27A7198C096730137A3 /* Pods-Dorm Room WallTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dorm Room WallTests.release.xcconfig"; path = "Target Support Files/Pods-Dorm Room WallTests/Pods-Dorm Room WallTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -204,6 +207,8 @@
 			children = (
 				0BBDA4C3289D86D400FE55F7 /* Constants.h */,
 				0BBDA4C4289D86D400FE55F7 /* Constants.m */,
+				0BBDA4C8289DCBE500FE55F7 /* Protocols.h */,
+				0BBDA4C9289DCBE500FE55F7 /* Protocols.m */,
 				0B71EE0F289AF52E00B75F06 /* WallCacheManager.h */,
 				0B71EE10289AF52E00B75F06 /* WallCacheManager.m */,
 				0B68EA94288A1728006E92AA /* GMapsAPIManager.h */,
@@ -588,6 +593,7 @@
 				0B71952A28764C6800DA7114 /* ProfileViewController.m in Sources */,
 				0B4D1EFB2888728C001D0F3F /* ParseQueryManager.m in Sources */,
 				0B71951E287500BC00DA7114 /* LoginViewController.m in Sources */,
+				0BBDA4CA289DCBE500FE55F7 /* Protocols.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
